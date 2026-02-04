@@ -1,0 +1,43 @@
+{
+  "name": "blog-post",
+  "version": "1.0.0",
+  "description": "an AI blog application",
+  "keywords": [
+    "AI",
+    "Blog"
+  ],
+  "license": "ISC",
+  "author": "Stella Oseyomon",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --testTimeout=100000000",
+    "test:watch": "jest --watch",
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js --ignore frontend",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "code:check": "npm run lint && npm run format:check",
+    "code:fix": "npm run lint:fix && npm run format"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
+    "@eslint/js": "^9.39.2",
+    "babel-jest": "^30.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.12.2",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jest": "^30.2.0",
+    "prettier": "^3.8.1",
+    "supertest": "^7.2.2"
+  }
+}
