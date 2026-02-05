@@ -8,7 +8,7 @@
   ],
   "license": "ISC",
   "author": "Stella Oseyomon",
-  "type": "commonjs",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --testTimeout=100000000",
