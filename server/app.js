@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import ErrorMiddleware from "./middleware/Error.js";
 
 const app = express();
 
@@ -15,5 +16,6 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use(ErrorMiddleware);
 
-export default app
+export default app;
