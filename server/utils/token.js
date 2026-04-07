@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import config from "../config";
 
 dotenv.config({ quiet: true });
 
@@ -17,7 +16,7 @@ const signToken = (
 
 const tokenService = {
   generateJwtToken: user =>
-    signToken({ _id: user._id, email: user.email }, config.jwtSecret),
+    signToken({ _id: user._id, email: user.email }, process.env.JWT_SECRET),
 
   generateRefreshJwtToken: user =>
     signToken(
