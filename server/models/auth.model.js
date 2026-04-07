@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const { Schema, model } = mongoose;
-const { isEmail, isDate } = validator;
+const { isEmail } = validator;
 
 const AuthSchema = new Schema(
   {
@@ -45,13 +45,13 @@ const AuthSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin", "superadmin"],
+      enum: ["user", "admin", "superAdmin"],
     },
-    createdAt: {
+    created_at: {
       type: Date,
       default: Date.now,
     },
-    updatedAt: {
+    updated_at: {
       type: Date,
       default: Date.now,
     },
