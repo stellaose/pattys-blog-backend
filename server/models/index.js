@@ -13,17 +13,7 @@ export default {
 
 
         
-    /**
-     * Sendgrid
-     */
-    // sendGrid: {
-    //     apiKey:
-    //     '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',
-    //     email: 'hello@haraka.ai',
-    //     templateIds: {
-    //       passwordReset: 'd-be3056d93940441a9608dad7e92d5fe7'
-    //     }
-    // },
+  
 
     /**
      * Used by winston logger
