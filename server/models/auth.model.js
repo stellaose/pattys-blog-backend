@@ -60,6 +60,12 @@ const AuthSchema = new Schema(
     emailVerificationTokenExpires: {
       type: Date,
     },
+    passwordToken: {
+      type: String,
+    },
+    passwordTokenExpires: {
+      type: Date,
+    },
     created_at: {
       type: Date,
       default: Date.now,
