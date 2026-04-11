@@ -25,11 +25,11 @@ function escapeHtml(value) {
     .replace(/'/g, "&#39;");
 }
 
-export const signUpMail = (first_name, url) => ({
-  subject: "Welcome to Pattys",
-  text: `Welcome to Pattys`,
+export const signUpMail = (first_name, verificationCode) => ({
+  subject: "Welcome to Pattys — verify your email",
+  text: `Welcome to Pattys.`,
   html: signupHtmlTemplate
     .replace("{{EMAIL_STYLES}}", signupStyleBlock)
     .replaceAll("{{first_name}}", escapeHtml(first_name))
-    .replaceAll("{{url}}", escapeHtml(url)),
+    .replaceAll("{{code}}", escapeHtml(verificationCode)),
 });

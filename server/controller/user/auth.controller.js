@@ -1,17 +1,14 @@
+import crypto from "crypto";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import ErrorResponse from "../../utils/ErrorHandler.js";
 import validateEmail from "../../utils/Validation.js";
-import tokenService from "../../utils/token.js";
 import { sendEmail } from "../../utils/mailer.js";
 import { Auth } from "../../models/auth.model.js";
 import { nanoid } from "nanoid";
 import { signUpMail } from "../../utils/emailMessages.js";
 
 dotenv.config({ quiet: true });
-
-const baseUrl = () =>
-  process.env.APP_BASE_URL || `http://localhost:${process.env.PORT || 3003}`;
 
 export const AuthController = {
   signup: async (req, res, next) => {
@@ -41,16 +38,16 @@ export const AuthController = {
       if (!phone_number) {
         return next(new ErrorResponse("Phone number is required", 400));
       }
-      
-      const existingEmail= await Auth.findOne({
-        email: email.toLowerCase()
+
+      const existingEmail = await Auth.findOne({
+        email: email.toLowerCase(),
       });
       if (existingEmail) {
         return next(new ErrorResponse("Email already exists", 400));
       }
-      
-      const existingUsername= await Auth.findOne({
-        user_name
+
+      const existingUsername = await Auth.findOne({
+        user_name,
       });
       if (existingUsername) {
         return next(new ErrorResponse("Username already exists", 400));
@@ -73,32 +70,35 @@ export const AuthController = {
         isEmailVerified: false,
       });
 
-      const token = tokenService.generateEmailToken(user);
-      user.emailVerificationToken = token;
+      const verificationCode = crypto
+        .randomInt(0, 1_000_000)
+        .toString()
+        .padStart(6, "0");
+      user.emailVerificationToken = verificationCode;
       user.emailVerificationTokenExpires = new Date(
-        Date.now() + 60 * 60 * 1000
+        Date.now() + 10 * 60 * 1000
       );
-      await user.save();
 
-      const verifyUrl = `${baseUrl()}/api/user/verify-email?token=${encodeURIComponent(
-        token
-      )}`;
-      
-
-      const mail = signUpMail(user?.first_name, verifyUrl);
-      await sendEmail({
+      const mail = signUpMail(user?.first_name, verificationCode);
+      const sentMail = await sendEmail({
         to: user?.email,
         subject: mail?.subject,
         html: mail?.html,
         text: mail?.text,
       });
 
+      if (sentMail) {
+        await user.save();
+      }
+
       res.status(201).json({
         success: true,
         message:
-          "Signup successful. Please check your email to verify your account.",
+          "Signup successful. Check your email for a 6-digit code to verify your account.",
         user: {
           id: user?._id,
+          userId: user?.userId,
+          code: user?.emailVerificationToken,
           first_name: user?.first_name,
           last_name: user?.last_name,
           user_name: user?.user_name,
@@ -117,17 +117,19 @@ export const AuthController = {
   },
   verifyEmail: async (req, res, next) => {
     try {
-      const { token } = req.query;
-      if (!token) return next(new ErrorResponse("Token is required", 400));
+      const { email, code } = req.body;
+      if (!email || !validateEmail(email)) {
+        return next(new ErrorResponse("Valid email is required", 400));
+      }
+    
+      const normalized = String(code);
+      if (!normalized) {
+        return next(
+          new ErrorResponse("A 6-digit verification code is required", 400)
+        );
+      }
 
-      const { success, decoded, error } = tokenService.verifyToken(
-        String(token),
-        process.env.EMAIL_SECRET
-      );
-      if (!success)
-        return next(new ErrorResponse(error || "Invalid token", 400));
-
-      const user = await Auth.findById(decoded._id);
+      const user = await Auth.findOne({ email: email.toLowerCase() });
       if (!user) return next(new ErrorResponse("User not found", 404));
 
       if (user.isEmailVerified) {
@@ -138,11 +140,13 @@ export const AuthController = {
       }
 
       if (
-        user.emailVerificationToken !== String(token) ||
+        user.emailVerificationToken !== normalized ||
         (user.emailVerificationTokenExpires &&
           user.emailVerificationTokenExpires.getTime() < Date.now())
       ) {
-        return next(new ErrorResponse("Verification token expired", 400));
+        return next(
+          new ErrorResponse("Invalid or expired verification code", 400)
+        );
       }
 
       user.isEmailVerified = true;
