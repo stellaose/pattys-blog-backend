@@ -1,8 +1,6 @@
+import "./load-env.js";
 import app from "./app.js";
-import dotenv from "dotenv";
 import databaseConnect from "./database/index.js";
-
-dotenv.config({ quiet: true });
 
 const port = process.env.PORT || 3003;
 

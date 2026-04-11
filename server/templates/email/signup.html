@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -27,13 +27,12 @@
 
             <p>
               To ensure your account is secure and that you receive important
-              updates (and the occasional treat), please confirm your email
-              address by clicking the button below:
+              updates (and the occasional treat), confirm your email with this
+              6-digit code (valid for 10 mins):
             </p>
 
-            <div class="link">
-            <a href='{{url}}'>Verify My Email</a>
-              
+            <div class="code-wrap" role="group" aria-label="Verification code">
+              <span class="code">{{code}}</span>
             </div>
           </div>
 
@@ -44,6 +43,5 @@
         </div>
       </div>
     </section>
-   
   </body>
 </html>
