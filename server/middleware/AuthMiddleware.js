@@ -11,13 +11,18 @@ export const Auth = async (req, res, next) => {
     if (!bearerTokenFromHeader) {
       return next(new ErrorResponse("Unauthorized", 401));
     }
-
+    
     const token = bearerTokenFromHeader.replace("Bearer ", "");
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         return next(new ErrorResponse("Invalid token", 401));
       }
-      req.userId = decoded.userid;
+      const id = decoded._id ?? decoded.userId;
+      if (!id) {
+        return next(new ErrorResponse("Cannot find user", 401));
+      }
+      req.userId = id;
       next();
     });
   } catch (error) {
@@ -34,11 +39,11 @@ export const AuthAdmin = async (req, res, next) => {
     }
 
     const token = bearerTokenFromHeader.replace("Bearer ", "");
-    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         return next(new ErrorResponse("Invalid token", 401));
       }
-      req.adminId = decoded.adminid;
+      req.adminId = decoded.adminId;
       next();
     });
   } catch (error) {

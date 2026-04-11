@@ -42,7 +42,7 @@
   font-family: ui-monospace, "Cascadia Code", "Courier New", monospace;
   font-size: 28px;
   font-weight: 700;
-  letter-spacing: 0.45em;
+  letter-spacing: 0.35em;
   padding: 16px 24px 16px 32px;
   background-color: #f5f5f5;
   border: 1px solid rgb(153, 152, 152);
@@ -50,18 +50,40 @@
   color: #1a1a1a;
 }
 
+.code-info {
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 300px;
+  margin-top: 12px;
+  color: #494848;
+}
+
 .signature {
   display: flex;
   flex-direction: column;
 }
 
-.signature span,
-.text span {
+.signature p {
+  font-size: 16px;
+}
+
+.tip {
+  margin-left: 14px;
+  font-size: 12px;
+  color: #494848;
+}
+
+.tip span {
   font-weight: bold;
 }
 
 .signature p {
   font-size: 16px;
+}
+
+.signature span,
+.text span {
+  font-weight: bold;
 }
 
 @media (max-width <= 768px) {
@@ -74,6 +96,6 @@
   }
 
   .code {
-    font-size: 24px;
+    font-size: 20px;
   }
 }

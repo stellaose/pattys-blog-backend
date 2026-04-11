@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forget Password</title>
+    {{EMAIL_STYLES}}
+  </head>
+  <body>
+    <section class="section">
+      <img
+        src="https://stellaose-bucket.s3.eu-north-1.amazonaws.com/logo.png"
+        alt="logo"
+        class="logo"
+      />
+
+      <div class="container">
+        <p class="greeting">Hello {{first_name}},</p>
+
+        <div class="content">
+          <div class="text">
+            <p>
+              We received a request to reset your password for your
+              <span class>Pattys</span> account. Please use the following
+              six-digit verification code to complete the process:
+            </p>
+
+            <div class="code-wrap">
+              <p class="code">{{code}}</>
+              <p class="code-info"
+                >This code is valid for the next 10 minutes.</p>
+            </div>
+
+            <p>
+              Didn't request this code? If you didn't try to reset your
+              password, please ignore this email. Someone may have entered your
+              email address by mistake. Your account remains secure.
+            </p>
+
+            <p>
+              If you have any questions or need further assistance, please don't
+              hesitate to reach out to our support team. We're here to help!
+            </p>
+          </div>
+
+          <div class="signature">
+            <p>Regards,</p>
+            <p>The <span>Pattys</span> Team</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
