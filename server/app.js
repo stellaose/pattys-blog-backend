@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import ErrorMiddleware from "./middleware/Error.js";
+import userRoutes from "./routes/user/index.js";
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.get("/", (req, res) => {
     message: "Welcome to Pattys",
   });
 });
+
+app.use("/api/v1", userRoutes);
 
 app.use(ErrorMiddleware);
 

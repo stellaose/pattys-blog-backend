@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    {{EMAIL_STYLES}}
+  </head>
+  <body>
+    <section class="section">
+      <img
+        src="https://stellaose-bucket.s3.eu-north-1.amazonaws.com/logo.png"
+        alt="logo"
+        class="logo"
+      />
+
+      <div class="container">
+        <p class="greeting">Hello {{first_name}},</p>
+
+        <div class="content">
+          <div class="text">
+            <p>
+              We are thrilled to have you join the
+              <span class>Pattys</span> community! You’re just one small step
+              away from unlocking everything we have to offer.
+            </p>
+
+            <p>
+              To ensure your account is secure and that you receive important
+              updates (and the occasional treat), please confirm your email
+              address by clicking the button below:
+            </p>
+
+            <div class="link">
+            <a href='{{url}}'>Verify My Email</a>
+              
+            </div>
+          </div>
+
+          <div class="signature">
+            <p>Regards,</p>
+            <p>The <span>Pattys</span> Team</p>
+          </div>
+        </div>
+      </div>
+    </section>
+   
+  </body>
+</html>
