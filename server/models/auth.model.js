@@ -7,6 +7,7 @@ const { isEmail } = validator;
 const AuthSchema = new Schema(
   {
     id: Schema.Types.ObjectId,
+    userId: String,
     first_name: {
       type: String,
       trim: true,
@@ -28,6 +29,7 @@ const AuthSchema = new Schema(
     },
     password: {
       type: String,
+      required: [true, "Password is required"],
     },
     phone_number: {
       type: String,
@@ -46,6 +48,17 @@ const AuthSchema = new Schema(
     role: {
       type: String,
       enum: ["user", "admin", "superAdmin"],
+      default: "user",
+    },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
+    emailVerificationToken: {
+      type: String,
+    },
+    emailVerificationTokenExpires: {
+      type: Date,
     },
     created_at: {
       type: Date,
