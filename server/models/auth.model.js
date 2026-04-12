@@ -4,6 +4,25 @@ import validator from "validator";
 const { Schema, model } = mongoose;
 const { isEmail } = validator;
 
+const AuthBlogEntrySchema = new Schema(
+  {
+    id: {
+      type: Schema.Types.ObjectId,
+      ref: "Blog",
+      required: true,
+    },
+    title: {
+      type: String,
+      trim: true,
+    },
+    description: {
+      type: [String],
+      trim: true,
+    },
+  },
+  { _id: false }
+);
+
 const AuthSchema = new Schema(
   {
     id: Schema.Types.ObjectId,
@@ -66,11 +85,15 @@ const AuthSchema = new Schema(
     passwordTokenExpires: {
       type: Date,
     },
-    created_at: {
+    createdAt: {
       type: Date,
       default: Date.now,
     },
-    updated_at: {
+    blogs: {
+      type: [AuthBlogEntrySchema],
+      default: [],
+    },
+    updatedAt: {
       type: Date,
       default: Date.now,
     },
