@@ -109,7 +109,7 @@ export const AuthController = {
           bio: user?.bio,
           role: user?.role,
           isEmailVerified: user?.isEmailVerified,
-          created_at: user?.created_at,
+          createdAt: user?.createdAt,
         },
       });
     } catch (error) {
@@ -204,7 +204,7 @@ export const AuthController = {
           gender: user?.gender,
           bio: user?.bio,
           isEmailVerified: user?.isEmailVerified,
-          created_at: user?.created_at,
+          createdAt: user?.createdAt,
         },
         token,
         refreshToken,
@@ -369,6 +369,7 @@ export const AuthController = {
 
       return res.status(200).json({
         success: true,
+        message: "User found successfully",
         user,
       });
     } catch (error) {
@@ -405,13 +406,12 @@ export const AuthController = {
         updatedDetails,
         { new: true }
       );
-      
+
       return res.status(200).json({
         success: true,
         message: "User updated successfully",
         updatedUser,
       });
-      
     } catch (error) {
       next(error);
     }
