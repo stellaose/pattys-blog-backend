@@ -16,20 +16,32 @@ const signToken = (
 
 const tokenService = {
   generateJwtToken: user =>
-    signToken({ _id: user._id, email: user.email }, process.env.JWT_SECRET),
+    signToken(
+      { _id: user._id, userId: user.userId, email: user.email },
+      process.env.JWT_SECRET
+    ),
 
   generateRefreshJwtToken: user =>
     signToken(
-      { _id: user._id, version: user.tokenVersion },
+      {
+        _id: user._id,
+        userId: user.userId,
+        email: user.email,
+        version: user.tokenVersion,
+      },
       process.env.REFRESH_JWT_SECRET
     ),
 
   generateEmailToken: user =>
     signToken(
-      { _id: user._id, email: user.email },
+      {
+        _id: user._id,
+        userId: user.userId,
+        email: user.email,
+      },
       process.env.EMAIL_SECRET,
       "1h"
-    ), 
+    ),
 
   verifyToken: (token, secret) => {
     try {

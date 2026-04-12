@@ -12,4 +12,8 @@ router.post("/auth/verify-forget-password", AuthController.verifyForgetPassword)
 router.post("/auth/reset-password", AuthController.resetPassword);
 router.put("/auth/change-password/:userId", Auth, AuthController.changePassword);
 
+// $ user
+router.get('/auth/my-profile', Auth, AuthController.getMyProfile)
+router.patch('/auth/update-me', Auth, AuthController.updateUser)
+
 export default router;

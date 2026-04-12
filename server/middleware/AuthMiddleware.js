@@ -11,18 +11,14 @@ export const Auth = async (req, res, next) => {
     if (!bearerTokenFromHeader) {
       return next(new ErrorResponse("Unauthorized", 401));
     }
-    
-    const token = bearerTokenFromHeader.replace("Bearer ", "");
 
+    const token = bearerTokenFromHeader.replace("Bearer ", "");
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
         return next(new ErrorResponse("Invalid token", 401));
       }
-      const id = decoded._id ?? decoded.userId;
-      if (!id) {
-        return next(new ErrorResponse("Cannot find user", 401));
-      }
-      req.userId = id;
+
+      req.userId = decoded.userId;
       next();
     });
   } catch (error) {
