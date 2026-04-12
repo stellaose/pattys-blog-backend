@@ -326,80 +326,92 @@ export const AuthController = {
     }
   },
 
-  // changePassword: async (req, res, next) => {
-  //   try {
-  //     const { password, newPassword } = req.body;
-  //     const { userId } = req.params;
-
-  //     if (!password) {
-  //       return next(new ErrorResponse("Password is required", 400));
-  //     }
-  //     if (!newPassword) {
-  //       return next(new ErrorResponse("New password is required", 400));
-  //     }
-
-  //     const user = await Auth.findById(req.userId);
-  //     if (!user) return next(new ErrorResponse("User not found", 404));
-
-  //     const paramMatches =
-  //       String(user._id) === String(userId) || user.userId === userId;
-  //     if (!paramMatches) {
-  //       return next(new ErrorResponse("Forbidden", 403));
-  //     }
-
-  //     const currentOk = await bcrypt.compare(password, user.password);
-  //     if (!currentOk) {
-  //       return next(new ErrorResponse("Invalid password", 400));
-  //     }
-
-  //     const sameAsOld = await bcrypt.compare(newPassword, user.password);
-  //     if (sameAsOld) {
-  //       return next(new ErrorResponse("New password must be different", 400));
-  //     }
-
-  //     const salt = bcrypt.genSaltSync(10);
-  //     user.password = bcrypt.hashSync(newPassword, salt);
-  //     await user.save();
-
-  //     return res.status(200).json({
-  //       success: true,
-  //       message: "Password changed successfully",
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // },
-  
   changePassword: async (req, res, next) => {
     try {
       const { password, newPassword } = req.body;
       const { userId } = req.params;
-  
-      if (!password) return next(new ErrorResponse("Password is required", 400));
-      if (!newPassword) return next(new ErrorResponse("New password is required", 400));
-  
-      // ✅ Find user by _id from token (req.userId is the MongoDB _id)
+
+      if (!password)
+        return next(new ErrorResponse("Password is required", 400));
+      if (!newPassword)
+        return next(new ErrorResponse("New password is required", 400));
+
       const user = await Auth.findById(req.userId);
       if (!user) return next(new ErrorResponse("User not found", 404));
-  
+
       const paramMatches =
         String(user._id) === String(userId) || user.userId === userId;
       if (!paramMatches) return next(new ErrorResponse("Forbidden", 403));
-  
+
       const currentOk = await bcrypt.compare(password, user.password);
       if (!currentOk) return next(new ErrorResponse("Invalid password", 400));
-  
+
       const sameAsOld = await bcrypt.compare(newPassword, user.password);
-      if (sameAsOld) return next(new ErrorResponse("New password must be different", 400));
-  
+      if (sameAsOld)
+        return next(new ErrorResponse("New password must be different", 400));
+
       const salt = bcrypt.genSaltSync(10);
       user.password = bcrypt.hashSync(newPassword, salt);
       await user.save();
-  
+
       return res.status(200).json({
         success: true,
         message: "Password changed successfully",
       });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getMyProfile: async (req, res, next) => {
+    try {
+      const user = await Auth.findOne({ userId: req.userId });
+
+      return res.status(200).json({
+        success: true,
+        user,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updateUser: async (req, res, next) => {
+    try {
+      const {
+        first_name,
+        last_name,
+        user_name,
+        email,
+        password,
+        phone_number,
+        gender,
+        bio,
+      } = req.body;
+
+      const updatedDetails = {
+        first_name,
+        last_name,
+        user_name,
+        email,
+        password,
+        phone_number,
+        gender,
+        bio,
+      };
+      const user = await Auth.findOne({ userId: req.userId });
+      const updatedUser = await Auth.findOneAndUpdate(
+        { userId: req.userId },
+        updatedDetails,
+        { new: true }
+      );
+      
+      return res.status(200).json({
+        success: true,
+        message: "User updated successfully",
+        updatedUser,
+      });
+      
     } catch (error) {
       next(error);
     }
