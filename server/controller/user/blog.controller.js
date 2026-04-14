@@ -66,7 +66,9 @@ export const BlogController = {
       const resultPerPage = Math.min(Number(queryParams.limit) || 10, 100);
       const currentPage = Number(queryParams.page) || 1;
 
-      const features = new ApiFeatures(Blog.find({ author: req.userId, isFlagged: false }), queryParams,
+      const features = new ApiFeatures(
+        Blog.find({ author: req.userId, isFlagged: false }),
+        queryParams,
         {
           searchableFields: ["title", "description"],
           filterAllowlist: ["category"],
@@ -166,4 +168,89 @@ export const BlogController = {
     }
   },
 
+  likeDislikePost: async (req, res, next) => {
+    try {
+      const { likeStatus } = req.body;
+
+      if (likeStatus === "like") {
+        const blog = await Blog.findOneAndUpdate(
+          { blogId: req.params.blogId },
+          [
+            {
+              $set: {
+                likes: {
+                  $setUnion: [{ $ifNull: ["$likes", []] }, [req.userId]],
+                },
+                dislikes: {
+                  $setDifference: [{ $ifNull: ["$dislikes", []] }, [req.userId]],
+                },
+              },
+            },
+            {
+              $set: {
+                likeStatus: "like",
+                likeNo: { $size: "$likes" },
+                dislikeNo: { $size: "$dislikes" },
+              },
+            },
+          ],
+          { new: true, updatePipeline: true }
+        );
+        if (!blog) return next(new ErrorResponse("Blog not found", 404));
+        return res.status(200).json({
+          success: true,
+          message: "Blog liked successfully",
+          blog,
+        });
+      }
+      if (likeStatus === "dislike") {
+        const blog = await Blog.findOneAndUpdate(
+          { blogId: req.params.blogId },
+          [
+            {
+              $set: {
+                dislikes: {
+                  $setUnion: [{ $ifNull: ["$dislikes", []] }, [req.userId]],
+                },
+                likes: {
+                  $setDifference: [{ $ifNull: ["$likes", []] }, [req.userId]],
+                },
+              },
+            },
+            {
+              $set: {
+                likeStatus: "dislike",
+                likeNo: { $size: "$likes" },
+                dislikeNo: { $size: "$dislikes" },
+              },
+            },
+          ],
+          { new: true, updatePipeline: true }
+        );
+        if (!blog) return next(new ErrorResponse("Blog not found", 404));
+
+        return res.status(200).json({
+          success: true,
+          message: "Blog disliked successfully",
+          blog,
+        });
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  deletePost: async (req, res, next) => {
+    try {
+      const blog = await Blog.findOneAndDelete({ blogId: req.params.blogId });
+      if (!blog) return next(new ErrorResponse("Blog not found", 404));
+      return res.status(200).json({
+        success: true,
+        message: "Blog deleted successfully",
+        blog,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };

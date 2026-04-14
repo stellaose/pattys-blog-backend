@@ -35,6 +35,14 @@ const BlogSchema = new Schema(
       type: Number,
       default: 0,
     },
+    likes: {
+      type: [String],
+      default: [],
+    },
+    dislikes: {
+      type: [String],
+      default: [],
+    },
     comment: [
       {
         author: {
@@ -60,6 +68,18 @@ const BlogSchema = new Schema(
     isFlagged: {
       type: Boolean,
       default: false,
+    },
+    likeStatus: {
+      type: String,
+      enum: ["like", "dislike"],
+    },
+    likeCount: {
+      type: Number,
+      default: 0,
+    },
+    dislikeCount: {
+      type: Number,
+      default: 0,
     },
     createdAt: {
       type: Date,
