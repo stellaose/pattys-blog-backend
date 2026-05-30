@@ -8,6 +8,8 @@ import { Auth } from "../../models/auth.model.js";
 import { nanoid } from "nanoid";
 import tokenService from "../../utils/token.js";
 import { signUpMail, forgetPasswordMail } from "../../utils/emailMessages.js";
+import logger from "../../logger/logger.js";
+import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
 
 dotenv.config({ quiet: true });
 
@@ -26,25 +28,49 @@ export const AuthController = {
       } = req.body;
 
       if (!email || !validateEmail(email)) {
-        return next(new ErrorResponse("Valid email is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP} ${labelEnum.MISSING_EMAIL} ${messagesEnum.EMAIL_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          "Valid email is required",
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
       if (!password || password?.length < 6) {
         return next(
-          new ErrorResponse("Password is required (min 8 chars)", 400)
+          new ErrorResponse(
+            "Password is required (min 8 chars)",
+            statusEnum.statusCode.HTTP_BAD_REQUEST
+          )
         );
       }
       if (!user_name) {
-        return next(new ErrorResponse("Username is required", 400));
+        return next(
+          new ErrorResponse(
+            "Username is required",
+            statusEnum.statusCode.HTTP_BAD_REQUEST
+          )
+        );
       }
       if (!phone_number) {
-        return next(new ErrorResponse("Phone number is required", 400));
+        return next(
+          new ErrorResponse(
+            "Phone number is required",
+            statusEnum.statusCode.HTTP_BAD_REQUEST
+          )
+        );
       }
 
       const existingEmail = await Auth.findOne({
         email: email.toLowerCase(),
       });
       if (existingEmail) {
-        return next(new ErrorResponse("Email already exists", 400));
+        return next(
+          new ErrorResponse(
+            "Email already exists",
+            statusEnum.statusCode.HTTP_CONFLICT
+          )
+        );
       }
 
       const existingUsername = await Auth.findOne({
@@ -93,6 +119,7 @@ export const AuthController = {
       }
 
       res.status(201).json({
+        code: statusEnum.statusCode.HTTP_CREATED,
         success: true,
         message:
           "Signup successful. Check your email for a 6-digit code to verify your account.",
@@ -135,10 +162,12 @@ export const AuthController = {
       if (!user) return next(new ErrorResponse("User not found", 404));
 
       if (user.isEmailVerified) {
-        return res.status(200).json({
-          success: true,
-          message: "Email already verified",
-        });
+        return next(
+          new ErrorResponse(
+            "This e-mail has already been verified. Please login",
+            400
+          )
+        );
       }
 
       if (
@@ -159,6 +188,83 @@ export const AuthController = {
       return res.status(200).json({
         success: true,
         message: "Email verified successfully",
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  resendOtp: async (req, res, next) => {
+    try {
+      const { userId } = req.params;
+      const { isSignupPasswordOtp } = req.body;
+
+      const user = await Auth.findOne({ userId });
+      if (!user) return next(new ErrorResponse("User not found", 404));
+
+      let mail;
+      const verificationCode = crypto
+        .randomInt(0, 1_000_000)
+        .toString()
+        .padStart(6, "0");
+
+      if (isSignupPasswordOtp) {
+        if (user.isEmailVerified) {
+          return next(
+            new ErrorResponse("This e-mail has already been verified", 400)
+          );
+        }
+
+        user.emailVerificationToken = verificationCode;
+        user.emailVerificationTokenExpires = new Date(
+          Date.now() + 10 * 60 * 1000
+        );
+
+        mail = signUpMail(user?.first_name, verificationCode);
+      } else {
+        if (!user.isEmailVerified) {
+          return next(
+            new ErrorResponse(
+              "This e-mail has not been verified. Please verify your account",
+              400
+            )
+          );
+        }
+
+        user.passwordToken = verificationCode;
+        user.passwordTokenExpires = new Date(Date.now() + 10 * 60 * 1000);
+        mail = forgetPasswordMail(user?.first_name, verificationCode);
+      }
+
+      const sentMail = await sendEmail({
+        to: user?.email,
+        subject: mail?.subject,
+        html: mail?.html,
+        text: mail?.text,
+      });
+
+      if (sentMail) {
+        await user.save();
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "Check your email for a 6-digit code to verify your account.",
+        user: {
+          id: user?._id,
+          userId: user?.userId,
+          code: user?.emailVerificationToken,
+          first_name: user?.first_name,
+          last_name: user?.last_name,
+          user_name: user?.user_name,
+          email: user?.email,
+          phone_number: user?.phone_number,
+          gender: user?.gender,
+          bio: user?.bio,
+          role: user?.role,
+          isEmailVerified: user?.isEmailVerified,
+          createdAt: user?.createdAt,
+        },
       });
     } catch (error) {
       next(error);
