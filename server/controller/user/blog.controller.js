@@ -108,6 +108,23 @@ export const BlogController = {
     }
   },
 
+  getOneBlog: async (req, res, next) => {
+    try {
+      const { blogId } = req.params;
+      
+      const blog = await Blog.findOne({ blogId });
+      if (!blog) return next(new ErrorResponse("Blog not found", 404));
+      
+      return res.status(200).json({
+        success: true,
+        message: "Blog found successfully",
+        blog,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
+
   createPost: async (req, res, next) => {
     try {
       const { title, description, category } = req.body;
@@ -182,7 +199,10 @@ export const BlogController = {
                   $setUnion: [{ $ifNull: ["$likes", []] }, [req.userId]],
                 },
                 dislikes: {
-                  $setDifference: [{ $ifNull: ["$dislikes", []] }, [req.userId]],
+                  $setDifference: [
+                    { $ifNull: ["$dislikes", []] },
+                    [req.userId],
+                  ],
                 },
               },
             },
@@ -253,4 +273,6 @@ export const BlogController = {
       next(error);
     }
   },
+
+  addCommentToPost: async (req, res, next) => {},
 };
