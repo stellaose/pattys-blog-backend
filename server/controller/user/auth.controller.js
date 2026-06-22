@@ -29,35 +29,41 @@ export const AuthController = {
 
       if (!email || !validateEmail(email)) {
         logger.warn(
-          `${labelEnum.CURRENT_TIME_STAMP} ${labelEnum.MISSING_EMAIL} ${messagesEnum.EMAIL_REQUIRED}`
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.EMAIL_REQUIRED}`
         );
         throw new ErrorResponse(
-          "Valid email is required",
+          messagesEnum.EMAIL_REQUIRED,
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
+
       if (!password || password?.length < 6) {
-        return next(
-          new ErrorResponse(
-            "Password is required (min 8 chars)",
-            statusEnum.statusCode.HTTP_BAD_REQUEST
-          )
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.PASSWORD_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PASSWORD_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
+
       if (!user_name) {
-        return next(
-          new ErrorResponse(
-            "Username is required",
-            statusEnum.statusCode.HTTP_BAD_REQUEST
-          )
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USERNAME_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PHONE_NUMBER_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
+
       if (!phone_number) {
-        return next(
-          new ErrorResponse(
-            "Phone number is required",
-            statusEnum.statusCode.HTTP_BAD_REQUEST
-          )
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.PHONE_NUMBER_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PHONE_NUMBER_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
 
@@ -65,11 +71,12 @@ export const AuthController = {
         email: email.toLowerCase(),
       });
       if (existingEmail) {
-        return next(
-          new ErrorResponse(
-            "Email already exists",
-            statusEnum.statusCode.HTTP_CONFLICT
-          )
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.EMAIL_EXISTS}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.EMAIL_EXISTS,
+          statusEnum.statusCode.HTTP_CONFLICT
         );
       }
 
@@ -77,7 +84,13 @@ export const AuthController = {
         user_name,
       });
       if (existingUsername) {
-        return next(new ErrorResponse("Username already exists", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USERNAME_EXISTS}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.EMAIL_EXISTS,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
       const salt = bcrypt.genSaltSync(10);
@@ -140,6 +153,10 @@ export const AuthController = {
         },
       });
     } catch (error) {
+      logger.error(
+        `Signup failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -147,14 +164,22 @@ export const AuthController = {
   verifyEmail: async (req, res, next) => {
     try {
       const { email, code } = req.body;
+
       if (!email || !validateEmail(email)) {
-        return next(new ErrorResponse("Valid email is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.EMAIL_REQUIRED}`
+        );
+        throw new ErrorResponse("Valid email is required", 400);
       }
 
       const normalized = String(code);
       if (!normalized) {
-        return next(
-          new ErrorResponse("A 6-digit verification code is required", 400)
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.VERIFICATION_CODE_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.VERIFICATION_CODE_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
 
@@ -162,11 +187,12 @@ export const AuthController = {
       if (!user) return next(new ErrorResponse("User not found", 404));
 
       if (user.isEmailVerified) {
-        return next(
-          new ErrorResponse(
-            "This e-mail has already been verified. Please login",
-            400
-          )
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.EMAIL_ALREADY_VERIFIED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.EMAIL_ALREADY_VERIFIED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
 
@@ -175,8 +201,12 @@ export const AuthController = {
         (user.emailVerificationTokenExpires &&
           user.emailVerificationTokenExpires.getTime() < Date.now())
       ) {
-        return next(
-          new ErrorResponse("Invalid or expired verification code", 400)
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.INVALID_VERIFICATION_CODE}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.INVALID_VERIFICATION_CODE,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
 
@@ -190,6 +220,10 @@ export const AuthController = {
         message: "Email verified successfully",
       });
     } catch (error) {
+      logger.error(
+        `Email verification failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}`,
+        error.message
+      );
       next(error);
     }
   },
