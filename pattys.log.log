@@ -1,0 +1,6 @@
+2026-07-22T20:50:44.520Z [WARN]: [33m
+          22-Jul-2026, 21:47:10-AuthController::login-undefined[0m
+2026-07-22T20:51:54.716Z [WARN]: [33m22-Jul-2026, 21:51:50-AuthController::login-Invalid password[0m
+2026-07-22T20:51:54.717Z [WARN]: [33mLogin failed::22-Jul-2026, 21:51:50-AuthController::login[0m
+2026-07-22T20:52:24.204Z [WARN]: [33m22-Jul-2026, 21:52:18-AuthController::login-Invalid password[0m
+2026-07-22T20:52:24.205Z [ERROR]: [31mLogin failed::22-Jul-2026, 21:52:18-AuthController::login[0m

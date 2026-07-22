@@ -375,10 +375,12 @@ export const AuthController = {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
         logger.warn(
-          `
-          ${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.INVALID_CREDENTIALS}`
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.INVALID_PASSWORD}`
         );
-        throw new ErrorResponse(messagesEnum.INVALID_PASSWORD, 401);
+        throw new ErrorResponse(
+          messagesEnum.INVALID_PASSWORD,
+          statusEnum.statusCode.HTTP_UNAUTHORIZED
+        );
       }
 
       const token = tokenService.generateJwtToken(user);
@@ -388,7 +390,8 @@ export const AuthController = {
       await delete user.passwordToken;
       await delete user.passwordTokenExpires;
 
-      return res.status(200).json({
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: "Login successful",
         user,
@@ -396,6 +399,10 @@ export const AuthController = {
         refreshToken,
       });
     } catch (error) {
+      logger.error(
+        `Login failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -403,15 +410,31 @@ export const AuthController = {
   forgetPassword: async (req, res, next) => {
     try {
       const { email } = req.body;
+
       if (!email || !validateEmail(email)) {
-        return next(new ErrorResponse("Valid email is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_REQUIRED}`
+        );
+        throw new ErrorResponse(messagesEnum.EMAIL_REQUIRED, 400);
       }
 
-      const user = await Auth.findOne({ email: email.toLowerCase() });
-      if (!user) return next(new ErrorResponse("User not found", 404));
+      const user = await AuthService.getUserByEmail(email);
+
+      if (!user) {
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       if (!user.isEmailVerified) {
-        return next(new ErrorResponse("Email not verified", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_NOT_VERIFIED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.EMAIL_NOT_VERIFIED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
       const verificationCode = crypto
@@ -434,67 +457,170 @@ export const AuthController = {
 
       if (sentMail) {
         await user.save();
+        logger.info(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
+        );
       }
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
+      );
 
-      return res.status(200).json({
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Email sent successfully",
-        code: user?.passwordToken,
+        message: messagesEnum.EMAIL_SENT_SUCCESSFULLY,
+        data: {
+          userId: user?.userId,
+          first_name: user?.first_name,
+          last_name: user?.last_name,
+          user_name: user?.user_name,
+          email: user?.email,
+          code: user?.passwordToken,
+        },
       });
     } catch (error) {
+      logger.error(
+        `Forget password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}`,
+        error.message
+      );
       next(error);
     }
   },
 
   verifyForgetPassword: async (req, res, next) => {
     try {
-      const { email, code } = req.body;
-      if (!email || !validateEmail(email)) {
-        return next(new ErrorResponse("Valid email is required", 400));
+      const { userId, code } = req.body;
+
+      if (!userId) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.USER_ID_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
+
       if (!code) {
-        return next(new ErrorResponse("Verification code is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.VERIFICATION_CODE_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.VERIFICATION_CODE_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
-      const user = await Auth.findOne({ email: email.toLowerCase() });
+      const user = await AuthService.getUserByUserId(userId);
 
-      if (!user) return next(new ErrorResponse("User not found", 404));
-
-      if (!user.passwordToken)
-        return next(new ErrorResponse("Code not found", 404));
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       if (user.passwordToken !== code)
-        return next(new ErrorResponse("Invalid code", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.INVALID_VERIFICATION_CODE}`
+        );
+      throw new ErrorResponse(
+        messagesEnum.INVALID_VERIFICATION_CODE,
+        statusEnum.statusCode.HTTP_BAD_REQUEST
+      );
 
-      if (user.passwordTokenExpires.getTime() < Date.now())
-        return next(new ErrorResponse("Code expired", 400));
+      if (user.passwordTokenExpires.getTime() < Date.now()) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.VERIFICATION_CODE_EXPIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.VERIFICATION_CODE_EXPIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.VERIFICATION_SUCCESSFUL}`
+      );
 
-      return res.status(200).json({
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Code verified successfully",
+        message: messagesEnum.VERIFICATION_SUCCESSFUL,
+        user: {
+          userId: user?.userId,
+          first_name: user?.first_name,
+          last_name: user?.last_name,
+          user_name: user?.user_name,
+          email: user?.email,
+        },
       });
     } catch (error) {
+      logger.error(
+        `Verify forget password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}`,
+        error.message
+      );
       next(error);
     }
   },
 
   resetPassword: async (req, res, next) => {
     try {
-      const { email, password } = req.body;
-      if (!email || !validateEmail(email)) {
-        return next(new ErrorResponse("Valid email is required", 400));
+      const { userId, password } = req.body;
+
+      if (!userId) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.USER_ID_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
+
       if (!password) {
-        return next(new ErrorResponse("Password is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.PASSWORD_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PASSWORD_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
-      const user = await Auth.findOne({ email: email.toLowerCase() });
-      if (!user) return next(new ErrorResponse("User not found", 404));
+      const user = await AuthService.getUserByUserId(userId);
 
-      if (!user.passwordToken)
-        return next(new ErrorResponse("Code not found", 404));
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      if (!user.passwordToken) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.VERIFICATION_CODE_NOT_FOUND}`
+        );
+        return next(
+          new ErrorResponse(
+            messagesEnum.VERIFICATION_CODE_NOT_FOUND,
+            statusEnum.statusCode.HTTP_NOT_FOUND
+          )
+        );
+      }
 
       if (user.passwordTokenExpires.getTime() < Date.now())
-        return next(new ErrorResponse("Code expired", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.VERIFICATION_CODE_EXPIRED}`
+        );
+      throw new ErrorResponse(
+        messagesEnum.VERIFICATION_CODE_EXPIRED,
+        statusEnum.statusCode.HTTP_BAD_REQUEST
+      );
 
       const salt = bcrypt.genSaltSync(10);
       user.password = bcrypt.hashSync(password, salt);
@@ -503,11 +629,20 @@ export const AuthController = {
 
       await user.save();
 
-      return res.status(200).json({
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.PASSWORD_RESET_SUCCESSFUL}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Password reset successful",
+        message: messagesEnum.PASSWORD_RESET_SUCCESSFUL,
       });
     } catch (error) {
+      logger.error(
+        `Reset password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -517,48 +652,123 @@ export const AuthController = {
       const { password, newPassword } = req.body;
       const { userId } = req.params;
 
-      if (!password)
-        return next(new ErrorResponse("Password is required", 400));
-      if (!newPassword)
-        return next(new ErrorResponse("New password is required", 400));
+      if (!password) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.PASSWORD_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PASSWORD_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
 
-      const user = await Auth.findById(req.userId);
-      if (!user) return next(new ErrorResponse("User not found", 404));
+      if (!newPassword) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.NEW_PASSWORD_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          NEW_PASSWORD_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+      const user = await AuthService.getUserByUserId(req.userId);
+      {
+      }
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       const paramMatches =
         String(user._id) === String(userId) || user.userId === userId;
-      if (!paramMatches) return next(new ErrorResponse("Forbidden", 403));
+
+      if (!paramMatches) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.FORBIDDEN}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.FORBIDDEN,
+          statusEnum.statusCode.HTTP_FORBIDDEN
+        );
+      }
 
       const currentOk = await bcrypt.compare(password, user.password);
-      if (!currentOk) return next(new ErrorResponse("Invalid password", 400));
 
+      if (!currentOk) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.INVALID_PASSWORD}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.INVALID_PASSWORD,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
       const sameAsOld = await bcrypt.compare(newPassword, user.password);
       if (sameAsOld)
-        return next(new ErrorResponse("New password must be different", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.PASSWORD_CANNOT_BE_SAME}`
+        );
+      throw new ErrorResponse(
+        messagesEnum.PASSWORD_CANNOT_BE_SAME,
+        statusEnum.statusCode.HTTP_BAD_REQUEST
+      );
 
       const salt = bcrypt.genSaltSync(10);
       user.password = bcrypt.hashSync(newPassword, salt);
       await user.save();
 
-      return res.status(200).json({
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.PASSWORD_CHANGE_SUCCESSFUL}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Password changed successfully",
+        message: messagesEnum.PASSWORD_CHANGE_SUCCESSFUL,
       });
     } catch (error) {
+      logger.error(
+        `Change password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}`,
+        error.message
+      );
       next(error);
     }
   },
 
   getMyProfile: async (req, res, next) => {
     try {
-      const user = await Auth.findOne({ userId: req.userId });
+      const user = await AuthService.getUserByUserId(req.userId);
 
-      return res.status(200).json({
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_GET_PROFILE}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_GET_PROFILE}-${messagesEnum.USER_FOUND_SUCCESSFULLY}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "User found successfully",
+        message: messagesEnum.USER_FOUND_SUCCESSFULLY,
         user,
       });
     } catch (error) {
+      logger.error(
+        `Get profile failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_GET_PROFILE}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -586,19 +796,75 @@ export const AuthController = {
         gender,
         bio,
       };
-      const user = await Auth.findOne({ userId: req.userId });
+
+      const { userId } = req.params;
+
+      const user = await AuthService.getUserByUserId(userId);
+
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}-${messagesEnum.USER_FOUND_SUCCESSFULLY}`
+      );
       const updatedUser = await Auth.findOneAndUpdate(
-        { userId: req.userId },
+        { userId },
         updatedDetails,
         { new: true }
       );
 
-      return res.status(200).json({
+      if (!updatedUser) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}-${messagesEnum.USER_UPDATED_SUCCESSFULLY}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "User updated successfully",
+        message: messagesEnum.USER_UPDATED_SUCCESSFULLY,
         updatedUser,
       });
     } catch (error) {
+      logger.error(
+        `Update user failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}`,
+        error.message
+      );
+      next(error);
+    }
+  },
+
+  logout: async (req, res, next) => {
+    try {
+      res.clearCookie("token");
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGOUT}-${messagesEnum.LOGGED_OUT_SUCCESSFULLY}`
+      );
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
+        success: true,
+        message: messagesEnum.LOGGED_OUT_SUCCESSFULLY,
+      });
+    } catch (error) {
+      logger.error(
+        `Logout failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGOUT}`,
+        error.message
+      );
       next(error);
     }
   },

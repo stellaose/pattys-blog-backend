@@ -6,6 +6,10 @@ export const labelEnum = {
   USER_VERIFICATION: "AuthController::verifyEmail",
   USER_FORGET_PASSWORD: "AuthController::forgetPassword",
   USER_RESET_PASSWORD: "AuthController::resetPassword",
+  USER_VERIFY_FORGOT_PASSWORD: "AuthController::verifyForgetPassword",
+  USER_CHANGE_PASSWORD: "AuthController::changePassword",
+  USER_UPDATE_PROFILE: "AuthController::updateUser",
+  USER_GET_PROFILE: "AuthController::getMyProfile",
 
   RESEND_OTP: "AuthController::resendOtp",
   USER_LOGIN: "AuthController::login",
