@@ -89,14 +89,14 @@ const AuthSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    // isSignupPasswordOtp: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // isForgetPasswordOtp: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+    isSignupPasswordOtp: {
+      type: Boolean,
+      default: false,
+    },
+    isForgetPasswordOtp: {
+      type: Boolean,
+      default: false,
+    },
     blogs: {
       type: [AuthBlogEntrySchema],
       default: [],
