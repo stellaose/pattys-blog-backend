@@ -5,6 +5,7 @@ import ErrorResponse from "../../utils/ErrorHandler.js";
 import validateEmail from "../../utils/Validation.js";
 import { sendEmail } from "../../utils/mailer.js";
 import { Auth } from "../../models/auth.model.js";
+import AuthService from "../../service/user/auth.service.js";
 import { nanoid } from "nanoid";
 import tokenService from "../../utils/token.js";
 import { signUpMail, forgetPasswordMail } from "../../utils/emailMessages.js";
@@ -67,9 +68,8 @@ export const AuthController = {
         );
       }
 
-      const existingEmail = await Auth.findOne({
-        email: email.toLowerCase(),
-      });
+      const existingEmail = await AuthService.getUserByEmail(email);
+
       if (existingEmail) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.EMAIL_EXISTS}`
@@ -80,9 +80,8 @@ export const AuthController = {
         );
       }
 
-      const existingUsername = await Auth.findOne({
-        user_name,
-      });
+      const existingUsername = await AuthService.getUserByUsername(user_name);
+
       if (existingUsername) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USERNAME_EXISTS}`
@@ -114,6 +113,7 @@ export const AuthController = {
         .randomInt(0, 1_000_000)
         .toString()
         .padStart(6, "0");
+
       user.emailVerificationToken = verificationCode;
       user.emailVerificationTokenExpires = new Date(
         Date.now() + 10 * 60 * 1000
@@ -131,26 +131,15 @@ export const AuthController = {
         await user.save();
       }
 
-      res.status(201).json({
+      await delete user.password;
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USER_CREATED}`
+      );
+      res.status(statusEnum.statusCode.HTTP_CREATED).json({
         code: statusEnum.statusCode.HTTP_CREATED,
         success: true,
-        message:
-          "Signup successful. Check your email for a 6-digit code to verify your account.",
-        user: {
-          id: user?._id,
-          userId: user?.userId,
-          code: user?.emailVerificationToken,
-          first_name: user?.first_name,
-          last_name: user?.last_name,
-          user_name: user?.user_name,
-          email: user?.email,
-          phone_number: user?.phone_number,
-          gender: user?.gender,
-          bio: user?.bio,
-          role: user?.role,
-          isEmailVerified: user?.isEmailVerified,
-          createdAt: user?.createdAt,
-        },
+        message: messagesEnum.SIGNUP_SUCCESSFUL,
+        user,
       });
     } catch (error) {
       logger.error(
@@ -169,7 +158,7 @@ export const AuthController = {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.EMAIL_REQUIRED}`
         );
-        throw new ErrorResponse("Valid email is required", 400);
+        throw new ErrorResponse(messagesEnum.EMAIL_REQUIRED, 400);
       }
 
       const normalized = String(code);
@@ -183,8 +172,17 @@ export const AuthController = {
         );
       }
 
-      const user = await Auth.findOne({ email: email.toLowerCase() });
-      if (!user) return next(new ErrorResponse("User not found", 404));
+      const user = await AuthService.getUserByEmail(email);
+
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       if (user.isEmailVerified) {
         logger.warn(
@@ -215,9 +213,18 @@ export const AuthController = {
       user.emailVerificationTokenExpires = undefined;
       await user.save();
 
-      return res.status(200).json({
+      await delete user.password;
+      await delete user.passwordToken;
+      await delete user.passwordTokenExpires;
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.EMAIL_VERIFIED}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Email verified successfully",
+        message: messagesEnum.EMAIL_VERIFIED_SUCCESSFULLY,
       });
     } catch (error) {
       logger.error(
@@ -233,8 +240,17 @@ export const AuthController = {
       const { userId } = req.params;
       const { isSignupPasswordOtp } = req.body;
 
-      const user = await Auth.findOne({ userId });
-      if (!user) return next(new ErrorResponse("User not found", 404));
+      const user = await AuthService.getUserByUserId(userId);
+
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       let mail;
       const verificationCode = crypto
@@ -244,8 +260,12 @@ export const AuthController = {
 
       if (isSignupPasswordOtp) {
         if (user.isEmailVerified) {
-          return next(
-            new ErrorResponse("This e-mail has already been verified", 400)
+          logger.warn(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${enumMessagesEnum.EMAIL_ALREADY_VERIFIED}`
+          );
+          throw new ErrorResponse(
+            enumMessagesEnum.EMAIL_ALREADY_VERIFIED,
+            statusEnum.statusCode.HTTP_BAD_REQUEST
           );
         }
 
@@ -257,11 +277,12 @@ export const AuthController = {
         mail = signUpMail(user?.first_name, verificationCode);
       } else {
         if (!user.isEmailVerified) {
-          return next(
-            new ErrorResponse(
-              "This e-mail has not been verified. Please verify your account",
-              400
-            )
+          logger.warn(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${enumMessagesEnum.EMAIL_NOT_VERIFIED}`
+          );
+          throw new ErrorResponse(
+            enumMessagesEnum.EMAIL_NOT_VERIFIED,
+            statusEnum.statusCode.HTTP_BAD_REQUEST
           );
         }
 
@@ -279,28 +300,28 @@ export const AuthController = {
 
       if (sentMail) {
         await user.save();
+        logger.info(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-message sent`
+        );
       }
+      await delete user.password;
+      await delete user.passwordToken;
+      await delete user.passwordTokenExpires;
 
-      return res.status(200).json({
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
+      );
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: "Check your email for a 6-digit code to verify your account.",
-        user: {
-          id: user?._id,
-          userId: user?.userId,
-          code: user?.emailVerificationToken,
-          first_name: user?.first_name,
-          last_name: user?.last_name,
-          user_name: user?.user_name,
-          email: user?.email,
-          phone_number: user?.phone_number,
-          gender: user?.gender,
-          bio: user?.bio,
-          role: user?.role,
-          isEmailVerified: user?.isEmailVerified,
-          createdAt: user?.createdAt,
-        },
+        user,
       });
     } catch (error) {
+      logger.error(
+        `Resend otp failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -308,44 +329,69 @@ export const AuthController = {
   login: async (req, res, next) => {
     try {
       const { email, password } = req.body;
+
       if (!email || !validateEmail(email)) {
-        return next(new ErrorResponse("Valid email is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.EMAIL_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.EMAIL_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
       if (!password) {
-        return next(new ErrorResponse("Password is required", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.PASSWORD_REQUIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PASSWORD_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
-      const user = await Auth.findOne({ email: email.toLowerCase() });
-      if (!user) return next(new ErrorResponse("User not found", 404));
+      const user = await AuthService.getUserByEmail(email);
+
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.USER_NOT_FOUND}`
+        );
+
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       if (!user.isEmailVerified) {
-        return next(new ErrorResponse("Email not verified", 400));
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.EMAIL_NOT_VERIFIED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.EMAIL_NOT_VERIFIED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return next(new ErrorResponse("Invalid credentials", 401));
+        logger.warn(
+          `
+          ${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.INVALID_CREDENTIALS}`
+        );
+        throw new ErrorResponse(messagesEnum.INVALID_PASSWORD, 401);
       }
 
       const token = tokenService.generateJwtToken(user);
       const refreshToken = tokenService.generateRefreshJwtToken(user);
 
+      await delete user.password;
+      await delete user.passwordToken;
+      await delete user.passwordTokenExpires;
+
       return res.status(200).json({
         success: true,
         message: "Login successful",
-        user: {
-          id: user?._id,
-          userId: user?.userId,
-          first_name: user?.first_name,
-          last_name: user?.last_name,
-          user_name: user?.user_name,
-          email: user?.email,
-          phone_number: user?.phone_number,
-          gender: user?.gender,
-          bio: user?.bio,
-          isEmailVerified: user?.isEmailVerified,
-          createdAt: user?.createdAt,
-        },
+        user,
         token,
         refreshToken,
       });
