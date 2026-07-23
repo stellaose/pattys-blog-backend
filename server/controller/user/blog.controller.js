@@ -1,7 +1,10 @@
 import { Auth } from "../../models/auth.model.js";
 import { Blog } from "../../models/blog.model.js";
+import { messagesEnum, labelEnum, statusEnum } from "../../enums/index.js";
+import BlogsService from "../../service/user/blog.service.js";
 import ErrorResponse from "../../utils/ErrorHandler.js";
 import ApiFeatures from "../../utils/apiFeatures.js";
+import logger from "../../logger/logger.js";
 import { nanoid } from "nanoid";
 
 const toAuthBlogEntry = doc => ({
@@ -22,7 +25,7 @@ export const BlogController = {
       const currentPage = Number(queryParams.page) || 1;
 
       const features = new ApiFeatures(
-        Blog.find({ isFlagged: false }),
+        BlogsService.getAllUnflaggedBlogs(),
         queryParams,
         {
           searchableFields: ["title", "description"],
@@ -33,14 +36,15 @@ export const BlogController = {
       features.search().filter().sort();
 
       const filter = features.query.getFilter();
-      const blogsCount = await Blog.countDocuments(filter);
+      const blogsCount = await BlogsService.countDocuments(filter);
 
       features.pagination(resultPerPage);
       const blogs = await features.query;
 
-      return res.status(200).json({
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Blogs fetched successfully",
+        message: messagesEnum.success.BLOGS_FETCHED_SUCCESSFULLY,
         blogs,
         pagination: {
           count: blogs.length,
@@ -51,6 +55,10 @@ export const BlogController = {
         },
       });
     } catch (error) {
+      logger.error(
+        `Get all blogs failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ALL_BLOGS}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -67,7 +75,7 @@ export const BlogController = {
       const currentPage = Number(queryParams.page) || 1;
 
       const features = new ApiFeatures(
-        Blog.find({ author: req.userId, isFlagged: false }),
+        BlogsService.getUserUnflaggedBlogs(req.userId),
         queryParams,
         {
           searchableFields: ["title", "description"],
@@ -78,22 +86,24 @@ export const BlogController = {
       features.search().filter().sort();
 
       const filter = features.query.getFilter();
-      const blogsCount = await Blog.countDocuments(filter);
+      const blogsCount = await BlogsService.countDocuments(filter);
 
       features.pagination(resultPerPage);
       const blog = await features.query;
 
-      const allForAuth = await Blog.find({ author: req.userId }).sort({
+      const allForAuth = BlogsService.getUserBlogs(req.userId).sort({
         createdAt: -1,
       });
-      await Auth.updateOne(
+
+      const updateUser = await Auth.updateOne(
         { userId: req.userId },
         { $set: { blogs: allForAuth.map(toAuthBlogEntry) } }
       );
 
-      return res.status(200).json({
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Your blogs fetched successfully",
+        message: messagesEnum.BLOG_FETCHED_SUCCESSFULLY,
         blog,
         pagination: {
           count: blog.length,
@@ -104,6 +114,10 @@ export const BlogController = {
         },
       });
     } catch (error) {
+      logger.error(
+        `Get my blogs failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_MY_BLOGS}`,
+        error.message
+      );
       next(error);
     }
   },
@@ -111,16 +125,39 @@ export const BlogController = {
   getOneBlog: async (req, res, next) => {
     try {
       const { blogId } = req.params;
-      
-      const blog = await Blog.findOne({ blogId });
-      if (!blog) return next(new ErrorResponse("Blog not found", 404));
-      
-      return res.status(200).json({
+
+      if (!blogId) {
+        logger.warn(
+          `Blog id is required::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ONE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+
+      const blog = await BlogsService.getOneBlog(blogId);
+      if (!blog) {
+        logger.warn(
+          `Blog not found::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ONE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Blog found successfully",
+        message: messagesEnum.BLOG_FETCHED_SUCCESSFULLY,
         blog,
       });
     } catch (error) {
+      logger.error(
+        `Get one blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ONE_BLOG}`,
+        error.message
+      );
       next(error);
     }
   },

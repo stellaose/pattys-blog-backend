@@ -23,12 +23,14 @@
     "code:fix": "npm run lint:fix && npm run format"
   },
   "dependencies": {
+    "@joi/date": "^2.1.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.6",
     "dayjs": "^1.11.21",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "googleapis": "^171.4.0",
+    "joi": "^18.2.3",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.6",
     "nanoid": "^5.1.7",
