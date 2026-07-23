@@ -1,7 +1,9 @@
 export const messagesEnum = {
   // $ General
   FORBIDDEN: "Forbidden",
+  UNAUTHORIZED: "Unauthorized",
   USER_ID_REQUIRED: "User ID is required",
+
   // ! Authentication related messages
   EMAIL_REQUIRED: "Email is required",
   EMAIL_EXISTS: "Email already exists",
@@ -55,9 +57,28 @@ export const messagesEnum = {
   RESEND_OTP_SUCCESSFUL:
     "Check your email for a 6-digit code to verify your account.",
 
-  // ; Forget Password
+  // : Forget Password
   FORGET_PASSWORD_SUCCESSFUL:
     "Check your email for a 6-digit code to reset your password.",
 
   // ? Login
+
+  // @ Middleware
+  NO_RESOURCE_ENTRY: role =>
+    `  Role ${role} is not allowed to access this resource`,
+  
+  // # Blogs
+  BLOG_CREATED_SUCCESSFULLY: "Blog created successfully",
+  BLOG_UPDATED_SUCCESSFULLY: "Blog updated successfully",
+  BLOG_DELETED_SUCCESSFULLY: "Blog deleted successfully",
+  BLOG_NOT_FOUND: "Blog not found",
+  BLOG_NOT_FOUND: "Blog not found",
+  BLOG_FOUND: "Blog found successfully",
+  BLOG_UNFLAGGED_SUCCESSFULLY: "Blog unflagged successfully",
+  BLOG_FLAGGED_SUCCESSFULLY: "Blog flagged successfully",
+  BLOG_LIKED_SUCCESSFULLY: "Blog liked successfully",
+  BLOG_DISLIKED_SUCCESSFULLY: "Blog disliked successfully",
+  BLOG_FETCHED_SUCCESSFULLY: "Blogs fetched successfully",
+  BLOG_ID_REQUIRED: "Blog id is required",
+  
 };

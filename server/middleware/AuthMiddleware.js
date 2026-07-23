@@ -1,66 +1,103 @@
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import ErrorResponse from "../utils/ErrorHandler.js";
+import { messagesEnum, labelEnum, statusEnum } from "../enums/index.js";
+import logger from "../logger/logger.js";
 
 dotenv.config({ quiet: true });
 
-export const Auth = async (req, res, next) => {
-  try {
-    const bearerTokenFromHeader = req.header("Authorization");
+const AuthMiddleWare = {
+  auth: async (req, res, next) => {
+    try {
+      const bearerTokenFromHeader = req.header("Authorization");
 
-    if (!bearerTokenFromHeader) {
-      return next(new ErrorResponse("Unauthorized", 401));
-    }
-
-    const token = bearerTokenFromHeader.replace("Bearer ", "");
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return next(new ErrorResponse("Invalid token", 401));
+      if (!bearerTokenFromHeader) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.AUTH_MIDDLEWARE}-${messagesEnum.UNAUTHORIZED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.UNAUTHORIZED,
+          statusEnum.statusCode.HTTP_UNAUTHORIZED
+        );
       }
 
-      req.userId = decoded.userId;
-      next();
-    });
-  } catch (error) {
-    console.error(error);
-    next(new ErrorResponse("Internal server error", 500));
-  }
-};
+      const token = bearerTokenFromHeader.replace("Bearer ", "");
+      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+          logger.warn(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.AUTH_MIDDLEWARE}-${messagesEnum.INVALID_TOKEN}`
+          );
+          throw new ErrorResponse(
+            messagesEnum.INVALID_TOKEN,
+            statusEnum.statusCode.HTTP_UNAUTHORIZED
+          );
+        }
 
-export const AuthAdmin = async (req, res, next) => {
-  try {
-    const bearerTokenFromHeader = req.header("Authorization");
-    if (!bearerTokenFromHeader) {
-      return next(new ErrorResponse("Unauthorized", 401));
-    }
-
-    const token = bearerTokenFromHeader.replace("Bearer ", "");
-    jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-      if (err) {
-        return next(new ErrorResponse("Invalid token", 401));
-      }
-      req.adminId = decoded.adminId;
-      next();
-    });
-  } catch (error) {
-    console.error(error);
-    return next(new ErrorResponse("Internal server error", 500));
-  }
-};
-
-export const AllowedRoles = (...roles) => {
-  return (req, res, next) => {
-    const { savedAdmin } = req;
-
-    if (!roles.includes(savedAdmin.role)) {
-      return next(
-        new ErrorResponse(
-          `Role ${savedAdmin.role} is not allowed to access this resource`,
-          401
-        )
+        req.userId = decoded.userId;
+        next();
+      });
+    } catch (error) {
+      logger.error(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.AUTH_MIDDLEWARE}-${messagesEnum.INTERNAL_SERVER_ERROR}`,
+        error.message
       );
+      next(error);
     }
+  },
 
-    next();
-  };
+  authAdmin: async (req, res, next) => {
+    try {
+      const bearerTokenFromHeader = req.header("Authorization");
+      if (!bearerTokenFromHeader) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.AUTH_ADMIN_MIDDLEWARE}-${messagesEnum.UNAUTHORIZED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.UNAUTHORIZED,
+          statusEnum.statusCode.HTTP_UNAUTHORIZED
+        );
+      }
+
+      const token = bearerTokenFromHeader.replace("Bearer ", "");
+      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+          logger.warn(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.AUTH_ADMIN_MIDDLEWARE}-${messagesEnum.INVALID_TOKEN}`
+          );
+          throw new ErrorResponse(
+            messagesEnum.INVALID_TOKEN,
+            statusEnum.statusCode.HTTP_UNAUTHORIZED
+          );
+        }
+        req.adminId = decoded.adminId;
+        next();
+      });
+    } catch (error) {
+      logger.error(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.AUTH_ADMIN_MIDDLEWARE}-${messagesEnum.INTERNAL_SERVER_ERROR}`,
+        error.message
+      );
+      return next(error);
+    }
+  },
+
+  allowedRoles: (...roles) => {
+    return (req, res, next) => {
+      const { savedAdmin } = req;
+
+      if (!roles.includes(savedAdmin.role)) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.ALLOWED_ROLES_MIDDLEWARE}-${messagesEnum.UNAUTHORIZED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.NO_RESOURCE_ENTRY(savedAdmin.role),
+          statusEnum.statusCode.HTTP_UNAUTHORIZED
+        );
+      }
+
+      next();
+    };
+  },
 };
+
+export default AuthMiddleWare;
