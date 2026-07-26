@@ -17,7 +17,6 @@ export const messagesEnum = {
   // + Password
   PASSWORD_REQUIRED: "Password is required (min 8 chars)",
   INVALID_PASSWORD: "Invalid password",
-  PASSWORD_REQUIRED: "Password is required",
   PASSWORD_MISMATCH: "Passwords do not match",
   PASSWORD_RESET_SUCCESSFUL: "Password reset successful",
   NEW_PASSWORD_REQUIRED: "New password is required",
@@ -71,10 +70,11 @@ export const messagesEnum = {
     `Role ${role} is not allowed to access this resource`,
 
   // # Blogs
+  BLOG_TITLE_REQUIRED: "Blog title is required",
+  BLOG_DESCRIPTION_REQUIRED: "Blog description is required",
   BLOG_CREATED_SUCCESSFULLY: "Blog created successfully",
   BLOG_UPDATED_SUCCESSFULLY: "Blog updated successfully",
   BLOG_DELETED_SUCCESSFULLY: "Blog deleted successfully",
-  BLOG_NOT_FOUND: "Blog not found",
   BLOG_NOT_FOUND: "Blog not found",
   BLOG_FOUND: "Blog found successfully",
   BLOG_UNFLAGGED_SUCCESSFULLY: "Blog unflagged successfully",
@@ -83,4 +83,15 @@ export const messagesEnum = {
   BLOG_DISLIKED_SUCCESSFULLY: "Blog disliked successfully",
   BLOG_FETCHED_SUCCESSFULLY: "Blogs fetched successfully",
   BLOG_ID_REQUIRED: "Blog id is required",
+  USER_BLOG_UPDATE: "User blog updated successfully",
+  
+  // $ Reviews
+  REVIEW_CREATED_SUCCESSFULLY: "Review created successfully",
+  REVIEW_UPDATED_SUCCESSFULLY: "Review updated successfully",
+  REVIEW_DELETED_SUCCESSFULLY: "Review deleted successfully",
+  REVIEW_NOT_FOUND: "Review not found",
+  REVIEW_FOUND: "Review found successfully",
+  REVIEW_FETCHED_SUCCESSFULLY: "Reviews fetched successfully",
+  REVIEW_ID_REQUIRED: "Review id is required",
+  USER_REVIEW_UPDATE: "User review updated successfully",
 };

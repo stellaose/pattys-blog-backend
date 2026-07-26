@@ -7,9 +7,9 @@ const router = Router();
 router.get(
   "/my-flagged",
   AuthMiddleware.auth,
-  FlaggedController.getMyFlaggedPost
+  FlaggedController.getMyFlaggedBlog
 );
-router.patch("/:blogId", AuthMiddleware.auth, FlaggedController.flagPost);
+router.patch("/:blogId", AuthMiddleware.auth, FlaggedController.flagBlog);
 router.put(
   "/remove/:blogId",
   AuthMiddleware.auth,

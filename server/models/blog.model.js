@@ -2,6 +2,31 @@ import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
+const BlogReviewSchema = new Schema(
+  {
+    author: {
+      type: String,
+      ref: "Auth",
+      required: true,
+    },
+    reviewId: {
+      type: String,
+      ref: "Review",
+      required: true,
+    },
+    review: {
+      type: String,
+      required: true,
+    },
+    likeNo: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+  },
+  { _id: false }
+);
+
 const BlogSchema = new Schema(
   {
     id: Schema.Types.ObjectId,
@@ -20,7 +45,7 @@ const BlogSchema = new Schema(
         "Sports",
         "Business",
         "Education",
-        "Other"
+        "Other",
       ],
     },
     description: {
@@ -43,23 +68,10 @@ const BlogSchema = new Schema(
       type: [String],
       default: [],
     },
-    comment: [
-      {
-        author: {
-          type: String,
-          ref: "Auth",
-          required: true,
-        },
-        comment: {
-          type: String,
-          required: true,
-        },
-        likeNo: {
-          type: Number,
-          required: true,
-        },
-      },
-    ],
+    review: {
+      type: [BlogReviewSchema],
+      default: [],
+    },
     author: {
       type: String,
       ref: "Auth",

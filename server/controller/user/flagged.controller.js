@@ -6,14 +6,14 @@ import ApiFeatures from "../../utils/apiFeatures.js";
 import { nanoid } from "nanoid";
 
 export const FlaggedController = {
-  getMyFlaggedPost: async (req, res, next) => {
+  getMyFlaggedBlog: async (req, res, next) => {
     try {
       const queryParams = { ...req.query };
       if (!queryParams.sort) {
         queryParams.sort = "-createdAt";
       }
       delete queryParams.author;
-      
+
       const resultPerPage = Math.min(Number(req.query.limit) || 10, 100);
       const currentPage = Number(req.query.page) || 1;
 
@@ -63,7 +63,7 @@ export const FlaggedController = {
       next(error);
     }
   },
-  flagPost: async (req, res, next) => {
+  flagBlog: async (req, res, next) => {
     try {
       const blog = await Blog.findOneAndUpdate(
         { blogId: req.params.blogId },

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import ErrorResponse from "../utils/ErrorHandler.js";
