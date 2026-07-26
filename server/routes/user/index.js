@@ -5,7 +5,7 @@ import flaggedRoute from './flaggedRoute.js'
 
 const router = Router();
 
-router.use("/user", authRoute);
+router.use("/auth", authRoute);
 router.use("/blog", blogRoute);
 router.use("/flag", flaggedRoute)
 

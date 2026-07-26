@@ -4,3 +4,72 @@
 2026-07-22T20:51:54.717Z [WARN]: [33mLogin failed::22-Jul-2026, 21:51:50-AuthController::login[0m
 2026-07-22T20:52:24.204Z [WARN]: [33m22-Jul-2026, 21:52:18-AuthController::login-Invalid password[0m
 2026-07-22T20:52:24.205Z [ERROR]: [31mLogin failed::22-Jul-2026, 21:52:18-AuthController::login[0m
+2026-07-23T15:32:48.530Z [INFO]: [32m23-Jul-2026, 16:32:34-AuthController::signup-undefined[0m
+2026-07-23T15:37:40.797Z [INFO]: [32m23-Jul-2026, 16:36:23-AuthController::signup-undefined[0m
+2026-07-23T15:38:36.807Z [INFO]: [32m23-Jul-2026, 16:38:20-AuthController::signup-User created successfully[0m
+2026-07-26T15:31:46.123Z [ERROR]: [31mSignup failed::26-Jul-2026, 16:30:50-AuthController::signup[0m
+2026-07-26T15:36:05.748Z [ERROR]: [31mSignup failed::26-Jul-2026, 16:35:59-AuthController::signup[0m
+2026-07-26T15:38:57.235Z [ERROR]: [31mSignup failed::26-Jul-2026, 16:38:51-AuthController::signup[0m
+2026-07-26T15:39:42.374Z [ERROR]: [31mSignup failed::26-Jul-2026, 16:39:13-AuthController::signup[0m
+2026-07-26T15:42:02.311Z [INFO]: [32m26-Jul-2026, 16:41:53-AuthController::signup-User created successfully[0m
+2026-07-26T15:43:55.231Z [WARN]: [33m26-Jul-2026, 16:43:48-AuthController::verifyEmail-User not found[0m
+2026-07-26T15:43:55.233Z [ERROR]: [31mEmail verification failed::26-Jul-2026, 16:43:48-AuthController::verifyEmail[0m
+2026-07-26T15:48:18.871Z [INFO]: [32m26-Jul-2026, 16:48:09-AuthController::verifyEmail-undefined[0m
+2026-07-26T15:50:18.605Z [WARN]: [33m26-Jul-2026, 16:49:35-AuthController::login-Invalid password[0m
+2026-07-26T15:50:18.606Z [ERROR]: [31mLogin failed::26-Jul-2026, 16:49:35-AuthController::login[0m
+2026-07-26T15:50:42.883Z [INFO]: [32m26-Jul-2026, 16:49:35-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T15:50:42.884Z [INFO]: [32m26-Jul-2026, 16:49:35-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T15:51:41.412Z [WARN]: [33m26-Jul-2026, 16:51:18-AuthController::verifyForgetPassword-Invalid verification code[0m
+2026-07-26T15:51:41.414Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 16:51:18-AuthController::verifyForgetPassword[0m
+2026-07-26T15:53:51.285Z [WARN]: [33m26-Jul-2026, 16:53:46-AuthController::verifyForgetPassword-Invalid verification code[0m
+2026-07-26T15:53:51.286Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 16:53:46-AuthController::verifyForgetPassword[0m
+2026-07-26T15:54:43.978Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 16:54:41-AuthController::verifyForgetPassword[0m
+2026-07-26T15:55:20.278Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 16:55:15-AuthController::verifyForgetPassword[0m
+2026-07-26T16:00:39.384Z [INFO]: [32m26-Jul-2026, 17:00:29-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:00:39.387Z [INFO]: [32m26-Jul-2026, 17:00:29-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:01:00.419Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 17:00:29-AuthController::verifyForgetPassword[0m
+2026-07-26T16:01:41.054Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 17:01:36-AuthController::verifyForgetPassword[0m
+2026-07-26T16:01:43.016Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 17:01:36-AuthController::verifyForgetPassword[0m
+2026-07-26T16:03:14.921Z [INFO]: [32m26-Jul-2026, 17:02:46-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:03:14.924Z [INFO]: [32m26-Jul-2026, 17:02:46-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:03:23.080Z [ERROR]: [31mVerify forget password failed::26-Jul-2026, 17:02:46-AuthController::verifyForgetPassword[0m
+2026-07-26T16:06:11.673Z [INFO]: [32m26-Jul-2026, 17:05:10-AuthController::verifyForgetPassword-Verification successful[0m
+2026-07-26T16:07:29.147Z [ERROR]: [31mReset password failed::26-Jul-2026, 17:06:44-AuthController::resetPassword[0m
+2026-07-26T16:08:23.563Z [INFO]: [32m26-Jul-2026, 17:06:44-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:08:23.564Z [INFO]: [32m26-Jul-2026, 17:06:44-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:08:31.961Z [INFO]: [32m26-Jul-2026, 17:06:44-AuthController::verifyForgetPassword-Verification successful[0m
+2026-07-26T16:08:35.909Z [ERROR]: [31mReset password failed::26-Jul-2026, 17:06:44-AuthController::resetPassword[0m
+2026-07-26T16:09:48.896Z [INFO]: [32m26-Jul-2026, 17:09:44-AuthController::resetPassword-Password reset successful[0m
+2026-07-26T16:15:06.288Z [INFO]: [32m26-Jul-2026, 17:14:44-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:15:06.289Z [INFO]: [32m26-Jul-2026, 17:14:44-AuthController::forgetPassword-Email sent successfully[0m
+2026-07-26T16:15:32.633Z [INFO]: [32m26-Jul-2026, 17:14:44-AuthController::verifyForgetPassword-Verification successful[0m
+2026-07-26T16:15:36.926Z [WARN]: [33m26-Jul-2026, 17:14:44-AuthController::resetPassword-password same as old[0m
+2026-07-26T16:15:36.926Z [ERROR]: [31mReset password failed::26-Jul-2026, 17:14:44-AuthController::resetPassword[0m
+2026-07-26T16:15:43.348Z [WARN]: [33m26-Jul-2026, 17:14:44-AuthController::resetPassword-password same as old[0m
+2026-07-26T16:15:43.349Z [ERROR]: [31mReset password failed::26-Jul-2026, 17:14:44-AuthController::resetPassword[0m
+2026-07-26T16:16:14.096Z [WARN]: [33m26-Jul-2026, 17:16:09-AuthController::resetPassword-password same as old[0m
+2026-07-26T16:16:14.097Z [ERROR]: [31mReset password failed::26-Jul-2026, 17:16:09-AuthController::resetPassword[0m
+2026-07-26T16:18:50.505Z [INFO]: [32m26-Jul-2026, 17:18:29-AuthController::resetPassword-Password reset successful[0m
+2026-07-26T16:47:56.221Z [WARN]: [33m26-Jul-2026, 17:47:28-AuthController::resendOtp-Request body is required[0m
+2026-07-26T16:47:56.223Z [ERROR]: [31mResend otp failed::26-Jul-2026, 17:47:28-AuthController::resendOtp[0m
+2026-07-26T16:48:18.643Z [WARN]: [33m26-Jul-2026, 17:48:16-AuthController::resendOtp-Request body is required[0m
+2026-07-26T16:48:18.644Z [ERROR]: [31mResend otp failed::26-Jul-2026, 17:48:16-AuthController::resendOtp[0m
+2026-07-26T16:49:19.123Z [WARN]: [33m26-Jul-2026, 17:49:04-AuthController::resendOtp-Request body is required[0m
+2026-07-26T16:49:19.124Z [ERROR]: [31mResend otp failed::26-Jul-2026, 17:49:04-AuthController::resendOtp[0m
+2026-07-26T16:49:51.031Z [WARN]: [33m26-Jul-2026, 17:49:35-AuthController::resendOtp-Request body is required[0m
+2026-07-26T16:49:51.032Z [ERROR]: [31mResend otp failed::26-Jul-2026, 17:49:35-AuthController::resendOtp[0m
+2026-07-26T16:50:14.837Z [WARN]: [33m26-Jul-2026, 17:50:12-AuthController::resendOtp-Verification code not found[0m
+2026-07-26T16:50:14.838Z [ERROR]: [31mResend otp failed::26-Jul-2026, 17:50:12-AuthController::resendOtp[0m
+2026-07-26T16:52:08.645Z [INFO]: [32m26-Jul-2026, 17:50:12-AuthController::getMyProfile-undefined[0m
+2026-07-26T16:55:10.102Z [WARN]: [33m26-Jul-2026, 17:54:25-AuthController::updateUser-User not found[0m
+2026-07-26T16:55:10.104Z [ERROR]: [31mUpdate user failed::26-Jul-2026, 17:54:25-AuthController::updateUser[0m
+2026-07-26T16:59:03.661Z [WARN]: [33m26-Jul-2026, 17:58:48-AuthController::updateUser-User ID is required[0m
+2026-07-26T16:59:03.661Z [ERROR]: [31mUpdate user failed::26-Jul-2026, 17:58:48-AuthController::updateUser[0m
+2026-07-26T17:21:39.567Z [INFO]: [32m26-Jul-2026, 18:21:20-AuthController::updateUser-undefined[0m
+2026-07-26T17:21:39.722Z [INFO]: [32m26-Jul-2026, 18:21:20-AuthController::updateUser-User updated successfully[0m
+2026-07-26T17:23:54.079Z [INFO]: [32m26-Jul-2026, 18:23:49-AuthController::updateUser-undefined[0m
+2026-07-26T17:23:54.236Z [INFO]: [32m26-Jul-2026, 18:23:49-AuthController::updateUser-User updated successfully[0m
+2026-07-26T17:24:56.402Z [INFO]: [32m26-Jul-2026, 18:24:53-AuthController::updateUser-undefined[0m
+2026-07-26T17:24:56.553Z [INFO]: [32m26-Jul-2026, 18:24:53-AuthController::updateUser-User updated successfully[0m
+2026-07-26T17:27:23.327Z [INFO]: [32m26-Jul-2026, 18:26:51-undefined-undefined[0m
+2026-07-26T17:29:45.363Z [INFO]: [32m26-Jul-2026, 18:29:40-undefined-undefined[0m

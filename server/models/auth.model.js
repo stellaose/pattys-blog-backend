@@ -74,20 +74,21 @@ const AuthSchema = new Schema(
       default: false,
     },
     emailVerificationToken: {
-      type: String,
+      type: Number,
     },
     emailVerificationTokenExpires: {
       type: Date,
     },
     passwordToken: {
-      type: String,
+      type: Number,
     },
     passwordTokenExpires: {
       type: Date,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now,
+   
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
     isSignupPasswordOtp: {
       type: Boolean,
@@ -101,10 +102,18 @@ const AuthSchema = new Schema(
       type: [AuthBlogEntrySchema],
       default: [],
     },
+     createdAt: {
+      type: Date,
+      default: Date.now,
+    },
     updatedAt: {
       type: Date,
       default: Date.now,
     },
+    deletedAt: {
+      type: Date,
+      default: null,
+    }
   },
   { timestamps: true }
 );
