@@ -73,3 +73,52 @@
 2026-07-26T17:24:56.553Z [INFO]: [32m26-Jul-2026, 18:24:53-AuthController::updateUser-User updated successfully[0m
 2026-07-26T17:27:23.327Z [INFO]: [32m26-Jul-2026, 18:26:51-undefined-undefined[0m
 2026-07-26T17:29:45.363Z [INFO]: [32m26-Jul-2026, 18:29:40-undefined-undefined[0m
+2026-07-26T18:20:41.791Z [INFO]: [32mUser blogs updated::26-Jul-2026, 19:18:40-undefined::User blog updated successfully[0m
+2026-07-26T18:20:41.793Z [INFO]: [32m26-Jul-2026, 19:18:40-undefined-Blog created successfully[0m
+2026-07-26T18:21:34.440Z [INFO]: [32mBlog deleted successfully::26-Jul-2026, 19:18:40-undefined[0m
+2026-07-26T18:21:59.764Z [INFO]: [32mUser blogs updated::26-Jul-2026, 19:18:40-undefined::User blog updated successfully[0m
+2026-07-26T18:21:59.765Z [INFO]: [32m26-Jul-2026, 19:18:40-undefined-Blog created successfully[0m
+2026-07-26T18:23:09.451Z [WARN]: [33mBlog not found::26-Jul-2026, 19:22:43-undefined[0m
+2026-07-26T18:23:09.592Z [ERROR]: [31mDelete post failed::26-Jul-2026, 19:22:43-undefined[0m
+2026-07-26T18:23:32.851Z [INFO]: [32mBlog deleted successfully::26-Jul-2026, 19:22:43-undefined[0m
+2026-07-26T19:43:55.148Z [ERROR]: [31mGet all blogs failed::26-Jul-2026, 20:43:30-undefined[0m
+2026-07-26T19:46:59.731Z [ERROR]: [31mGet all blogs failed::26-Jul-2026, 20:46:58-BlogController::getAllBlogs[0m
+2026-07-26T19:47:01.368Z [ERROR]: [31mGet all blogs failed::26-Jul-2026, 20:46:58-BlogController::getAllBlogs[0m
+2026-07-26T19:48:35.253Z [ERROR]: [31mGet all blogs failed::26-Jul-2026, 20:48:00-BlogController::getAllBlogs[0m
+2026-07-26T19:51:02.932Z [ERROR]: [31mGet all blogs failed::26-Jul-2026, 20:50:13-BlogController::getAllBlogs[0m
+2026-07-26T19:56:27.140Z [INFO]: [32mUser blogs updated::26-Jul-2026, 20:56:10-undefined::User blog updated successfully[0m
+2026-07-26T19:56:27.142Z [INFO]: [32m26-Jul-2026, 20:56:10-undefined-Blog created successfully[0m
+2026-07-26T20:14:08.165Z [ERROR]: [31mReview validation failed: blogId: Cast to ObjectId failed for value "blog-gKC0ZNvQmeVZVIq2jP0GDW" (type string) at path "blogId" because of "BSONError", author: Cast to ObjectId failed for value "user-Rg09SANKVndWFNIijUhcuaB" (type string) at path "author" because of "BSONError"::26-Jul-2026, 21:13:29-ReviewController::createReview[0m
+2026-07-26T20:15:39.584Z [ERROR]: [31mReview validation failed: review: Path `review` is required., author: Path `author` is required., blogId: Path `blogId` is required.::26-Jul-2026, 21:15:35-ReviewController::createReview[0m
+2026-07-26T20:16:08.966Z [ERROR]: [31mReview validation failed: review: Path `review` is required.::26-Jul-2026, 21:16:04-ReviewController::createReview[0m
+2026-07-26T20:18:15.043Z [ERROR]: [31mReview validation failed: review: Path `review` is required.::26-Jul-2026, 21:18:04-ReviewController::createReview[0m
+2026-07-26T20:18:41.359Z [ERROR]: [31mReview validation failed: review: Path `review` is required.::26-Jul-2026, 21:18:38-ReviewController::createReview[0m
+2026-07-26T20:19:10.679Z [ERROR]: [31mReview validation failed: review: Path `review` is required.::26-Jul-2026, 21:19:08-ReviewController::createReview[0m
+2026-07-26T20:20:30.095Z [WARN]: [33mundefined for blog-gKC0ZNvQmeVZVIq2jP0GDW::26-Jul-2026, 21:20:26-ReviewController::createReview[0m
+2026-07-26T20:20:30.097Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:20:26-ReviewController::createReview[0m
+2026-07-26T20:21:03.903Z [WARN]: [33mundefined for blog-gKC0ZNvQmeVZVIq2jP0GDW::26-Jul-2026, 21:21:00-ReviewController::createReview[0m
+2026-07-26T20:21:03.905Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:21:00-ReviewController::createReview[0m
+2026-07-26T20:22:03.166Z [ERROR]: [31mCast to embedded failed for value "{
+  author: 'user-Rg09SANKVndWFNIijUhcuaB',
+  reviewId: 'review-Imy8pxDaVk7HHMnIZABKWlXe',
+  review: 'This is interesting',
+  likeNo: 0
+}" (type Object) at path "review" because of "CastError"::26-Jul-2026, 21:22:00-ReviewController::createReview[0m
+2026-07-26T20:22:21.459Z [ERROR]: [31mCast to embedded failed for value "{
+  author: 'user-Rg09SANKVndWFNIijUhcuaB',
+  reviewId: 'review-mCYQl94eMCX5HeXlPIVR7FyA',
+  review: 'This is interesting',
+  likeNo: 0
+}" (type Object) at path "review" because of "CastError"::26-Jul-2026, 21:22:15-ReviewController::createReview[0m
+2026-07-26T20:22:57.809Z [ERROR]: [31mCast to embedded failed for value "{
+  author: 'user-Rg09SANKVndWFNIijUhcuaB',
+  reviewId: 'review-PpZpz4v3l4NGwojO68zUeIY9',
+  review: 'This is interesting',
+  likeNo: 0
+}" (type Object) at path "review" because of "CastError"::26-Jul-2026, 21:22:55-ReviewController::createReview[0m
+2026-07-26T20:23:48.992Z [ERROR]: [31mReview validation failed: review: Path `review` is required.::26-Jul-2026, 21:23:45-ReviewController::createReview[0m
+2026-07-26T20:28:26.243Z [INFO]: [32mUser blogs updated::26-Jul-2026, 21:28:00-BlogController::createBlog::User blog updated successfully[0m
+2026-07-26T20:28:26.392Z [INFO]: [32m26-Jul-2026, 21:28:00-BlogController::createBlog-Blog created successfully[0m
+2026-07-26T20:29:22.384Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:28:00-ReviewController::createReview[0m
+2026-07-26T20:31:59.760Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:28:00-ReviewController::createReview[0m
+2026-07-26T20:32:53.720Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:32:40-ReviewController::createReview[0m

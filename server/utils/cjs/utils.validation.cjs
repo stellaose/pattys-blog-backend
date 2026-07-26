@@ -34,7 +34,10 @@ module.exports = {
     end_date: Joi.date().optional(),
   }),
   userIdParams: Joi.object().keys({
-    userId: Joi.string().required(),
+    userId: Joi.string().required().messages({
+      "any.required": "User ID is required",
+      "string.empty": "User ID is required",
+    }),
   }),
   signup: Joi.object().keys({
     first_name: Joi.string().required(),
@@ -51,7 +54,10 @@ module.exports = {
     code: Joi.number().required(),
   }),
   resendOtpParams: Joi.object().keys({
-    userId: Joi.string().required(),
+    userId: Joi.string().required().messages({
+      "any.required": "User ID is required",
+      "string.empty": "User ID is required",
+    }),
   }),
   resendOtp: Joi.object().keys({
     isSignupPasswordOtp: Joi.boolean().optional(),
@@ -88,5 +94,27 @@ module.exports = {
     phone_number: Joi.string().optional(),
     gender: Joi.string().optional(),
     bio: Joi.string().optional(),
+  }),
+  createBlog: Joi.object().keys({
+    title: Joi.string().required(),
+    category: Joi.string().required(),
+    description: Joi.array().min(1).items(Joi.string()).required(),
+  }),
+  editBlog: Joi.object().keys({
+    title: Joi.string().optional(),
+    category: Joi.string().optional(),
+    description: Joi.array().min(1).items(Joi.string()).optional(),
+  }),
+  blogParams: Joi.object().keys({
+    blogId: Joi.string().required().messages({
+      "any.required": "Blog ID is required",
+      "string.empty": "Blog ID is required",
+    }),
+  }),
+  likeDislikeBlog: Joi.object().keys({
+    likeStatus: Joi.string().valid("like", "dislike").required(),
+  }),
+  createBlogReview: Joi.object().keys({
+    review: Joi.string().required(),
   }),
 };

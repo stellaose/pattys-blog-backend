@@ -19,4 +19,9 @@ export const {
   resetPassword,
   changePassword,
   updateProfile,
+  createBlog,
+  editBlog,
+  blogParams,
+  likeDislikeBlog,
+  createBlogReview,
 } = validation;

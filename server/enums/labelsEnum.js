@@ -10,10 +10,10 @@ export const labelEnum = {
   USER_CHANGE_PASSWORD: "AuthController::changePassword",
   USER_UPDATE_PROFILE: "AuthController::updateUser",
   USER_GET_PROFILE: "AuthController::getMyProfile",
-
+  USER_DELETE_PROFILE: "AuthController::deleteUser",
   RESEND_OTP: "AuthController::resendOtp",
   USER_LOGIN: "AuthController::login",
-  USER_SIGNUP: "AuthController::signup",
+  USER_LOGOUT: "AuthController::logout",
 
   // ^ Auth Middleware
   AUTH_MIDDLEWARE: "AuthMiddleware::auth",
@@ -21,16 +21,23 @@ export const labelEnum = {
   ALLOWED_ROLES_MIDDLEWARE: "AuthMiddleware::allowedRoles",
 
   // % BLOGS
-  CREATE_BLOG: "BlogController::createPost",
+  CREATE_BLOG: "BlogController::createBlog",
   GET_ALL_BLOGS: "BlogController::getAllBlogs",
   GET_MY_BLOGS: "BlogController::getMyBlogs",
   GET_ONE_BLOG: "BlogController::getOneBlog",
-  EDIT_BLOG: "BlogController::editPost",
-  LIKE_DISLIKE_BLOG: "BlogController::likeDislikePost",
-  DELETE_BLOG: "BlogController::deletePost",
+  EDIT_BLOG: "BlogController::editBlog",
+  LIKE_DISLIKE_BLOG: "BlogController::likeDislikeBlog",
+  DELETE_BLOG: "BlogController::deleteBlog",
 
-  // % FLAGGED BLOGS
-  GET_MY_FLAGGED_BLOGS: "FlaggedController::getMyFlaggedPost",
-  FLAG_BLOG: "FlaggedController::flagPost",
+  // - FLAGGED BLOGS
+  GET_MY_FLAGGED_BLOGS: "FlaggedController::getMyFlaggedBlog",
+  FLAG_BLOG: "FlaggedController::flagBlog",
   DELETE_FLAGGED_BLOG: "FlaggedController::deleteFlagged",
+
+  // ; REVIEWS
+  CREATE_REVIEW: "ReviewController::createReview",
+  GET_ALL_REVIEWS: "ReviewController::getAllReviews",
+  GET_ONE_REVIEW: "ReviewController::getOneReview",
+  EDIT_REVIEW: "ReviewController::editReview",
+  DELETE_REVIEW: "ReviewController::deleteReview",
 };

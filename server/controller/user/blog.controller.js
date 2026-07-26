@@ -6,6 +6,7 @@ import ErrorResponse from "../../utils/ErrorHandler.js";
 import ApiFeatures from "../../utils/apiFeatures.js";
 import logger from "../../logger/logger.js";
 import { nanoid } from "nanoid";
+import mongoose from "mongoose";
 
 const toAuthBlogEntry = doc => ({
   id: doc._id,
@@ -44,7 +45,7 @@ export const BlogController = {
       return res.status(statusEnum.statusCode.HTTP_OK).json({
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: messagesEnum.success.BLOGS_FETCHED_SUCCESSFULLY,
+        message: messagesEnum.BLOG_FETCHED_SUCCESSFULLY,
         blogs,
         pagination: {
           count: blogs.length,
@@ -56,7 +57,7 @@ export const BlogController = {
       });
     } catch (error) {
       logger.error(
-        `Get all blogs failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ALL_BLOGS}`,
+        `Get all blogs failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ALL_BLOGS}`,
         error.message
       );
       next(error);
@@ -95,16 +96,11 @@ export const BlogController = {
         createdAt: -1,
       });
 
-      const updateUser = await Auth.updateOne(
-        { userId: req.userId },
-        { $set: { blogs: allForAuth.map(toAuthBlogEntry) } }
-      );
-
       return res.status(statusEnum.statusCode.HTTP_OK).json({
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: messagesEnum.BLOG_FETCHED_SUCCESSFULLY,
-        blog,
+        blog: allForAuth,
         pagination: {
           count: blog.length,
           totalBlogs: blogsCount,
@@ -115,7 +111,7 @@ export const BlogController = {
       });
     } catch (error) {
       logger.error(
-        `Get my blogs failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_MY_BLOGS}`,
+        `Get my blogs failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_MY_BLOGS}`,
         error.message
       );
       next(error);
@@ -128,7 +124,7 @@ export const BlogController = {
 
       if (!blogId) {
         logger.warn(
-          `Blog id is required::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ONE_BLOG}`
+          `Blog id is required::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ONE_BLOG}`
         );
         throw new ErrorResponse(
           messagesEnum.BLOG_ID_REQUIRED,
@@ -139,7 +135,7 @@ export const BlogController = {
       const blog = await BlogsService.getOneBlog(blogId);
       if (!blog) {
         logger.warn(
-          `Blog not found::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ONE_BLOG}`
+          `Blog not found::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ONE_BLOG}`
         );
         throw new ErrorResponse(
           messagesEnum.BLOG_NOT_FOUND,
@@ -155,80 +151,191 @@ export const BlogController = {
       });
     } catch (error) {
       logger.error(
-        `Get one blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.BLOG_GET_ONE_BLOG}`,
+        `Get one blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ONE_BLOG}`,
         error.message
       );
       next(error);
     }
   },
 
-  createPost: async (req, res, next) => {
+  createBlog: async (req, res, next) => {
+    const session = await mongoose.startSession();
     try {
       const { title, description, category } = req.body;
 
       if (!title) {
-        return next(new ErrorResponse("Title is required", 400));
+        logger.warn(
+          `${messagesEnum.BLOG_TITLE_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_TITLE_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
       if (!description) {
-        return next(new ErrorResponse("Description is required", 400));
+        logger.warn(
+          `${messagesEnum.BLOG_DESCRIPTION_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_DESCRIPTION_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
       }
 
-      const blog = await Blog.create({
-        author: req.userId,
-        blogId: `blog-${nanoid(24).replaceAll("_", "").replaceAll("-", "")}`,
-        title,
-        description,
-        category: category ? category : "Other",
-      });
-
-      await Auth.findOneAndUpdate(
-        { userId: req.userId },
-        { $push: { blogs: toAuthBlogEntry(blog) } }
+      session.startTransaction();
+      const [blog] = await Blog.create(
+        [
+          {
+            author: req.userId,
+            blogId: `blog-${nanoid(24).replaceAll("_", "").replaceAll("-", "")}`,
+            title,
+            description,
+            category: category ? category : "Other",
+          },
+        ],
+        { session }
       );
 
-      return res.status(200).json({
+      const updateUser = await Auth.findOneAndUpdate(
+        { userId: req.userId },
+        { $push: { blogs: toAuthBlogEntry(blog) } },
+        { new: true, session },
+      );
+
+      if (updateUser) {
+        logger.info(
+          `User blogs updated::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}::${messagesEnum.USER_BLOG_UPDATE}`
+        );
+      }
+
+      await session.commitTransaction();
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}-${messagesEnum.BLOG_CREATED_SUCCESSFULLY}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_CREATED).json({
+        code: statusEnum.statusCode.HTTP_CREATED,
         success: true,
-        message: "Blog created successfully",
+        message: messagesEnum.BLOG_CREATED_SUCCESSFULLY,
         blog,
       });
     } catch (error) {
+      if (session.inTransaction()) {
+        await session.abortTransaction();
+      }
+      logger.error(
+        `Create blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}`,
+        error.message
+      );
       next(error);
+    } finally {
+      session.endSession();
     }
   },
 
-  editPost: async (req, res, next) => {
+  editBlog: async (req, res, next) => {
+    const session = await mongoose.startSession();
     try {
       const { title, description, category } = req.body;
+      const blogId = req.params.blogId;
+
+      if (!blogId) {
+        logger.warn(
+          `${messagesEnum.BLOG_ID_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+
+      session.startTransaction();
 
       const blog = await Blog.findOneAndUpdate(
-        { blogId: req.params.blogId },
+        { blogId },
         {
           title,
           description,
           category: category ? category : "Other",
         },
-        { new: true }
+        { new: true, session },
       );
-      if (!blog) return next(new ErrorResponse("Blog not found", 404));
+      if (!blog) {
+        logger.warn(
+          `${messagesEnum.BLOG_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
-      return res.status(200).json({
+      const updateUser = await Auth.findOneAndUpdate(
+        { userId: req.userId },
+        { $push: { blogs: toAuthBlogEntry(blog) } },
+        { new: true, session },
+      );
+
+      if (!updateUser) {
+        logger.warn(
+          `${messagesEnum.USER_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      } else {
+        logger.info(
+          `User blogs updated::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}::${messagesEnum.USER_BLOG_UPDATE}`
+        );
+      }
+
+      await session.commitTransaction();
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}-${messagesEnum.BLOG_UPDATED_SUCCESSFULLY}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Blog updated successfully",
+        message: messagesEnum.BLOG_UPDATED_SUCCESSFULLY,
         blog,
       });
     } catch (error) {
+      if (session.inTransaction()) {
+        await session.abortTransaction();
+      }
+      logger.error(
+        `Edit blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}`,
+        error.message
+      );
       next(error);
+    } finally {
+      session.endSession();
     }
   },
 
-  likeDislikePost: async (req, res, next) => {
+  likeDislikeBlog: async (req, res, next) => {
     try {
       const { likeStatus } = req.body;
+      const blogId = req.params.blogId;
+
+      if (!blogId) {
+        logger.warn(
+          `${messagesEnum.BLOG_ID_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
 
       if (likeStatus === "like") {
         const blog = await Blog.findOneAndUpdate(
-          { blogId: req.params.blogId },
+          { blogId },
           [
             {
               $set: {
@@ -253,10 +360,19 @@ export const BlogController = {
           ],
           { new: true, updatePipeline: true }
         );
-        if (!blog) return next(new ErrorResponse("Blog not found", 404));
-        return res.status(200).json({
+        if (!blog) {
+          logger.warn(
+            `${messagesEnum.BLOG_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`
+          );
+          throw new ErrorResponse(
+            messagesEnum.BLOG_NOT_FOUND,
+            statusEnum.statusCode.HTTP_NOT_FOUND
+          );
+        }
+        return res.status(statusEnum.statusCode.HTTP_OK).json({
+          code: statusEnum.statusCode.HTTP_OK,
           success: true,
-          message: "Blog liked successfully",
+          message: messagesEnum.BLOG_LIKED_SUCCESSFULLY,
           blog,
         });
       }
@@ -284,32 +400,99 @@ export const BlogController = {
           ],
           { new: true, updatePipeline: true }
         );
-        if (!blog) return next(new ErrorResponse("Blog not found", 404));
+        if (!blog) {
+          logger.warn(
+            `${messagesEnum.BLOG_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`
+          );
+          throw new ErrorResponse(
+            messagesEnum.BLOG_NOT_FOUND,
+            statusEnum.statusCode.HTTP_NOT_FOUND
+          );
+        }
 
-        return res.status(200).json({
+        return res.status(statusEnum.statusCode.HTTP_OK).json({
+          code: statusEnum.statusCode.HTTP_OK,
           success: true,
-          message: "Blog disliked successfully",
+          message: messagesEnum.BLOG_DISLIKED_SUCCESSFULLY,
           blog,
         });
       }
     } catch (error) {
+      logger.error(
+        `Like/Dislike post failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`,
+        error.message
+      );
       next(error);
     }
   },
 
-  deletePost: async (req, res, next) => {
+  deleteBlog: async (req, res, next) => {
+    const session = await mongoose.startSession();
     try {
-      const blog = await Blog.findOneAndDelete({ blogId: req.params.blogId });
-      if (!blog) return next(new ErrorResponse("Blog not found", 404));
-      return res.status(200).json({
+      const blogId = req.params.blogId;
+
+      if (!blogId) {
+        logger.warn(
+          `${messagesEnum.BLOG_ID_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+      session.startTransaction();
+      const blog = await Blog.findOneAndDelete({ blogId }, { session });
+      if (!blog) {
+        logger.warn(
+          `${messagesEnum.BLOG_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      const deleteUserBlog = await Auth.findOneAndUpdate(
+        { userId: req.userId },
+        {
+          $pull: {
+            blogs: { id: blog._id },
+          },
+        },
+        { session }
+      );
+
+      if (!deleteUserBlog) {
+        logger.warn(
+          `${messagesEnum.USER_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      await session.commitTransaction();
+      logger.info(
+        `${messagesEnum.BLOG_DELETED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`
+      );
+
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
         success: true,
-        message: "Blog deleted successfully",
-        blog,
+        message: messagesEnum.BLOG_DELETED_SUCCESSFULLY,
       });
     } catch (error) {
+      if (session.inTransaction()) {
+        await session.abortTransaction();
+      }
+      logger.error(
+        `Delete post failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`,
+        error.message
+      );
       next(error);
+    } finally {
+      session.endSession();
     }
   },
-
-  addCommentToPost: async (req, res, next) => {},
 };

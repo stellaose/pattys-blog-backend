@@ -11,6 +11,8 @@ import tokenService from "../../utils/token.js";
 import { signUpMail, forgetPasswordMail } from "../../utils/emailMessages.js";
 import logger from "../../logger/logger.js";
 import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
+import mongoose from "mongoose";
+import { Blog } from "../../models/blog.model.js";
 
 dotenv.config({ quiet: true });
 
@@ -915,6 +917,72 @@ export const AuthController = {
         error.message
       );
       next(error);
+    }
+  },
+
+  deleteUser: async (req, res, next) => {
+    const session = await mongoose.startSession();
+    try {
+      const userId = req.userId;
+      if (!userId) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      session.startTransaction();
+      const user = await Auth.findOneAndDelete({ userId }, { session });
+
+      if (!user) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      const deleteUserBlog = await Blog.deleteMany(
+        { author: userId },
+        { session }
+      );
+
+      if (!deleteUserBlog) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}-${messagesEnum.USER_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.USER_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+
+      await session.commitTransaction();
+
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}-${messagesEnum.USER_DELETED_SUCCESSFULLY}`
+      );
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
+        success: true,
+        message: messagesEnum.USER_DELETED_SUCCESSFULLY,
+      });
+    } catch (error) {
+      if (session.inTransaction()) {
+        await session.abortTransaction();
+      }
+      logger.error(
+        `Delete user failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}`,
+        error.message
+      );
+      next(error);
+    } finally {
+      session.endSession();
     }
   },
 

@@ -7,7 +7,12 @@ const { isEmail } = validator;
 const AuthBlogEntrySchema = new Schema(
   {
     id: {
-      type: Schema.Types.ObjectId,
+      type: String,
+      ref: "Blog",
+      required: true,
+    },
+    blogId: {
+      type: String,
       ref: "Blog",
       required: true,
     },

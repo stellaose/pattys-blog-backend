@@ -63,6 +63,12 @@ class ApiFeatures {
       return this;
     }
 
+    if (typeof this.query?.sort !== "function") {
+      throw new Error(
+        `ApiFeatures.sort: query does not support .sort() (type: ${typeof this.query})`
+      );
+    }
+
     const sortObj = {};
     for (const part of sortBy.split(",").map(s => s.trim()).filter(Boolean)) {
       if (part.startsWith("-")) {
