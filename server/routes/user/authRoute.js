@@ -17,49 +17,49 @@ import {
 const router = Router();
 
 router.post(
-  "/auth/signup",
+  "/signup",
   processJoiValidation(signup, "payload"),
   AuthController.signup
 );
 
 router.post(
-  "/auth/verify-email",
+  "/verify-email",
   processJoiValidation(verifyEmail, "payload"),
   AuthController.verifyEmail
 );
 
 router.post(
-  "/auth/resend-otp/:userId",
+  "/resend-otp/:userId",
   processJoiValidation(userIdParams, "params"),
   AuthController.resendOtp
 );
 
 router.post(
-  "/auth/login",
+  "/login",
   processJoiValidation(login, "payload"),
   AuthController.login
 );
 
 router.post(
-  "/auth/forget-password",
+  "/forget-password",
   processJoiValidation(forgetPassword, "payload"),
   AuthController.forgetPassword
 );
 
 router.post(
-  "/auth/verify-forget-password",
+  "/verify-forget-password",
   processJoiValidation(verifyForgetPassword, "payload"),
   AuthController.verifyForgetPassword
 );
 
 router.post(
-  "/auth/reset-password",
+  "/reset-password",
   processJoiValidation(resetPassword, "payload"),
   AuthController.resetPassword
 );
 
 router.put(
-  "/auth/change-password/:userId",
+  "/change-password/:userId",
   processJoiValidation(userIdParams, "params"),
   processJoiValidation(changePassword, "payload"),
   AuthMiddleware.auth,
@@ -67,12 +67,15 @@ router.put(
 );
 
 // $ user
-router.get(
-  "/auth/my-profile",
+router.get("/my-profile", AuthMiddleware.auth, AuthController.getMyProfile);
+
+router.patch(
+  "/update-me",
+  processJoiValidation(updateProfile, "payload"),
   AuthMiddleware.auth,
-  AuthController.getMyProfile
+  AuthController.updateUser
 );
 
-router.patch("/auth/update-me", AuthMiddleware.auth, AuthController.updateUser);
+router.post("/logout", AuthMiddleware.auth, AuthController.logout);
 
 export default router;

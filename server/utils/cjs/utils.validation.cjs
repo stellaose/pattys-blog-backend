@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const Joi = require("joi").extend(require("@joi/date"));
 
 module.exports = {
@@ -32,10 +33,10 @@ module.exports = {
     start_date: Joi.date().optional(),
     end_date: Joi.date().optional(),
   }),
- userIdParams: Joi.object().keys({
+  userIdParams: Joi.object().keys({
     userId: Joi.string().required(),
- }),
- signup: Joi.object().keys({
+  }),
+  signup: Joi.object().keys({
     first_name: Joi.string().required(),
     last_name: Joi.string().required(),
     user_name: Joi.string().required(),
@@ -44,40 +45,41 @@ module.exports = {
     phone_number: Joi.string().optional(),
     gender: Joi.string().optional(),
     bio: Joi.string().optional(),
- }),
- verifyEmail: Joi.object().keys({
+  }),
+  verifyEmail: Joi.object().keys({
     email: Joi.string().email().required(),
-    code: Joi.string().required(),
- }),
- resendOtpParams: Joi.object().keys({
+    code: Joi.number().required(),
+  }),
+  resendOtpParams: Joi.object().keys({
     userId: Joi.string().required(),
- }),
- resendOtp: Joi.object().keys({
-   isSignupPasswordOtp: Joi.boolean().required(),
- }),
- login: Joi.object().keys({
+  }),
+  resendOtp: Joi.object().keys({
+    isSignupPasswordOtp: Joi.boolean().optional(),
+    isForgotPasswordOtp: Joi.boolean().optional(),
+  }),
+  login: Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
- }),
- forgetPassword: Joi.object().keys({
+  }),
+  forgetPassword: Joi.object().keys({
     email: Joi.string().email().required(),
- }),
- verifyForgetPassword: Joi.object().keys({
+  }),
+  verifyForgetPassword: Joi.object().keys({
     userId: Joi.string().required(),
-    code: Joi.string().required(),
- }),
- resetPassword: Joi.object().keys({
+    code: Joi.number().required(),
+  }),
+  resetPassword: Joi.object().keys({
     userId: Joi.string().required(),
     password: Joi.string().min(6).required(),
- }),
- changePasswordParams: Joi.object().keys({
+  }),
+  changePasswordParams: Joi.object().keys({
     userId: Joi.string().required(),
- }),
- changePassword: Joi.object().keys({
+  }),
+  changePassword: Joi.object().keys({
     password: Joi.string().min(6).required(),
     newPassword: Joi.string().min(6).required(),
- }),
- updateProfile: Joi.object().keys({
+  }),
+  updateProfile: Joi.object().keys({
     userId: Joi.string().required(),
     first_name: Joi.string().optional(),
     last_name: Joi.string().optional(),
@@ -86,5 +88,5 @@ module.exports = {
     phone_number: Joi.string().optional(),
     gender: Joi.string().optional(),
     bio: Joi.string().optional(),
- }),
+  }),
 };
