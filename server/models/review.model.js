@@ -16,6 +16,10 @@ const ReviewSchema = new Schema(
       type: String,
       required: true,
     },
+    isEdited: {
+      type: Boolean,
+      default: false,
+    },
     likeNo: {
       type: Number,
       default: 0,

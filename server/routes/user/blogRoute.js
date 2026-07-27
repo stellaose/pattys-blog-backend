@@ -13,7 +13,7 @@ const router = Router();
 
 router.get("/all", AuthMiddleware.auth, BlogController.getAllBlogs);
 
-router.get("/my-posts", AuthMiddleware.auth, BlogController.getMyBlogs);
+router.get("/my-blogs", AuthMiddleware.auth, BlogController.getMyBlogs);
 
 router.post(
   "/create",

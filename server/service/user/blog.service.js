@@ -16,8 +16,8 @@ const BlogsService = {
   getUserUnflaggedBlogs: userId => {
     return Blog.find({ author: userId, isFlagged: false });
   },
-  getUserBlogs: async userId => {
-    return Blog.find({ author: userId });
+  getUserBlogs: userId => {
+    return Blog.find({ author: userId }).sort({ createdAt: -1 });
   },
 
   getOneBlog: async blogId => {
