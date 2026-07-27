@@ -91,10 +91,7 @@ const AuthSchema = new Schema(
       type: Date,
     },
    
-    isDeleted: {
-      type: Boolean,
-      default: false,
-    },
+   
     isSignupPasswordOtp: {
       type: Boolean,
       default: false,
@@ -115,10 +112,7 @@ const AuthSchema = new Schema(
       type: Date,
       default: Date.now,
     },
-    deletedAt: {
-      type: Date,
-      default: null,
-    }
+    
   },
   { timestamps: true }
 );

@@ -14,7 +14,9 @@ const ReviewService = {
     return await Review.findOne({ blogId, author });
   },
 
- 
+  getAllReviews: async () => {
+    return await Review.find();
+  },
 };
 
 export default ReviewService;

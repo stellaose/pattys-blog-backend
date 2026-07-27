@@ -18,6 +18,10 @@ const BlogReviewSchema = new Schema(
       type: String,
       required: true,
     },
+    isEdited: {
+      type: Boolean,
+      default: false,
+    },
     likeNo: {
       type: Number,
       required: true,

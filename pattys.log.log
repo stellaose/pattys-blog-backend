@@ -122,3 +122,17 @@
 2026-07-26T20:29:22.384Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:28:00-ReviewController::createReview[0m
 2026-07-26T20:31:59.760Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:28:00-ReviewController::createReview[0m
 2026-07-26T20:32:53.720Z [INFO]: [32mReview created successfully::26-Jul-2026, 21:32:40-ReviewController::createReview[0m
+2026-07-27T09:06:56.141Z [INFO]: [32mUser blogs updated::27-Jul-2026, 10:06:10-BlogController::createBlog::User blog updated successfully[0m
+2026-07-27T09:06:56.301Z [INFO]: [32m27-Jul-2026, 10:06:10-BlogController::createBlog-Blog created successfully[0m
+2026-07-27T09:07:44.380Z [WARN]: [33m27-Jul-2026, 10:06:10-AuthMiddleware::auth-Unauthorized[0m
+2026-07-27T09:07:44.382Z [ERROR]: [31m27-Jul-2026, 10:06:10-AuthMiddleware::auth-undefined[0m
+2026-07-27T09:13:45.148Z [INFO]: [32m27-Jul-2026, 10:13:33-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-07-27T09:13:59.990Z [INFO]: [32m27-Jul-2026, 10:13:33-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-07-27T09:19:27.336Z [INFO]: [32m27-Jul-2026, 10:18:16-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-07-27T09:19:37.937Z [INFO]: [32m27-Jul-2026, 10:18:16-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-07-27T09:24:51.597Z [WARN]: [33mBlog not found::27-Jul-2026, 10:18:16-BlogController::editBlog[0m
+2026-07-27T09:24:51.753Z [ERROR]: [31mEdit blog failed::27-Jul-2026, 10:18:16-BlogController::editBlog[0m
+2026-07-27T09:29:14.196Z [INFO]: [32m27-Jul-2026, 10:18:16-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-07-27T09:29:59.992Z [ERROR]: [31mGet my blogs failed::27-Jul-2026, 10:29:53-BlogController::getMyBlogs[0m
+2026-07-27T09:36:13.978Z [INFO]: [32m27-Jul-2026, 10:35:01-undefined-Blogs fetched successfully[0m
+2026-07-27T09:52:24.745Z [INFO]: [32m27-Jul-2026, 10:51:18-BlogController::likeDislikeBlog-Blog liked successfully[0m

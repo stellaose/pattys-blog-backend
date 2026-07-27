@@ -111,8 +111,6 @@ export const AuthController = {
         isEmailVerified: false,
         createdAt: Date.now,
         updatedAt: null,
-        isDeleted: false,
-        deletedAt: null,
       });
 
       const verificationCode = crypto
@@ -433,6 +431,10 @@ export const AuthController = {
       delete userObj.passwordToken;
       delete userObj.passwordTokenExpires;
 
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.LOGIN_SUCCESSFUL}`
+      );
+
       return res.status(statusEnum.statusCode.HTTP_OK).json({
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
@@ -731,8 +733,7 @@ export const AuthController = {
         );
       }
       const user = await AuthService.getUserByUserId(req.userId);
-      {
-      }
+
       if (!user) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.USER_NOT_FOUND}`
@@ -768,14 +769,15 @@ export const AuthController = {
         );
       }
       const sameAsOld = await bcrypt.compare(newPassword, user.password);
-      if (sameAsOld)
+      if (sameAsOld) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.PASSWORD_CANNOT_BE_SAME}`
         );
-      throw new ErrorResponse(
-        messagesEnum.PASSWORD_CANNOT_BE_SAME,
-        statusEnum.statusCode.HTTP_BAD_REQUEST
-      );
+        throw new ErrorResponse(
+          messagesEnum.PASSWORD_CANNOT_BE_SAME,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
 
       const salt = bcrypt.genSaltSync(10);
       user.password = bcrypt.hashSync(newPassword, salt);

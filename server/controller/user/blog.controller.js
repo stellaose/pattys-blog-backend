@@ -42,6 +42,10 @@ export const BlogController = {
       features.pagination(resultPerPage);
       const blogs = await features.query;
 
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ALL_BLOGS}-${messagesEnum.BLOG_FETCHED_SUCCESSFULLY}`
+      );
+
       return res.status(statusEnum.statusCode.HTTP_OK).json({
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
@@ -66,6 +70,7 @@ export const BlogController = {
 
   getMyBlogs: async (req, res, next) => {
     try {
+      const userId = req.userId;
       const queryParams = { ...req.query };
       if (!queryParams.sort) {
         queryParams.sort = "-createdAt";
@@ -76,7 +81,7 @@ export const BlogController = {
       const currentPage = Number(queryParams.page) || 1;
 
       const features = new ApiFeatures(
-        BlogsService.getUserUnflaggedBlogs(req.userId),
+        BlogsService.getUserUnflaggedBlogs(userId),
         queryParams,
         {
           searchableFields: ["title", "description"],
@@ -90,12 +95,14 @@ export const BlogController = {
       const blogsCount = await BlogsService.countDocuments(filter);
 
       features.pagination(resultPerPage);
+
       const blog = await features.query;
 
-      const allForAuth = BlogsService.getUserBlogs(req.userId).sort({
-        createdAt: -1,
-      });
+      const allForAuth = await BlogsService.getUserBlogs(userId);
 
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_MY_BLOG}-${messagesEnum.BLOG_FETCHED_SUCCESSFULLY}`
+      );
       return res.status(statusEnum.statusCode.HTTP_OK).json({
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
@@ -143,6 +150,9 @@ export const BlogController = {
         );
       }
 
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ONE_BLOG}-${messagesEnum.BLOG_FETCHED_SUCCESSFULLY}`
+      );
       return res.status(statusEnum.statusCode.HTTP_OK).json({
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
@@ -191,7 +201,7 @@ export const BlogController = {
             blogId: `blog-${nanoid(24).replaceAll("_", "").replaceAll("-", "")}`,
             title,
             description,
-            category: category ? category : "Other",
+            category: category ? category?.toLowerCase() : "other",
           },
         ],
         { session }
@@ -200,7 +210,7 @@ export const BlogController = {
       const updateUser = await Auth.findOneAndUpdate(
         { userId: req.userId },
         { $push: { blogs: toAuthBlogEntry(blog) } },
-        { new: true, session },
+        { new: true, session }
       );
 
       if (updateUser) {
@@ -258,9 +268,9 @@ export const BlogController = {
         {
           title,
           description,
-          category: category ? category : "Other",
+          category: category ? category?.toLowerCase() : "other",
         },
-        { new: true, session },
+        { new: true, session }
       );
       if (!blog) {
         logger.warn(
@@ -275,7 +285,7 @@ export const BlogController = {
       const updateUser = await Auth.findOneAndUpdate(
         { userId: req.userId },
         { $push: { blogs: toAuthBlogEntry(blog) } },
-        { new: true, session },
+        { new: true, session }
       );
 
       if (!updateUser) {
@@ -368,6 +378,10 @@ export const BlogController = {
             messagesEnum.BLOG_NOT_FOUND,
             statusEnum.statusCode.HTTP_NOT_FOUND
           );
+        } else {
+          logger.info(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_LIKED_SUCCESSFULLY}`
+          );
         }
         return res.status(statusEnum.statusCode.HTTP_OK).json({
           code: statusEnum.statusCode.HTTP_OK,
@@ -407,6 +421,10 @@ export const BlogController = {
           throw new ErrorResponse(
             messagesEnum.BLOG_NOT_FOUND,
             statusEnum.statusCode.HTTP_NOT_FOUND
+          );
+        } else {
+          logger.info(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_DISLIKED_SUCCESSFULLY}`
           );
         }
 

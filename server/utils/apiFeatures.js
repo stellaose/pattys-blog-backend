@@ -3,14 +3,14 @@ class ApiFeatures {
     this.query = query;
     this.queryStr = queryStr;
     this.options = {
-      searchableFields:
-        options.searchableFields ?? [
-          "title",
-          "description",
-          "first_name",
-          "last_name",
-          "user_name",
-        ],
+      searchableFields: options.searchableFields ?? [
+        "title",
+        "description",
+        "category",
+        "first_name",
+        "last_name",
+        "user_name",
+      ],
       filterAllowlist: options.filterAllowlist ?? null,
     };
   }
@@ -70,7 +70,10 @@ class ApiFeatures {
     }
 
     const sortObj = {};
-    for (const part of sortBy.split(",").map(s => s.trim()).filter(Boolean)) {
+    for (const part of sortBy
+      .split(",")
+      .map(s => s.trim())
+      .filter(Boolean)) {
       if (part.startsWith("-")) {
         sortObj[part.slice(1)] = -1;
       } else {
