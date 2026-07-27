@@ -90,8 +90,6 @@ const AuthSchema = new Schema(
     passwordTokenExpires: {
       type: Date,
     },
-   
-   
     isSignupPasswordOtp: {
       type: Boolean,
       default: false,

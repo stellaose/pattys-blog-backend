@@ -40,4 +40,5 @@ export const labelEnum = {
   GET_ONE_REVIEW: "ReviewController::getOneReview",
   EDIT_REVIEW: "ReviewController::editReview",
   DELETE_REVIEW: "ReviewController::deleteReview",
+  GET_REVIEWS_BY_BLOG_ID: "ReviewController::getReviewsByBlogId",
 };

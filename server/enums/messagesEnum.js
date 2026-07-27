@@ -94,4 +94,5 @@ export const messagesEnum = {
   REVIEW_FETCHED_SUCCESSFULLY: "Reviews fetched successfully",
   REVIEW_ID_REQUIRED: "Review id is required",
   USER_REVIEW_UPDATE: "User review updated successfully",
+  REVIEW_NOT_CREATED: "Review not created",
 };

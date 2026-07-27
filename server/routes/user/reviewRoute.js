@@ -6,6 +6,7 @@ import {
   processJoiValidation,
   createBlogReview,
   blogParams,
+  reviewParams,
 } from "../../utils/utils.validation.js";
 
 dotenv.config({ quiet: true });
@@ -18,6 +19,20 @@ router.post(
   processJoiValidation(blogParams, "params"),
   AuthMiddleWare.auth,
   ReviewController.createReview
+);
+
+router.delete(
+  "/:reviewId",
+  processJoiValidation(reviewParams, "params"),
+  AuthMiddleWare.auth,
+  ReviewController.deleteReview
+);
+
+router.get(
+  "/:blogId",
+  processJoiValidation(blogParams, "params"),
+  AuthMiddleWare.auth,
+  ReviewController.getReviewsByBlogId
 );
 
 export default router;
