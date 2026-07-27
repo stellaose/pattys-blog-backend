@@ -24,4 +24,5 @@ export const {
   blogParams,
   likeDislikeBlog,
   createBlogReview,
+  reviewParams,
 } = validation;

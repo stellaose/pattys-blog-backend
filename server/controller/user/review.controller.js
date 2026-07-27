@@ -5,6 +5,7 @@ import { Blog } from "../../models/blog.model.js";
 import mongoose from "mongoose";
 import { Review } from "../../models/review.model.js";
 import { nanoid } from "nanoid";
+import ReviewService from "../../service/user/review.service.js";
 
 const toBlogReviewEntry = (doc, userId) => ({
   author: userId,
@@ -105,58 +106,6 @@ const ReviewController = {
     }
   },
 
-  editReview: async (req, res, next) => {
-    const session = await mongoose.startSession();
-    try {
-      const reviewId = req.params.reviewId;
-      const { review } = req.body;
-
-      if (!reviewId) {
-        logger.warn(
-          `${messagesEnum.REVIEW_ID_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_REVIEW}`
-        );
-        throw new ErrorResponse(
-          messagesEnum.REVIEW_ID_REQUIRED,
-          statusEnum.statusCode.HTTP_BAD_REQUEST
-        );
-      }
-
-      session.startTransaction();
-
-      const updateReview = await Review.findOneAndUpdate(
-        { reviewId },
-        { review, isEdited: true },
-        { new: true, session }
-      )
-        .populate("author")
-        .populate("blogId");
-
-      if (!updateReview) {
-        logger.warn(
-          `${messagesEnum.REVIEW_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_REVIEW}`
-        );
-        throw new ErrorResponse(
-          messagesEnum.REVIEW_NOT_FOUND,
-          statusEnum.statusCode.HTTP_NOT_FOUND
-        );
-      }
-
-      if (session.inTransaction()) {
-        await session.commitTransaction();
-      }
-    } catch (error) {
-      if (session.inTransaction()) {
-        await session.abortTransaction();
-      }
-      logger.error(
-        `${error.message}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_REVIEW}`
-      );
-      next(error);
-    } finally {
-      await session.endSession();
-    }
-  },
-
   deleteReview: async (req, res, next) => {
     const session = await mongoose.startSession();
     try {
@@ -221,6 +170,45 @@ const ReviewController = {
       next(error);
     } finally {
       await session.endSession();
+    }
+  },
+
+  getReviewsByBlogId: async (req, res, next) => {
+    try {
+      const blogId = req.params.blogId;
+      if (!blogId) {
+        logger.warn(
+          `${messagesEnum.BLOG_ID_REQUIRED}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_REVIEWS_BY_BLOG_ID}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_ID_REQUIRED,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+      const findReviews = await ReviewService.getReviewByBlogId(blogId);
+      if (!findReviews) {
+        logger.warn(
+          `${messagesEnum.BLOG_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_REVIEWS_BY_BLOG_ID}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.BLOG_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
+      logger.info(
+        `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_REVIEWS_BY_BLOG_ID}-${messagesEnum.REVIEW_FETCHED_SUCCESSFULLY}`
+      );
+      return res.status(statusEnum.statusCode.HTTP_OK).json({
+        code: statusEnum.statusCode.HTTP_OK,
+        success: true,
+        message: messagesEnum.REVIEW_FETCHED_SUCCESSFULLY,
+        review: findReviews,
+      });
+    } catch (error) {
+      logger.error(
+        `${error.message}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_REVIEWS_BY_BLOG_ID}`
+      );
+      next(error);
     }
   },
 };

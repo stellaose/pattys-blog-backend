@@ -117,4 +117,10 @@ module.exports = {
   createBlogReview: Joi.object().keys({
     review: Joi.string().required(),
   }),
+  reviewParams: Joi.object().keys({
+    reviewId: Joi.string().required().messages({
+      "any.required": "Review ID is required",
+      "string.empty": "Review ID is required",
+    }),
+  }),
 };
