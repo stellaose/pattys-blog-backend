@@ -6,15 +6,16 @@ const { isEmail } = validator;
 
 const AuthBlogEntrySchema = new Schema(
   {
+    // These fields are embedded inside Auth.blogs and are optional.
+    // Removing `ref: "Blog"` avoids Mongoose attempting to cast/populate refs
+    // for undefined/malformed entries during `user.save()`.
     id: {
       type: String,
-      ref: "Blog",
-      required: true,
+      required: false,
     },
     blogId: {
       type: String,
-      ref: "Blog",
-      required: true,
+      required: false,
     },
     title: {
       type: String,
