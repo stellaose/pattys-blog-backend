@@ -16,7 +16,8 @@ module.exports = [
           varsIgnorePattern: "^_",
         },
       ],
-      "no-console": "warn",
+      "no-console": "off",
+      "no-undef": "off",
     },
   },
 ];

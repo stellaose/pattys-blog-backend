@@ -281,7 +281,7 @@ export const AuthController = {
         );
       }
 
-      if (!user.emailVerificationToken || !user.passwordToken) {
+      if (!user.emailVerificationToken && !user.passwordToken) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${messagesEnum.VERIFICATION_CODE_NOT_FOUND}`
         );
@@ -343,10 +343,13 @@ export const AuthController = {
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-message sent`
         );
       }
-      const userObj = user.toObject();
-      delete userObj.password;
-      delete userObj.passwordToken;
-      delete userObj.passwordTokenExpires;
+      const userObj = {
+        first_name: user?.first_name,
+        last_name: user?.last_name,
+        user_name: user?.user_name,
+        email: user?.email,
+        phone_number: user?.phone_number,
+      };
 
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
@@ -649,6 +652,18 @@ export const AuthController = {
         );
       }
 
+      const existingPassword = await bcrypt.compare(password, user.password);
+
+      if (existingPassword) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.NEW_PASSWORD_SAME_AS_OLD}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.PASSWORD_CANNOT_BE_SAME,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+
       if (!user.passwordToken) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.VERIFICATION_CODE_NOT_FOUND}`
@@ -689,6 +704,14 @@ export const AuthController = {
       user.updatedAt = new Date();
 
       await user.save();
+      
+      const userObj = {
+        userId: user?.userId,
+        first_name: user?.first_name,
+        last_name: user?.last_name,
+        user_name: user?.user_name,
+        email: user?.email,
+      };
 
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.PASSWORD_RESET_SUCCESSFUL}`
@@ -698,6 +721,7 @@ export const AuthController = {
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: messagesEnum.PASSWORD_RESET_SUCCESSFUL,
+        user: userObj,
       });
     } catch (error) {
       logger.error(
@@ -757,24 +781,13 @@ export const AuthController = {
         );
       }
 
-      const currentOk = await bcrypt.compare(password, user.password);
-
-      if (!currentOk) {
-        logger.warn(
-          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.INVALID_PASSWORD}`
-        );
-        throw new ErrorResponse(
-          messagesEnum.INVALID_PASSWORD,
-          statusEnum.statusCode.HTTP_BAD_REQUEST
-        );
-      }
       const sameAsOld = await bcrypt.compare(newPassword, user.password);
       if (sameAsOld) {
         logger.warn(
-          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.PASSWORD_CANNOT_BE_SAME}`
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.NEW_PASSWORD_SAME_AS_OLD}`
         );
         throw new ErrorResponse(
-          messagesEnum.PASSWORD_CANNOT_BE_SAME,
+          messagesEnum.NEW_PASSWORD_SAME_AS_OLD,
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }

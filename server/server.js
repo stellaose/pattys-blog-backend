@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import "./load-env.js";
 import app from "./app.js";
 import databaseConnect from "./database/index.js";

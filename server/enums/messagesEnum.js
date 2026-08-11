@@ -20,13 +20,14 @@ export const messagesEnum = {
   PASSWORD_MISMATCH: "Passwords do not match",
   PASSWORD_RESET_SUCCESSFUL: "Password reset successful",
   NEW_PASSWORD_REQUIRED: "New password is required",
-  PASSWORD_CANNOT_BE_SAME: "New password cannot be same as old password",
+  NEW_PASSWORD_SAME_AS_OLD: "New password cannot be same as old password",
   PASSWORD_CHANGED_SUCCESSFUL: "Password changed successfully",
 
   // = Username
   USERNAME_REQUIRED: "Username is required",
   USERNAME_EXISTS: "Username already exists",
   INVALID_USERNAME: "Invalid username",
+  USER_FOUND_SUCCESSFULLY: "User found successfully",
 
   // > Phone Number
   PHONE_NUMBER_REQUIRED: "Phone Number is required",
@@ -84,7 +85,7 @@ export const messagesEnum = {
   BLOG_FETCHED_SUCCESSFULLY: "Blogs fetched successfully",
   BLOG_ID_REQUIRED: "Blog id is required",
   USER_BLOG_UPDATE: "User blog updated successfully",
-  
+
   // $ Reviews
   REVIEW_CREATED_SUCCESSFULLY: "Review created successfully",
   REVIEW_UPDATED_SUCCESSFULLY: "Review updated successfully",

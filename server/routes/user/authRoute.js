@@ -41,7 +41,7 @@ router.post(
 );
 
 router.post(
-  "/forget-password",
+  "/forgot-password",
   processJoiValidation(forgetPassword, "payload"),
   AuthController.forgetPassword
 );
