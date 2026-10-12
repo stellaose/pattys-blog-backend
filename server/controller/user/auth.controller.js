@@ -1,20 +1,20 @@
-import crypto from "crypto";
 import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import ErrorResponse from "../../utils/ErrorHandler.js";
 import validateEmail from "../../utils/Validation.js";
-import { sendEmail } from "../../utils/mailer.js";
 import { Auth } from "../../models/auth.model.js";
 import { AuthService } from "../../service/user/auth.service.js";
 import { nanoid } from "nanoid";
 import tokenService from "../../utils/token.js";
-import { signUpMail, forgetPasswordMail } from "../../utils/emailMessages.js";
 import logger from "../../logger/logger.js";
 import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
 import mongoose from "mongoose";
 import { Blog } from "../../models/blog.model.js";
 
 dotenv.config({ quiet: true });
+
+// Email sending is disabled so others can test: every OTP is this fixed code.
+const TEST_OTP = 123456;
 
 export const AuthController = {
   signup: async (req, res, next) => {
@@ -109,31 +109,16 @@ export const AuthController = {
         bio,
         role: "user",
         isEmailVerified: false,
-        createdAt: Date.now,
+        createdAt: Date.now(),
         updatedAt: null,
       });
 
-      const verificationCode = crypto
-        .randomInt(0, 1_000_000)
-        .toString()
-        .padStart(6, "0");
-
-      user.emailVerificationToken = verificationCode;
+      user.emailVerificationToken = TEST_OTP;
       user.emailVerificationTokenExpires = new Date(
         Date.now() + 10 * 60 * 1000
       );
 
-      const mail = signUpMail(user?.first_name, verificationCode);
-      const sentMail = await sendEmail({
-        to: user?.email,
-        subject: mail?.subject,
-        html: mail?.html,
-        text: mail?.text,
-      });
-
-      if (sentMail) {
-        await user.save();
-      }
+      await user.save();
       const userObj = user.toObject();
       delete userObj.password;
       delete userObj.emailVerificationToken;
@@ -168,8 +153,7 @@ export const AuthController = {
         throw new ErrorResponse(messagesEnum.EMAIL_REQUIRED, 400);
       }
 
-      const normalized = String(code);
-      if (!normalized) {
+      if (!code) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.VERIFICATION_CODE_REQUIRED}`
         );
@@ -201,16 +185,25 @@ export const AuthController = {
         );
       }
 
-      if (
-        user.emailVerificationToken !== normalized ||
-        (user.emailVerificationTokenExpires &&
-          user.emailVerificationTokenExpires.getTime() < Date.now())
-      ) {
+      if (Number(user.emailVerificationToken) !== Number(code)) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.INVALID_VERIFICATION_CODE}`
         );
         throw new ErrorResponse(
           messagesEnum.INVALID_VERIFICATION_CODE,
+          statusEnum.statusCode.HTTP_BAD_REQUEST
+        );
+      }
+
+      if (
+        user.emailVerificationTokenExpires &&
+        user.emailVerificationTokenExpires.getTime() < Date.now()
+      ) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.VERIFICATION_CODE_EXPIRED}`
+        );
+        throw new ErrorResponse(
+          messagesEnum.VERIFICATION_CODE_EXPIRED,
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
@@ -291,12 +284,6 @@ export const AuthController = {
         );
       }
 
-      let mail;
-      const verificationCode = crypto
-        .randomInt(0, 1_000_000)
-        .toString()
-        .padStart(6, "0");
-
       if (isSignupPasswordOtp) {
         if (user.isEmailVerified) {
           logger.warn(
@@ -308,12 +295,10 @@ export const AuthController = {
           );
         }
 
-        user.emailVerificationToken = verificationCode;
+        user.emailVerificationToken = TEST_OTP;
         user.emailVerificationTokenExpires = new Date(
           Date.now() + 10 * 60 * 1000
         );
-
-        mail = signUpMail(user?.first_name, verificationCode);
       } else {
         if (!user.isEmailVerified) {
           logger.warn(
@@ -325,24 +310,11 @@ export const AuthController = {
           );
         }
 
-        user.passwordToken = verificationCode;
+        user.passwordToken = TEST_OTP;
         user.passwordTokenExpires = new Date(Date.now() + 10 * 60 * 1000);
-        mail = forgetPasswordMail(user?.first_name, verificationCode);
       }
 
-      const sentMail = await sendEmail({
-        to: user?.email,
-        subject: mail?.subject,
-        html: mail?.html,
-        text: mail?.text,
-      });
-
-      if (sentMail) {
-        await user.save();
-        logger.info(
-          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-message sent`
-        );
-      }
+      await user.save();
       const userObj = {
         first_name: user?.first_name,
         last_name: user?.last_name,
@@ -485,31 +457,11 @@ export const AuthController = {
         );
       }
 
-      const verificationCode = crypto
-        .randomInt(0, 1_000_000)
-        .toString()
-        .padStart(6, "0");
-
-      user.passwordToken = verificationCode;
+      user.passwordToken = TEST_OTP;
       user.passwordTokenExpires = new Date(Date.now() + 10 * 60 * 1000);
 
       await user.save();
 
-      const mail = forgetPasswordMail(user?.first_name, verificationCode);
-
-      const sentMail = await sendEmail({
-        to: user?.email,
-        subject: mail?.subject,
-        html: mail?.html,
-        text: mail?.text,
-      });
-
-      if (sentMail) {
-        await user.save();
-        logger.info(
-          `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
-        );
-      }
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
       );
@@ -704,7 +656,7 @@ export const AuthController = {
       user.updatedAt = new Date();
 
       await user.save();
-      
+
       const userObj = {
         userId: user?.userId,
         first_name: user?.first_name,
