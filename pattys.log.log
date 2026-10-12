@@ -38146,3 +38146,221 @@
 2026-08-11T13:24:29.441Z [INFO]: [32m11-Aug-2026, 11:19:33-AuthController::getMyProfile-User found successfully[0m
 2026-08-11T13:24:34.022Z [INFO]: [32m11-Aug-2026, 11:19:33-AuthController::getMyProfile-User found successfully[0m
 2026-08-11T13:24:47.331Z [INFO]: [32m11-Aug-2026, 11:19:33-AuthController::getMyProfile-User found successfully[0m
+2026-08-11T13:36:08.425Z [INFO]: [32m11-Aug-2026, 14:31:24-AuthController::getMyProfile-User found successfully[0m
+2026-10-11T03:02:38.336Z [WARN]: [33m11-Oct-2026, 04:00:14-AuthMiddleware::auth-Unauthorized[0m
+2026-10-11T03:02:38.350Z [ERROR]: [31m11-Oct-2026, 04:00:14-AuthMiddleware::auth-undefined[0m
+2026-10-12T11:59:07.368Z [ERROR]: [31mSignup failed::11-Oct-2026, 10:59:29-AuthController::signup[0m
+2026-10-12T12:00:33.830Z [ERROR]: [31mSignup failed::11-Oct-2026, 10:59:29-AuthController::signup[0m
+2026-10-12T12:01:59.340Z [ERROR]: [31mSignup failed::11-Oct-2026, 10:59:29-AuthController::signup[0m
+2026-10-12T12:03:03.305Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::signup-User created successfully[0m
+2026-10-12T13:15:16.819Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-message sent[0m
+2026-10-12T13:15:16.820Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-Email sent successfully[0m
+2026-10-12T13:15:17.210Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-message sent[0m
+2026-10-12T13:15:17.210Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-Email sent successfully[0m
+2026-10-12T13:15:46.083Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-message sent[0m
+2026-10-12T13:15:46.085Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-Email sent successfully[0m
+2026-10-12T13:15:46.720Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-message sent[0m
+2026-10-12T13:15:46.721Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-Email sent successfully[0m
+2026-10-12T13:15:49.283Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-message sent[0m
+2026-10-12T13:15:49.283Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-Email sent successfully[0m
+2026-10-12T13:18:51.626Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-message sent[0m
+2026-10-12T13:18:51.626Z [INFO]: [32m12-Oct-2026, 13:02:42-AuthController::resendOtp-Email sent successfully[0m
+2026-10-12T13:19:19.974Z [WARN]: [33m12-Oct-2026, 13:02:42-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:19:19.978Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 13:02:42-AuthController::verifyEmail[0m
+2026-10-12T13:22:31.581Z [WARN]: [33m12-Oct-2026, 14:22:23-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:22:31.584Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 14:22:23-AuthController::verifyEmail[0m
+2026-10-12T13:23:08.315Z [WARN]: [33m12-Oct-2026, 14:23:05-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:23:08.317Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 14:23:05-AuthController::verifyEmail[0m
+2026-10-12T13:24:52.305Z [INFO]: [32m12-Oct-2026, 14:23:05-AuthController::signup-User created successfully[0m
+2026-10-12T13:25:40.111Z [WARN]: [33m12-Oct-2026, 14:23:05-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:25:40.113Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 14:23:05-AuthController::verifyEmail[0m
+2026-10-12T13:28:57.013Z [WARN]: [33m12-Oct-2026, 14:28:42-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:28:57.016Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 14:28:42-AuthController::verifyEmail[0m
+2026-10-12T13:29:55.402Z [WARN]: [33m12-Oct-2026, 14:29:51-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:29:55.405Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 14:29:51-AuthController::verifyEmail[0m
+2026-10-12T13:30:20.575Z [WARN]: [33m12-Oct-2026, 14:30:17-AuthController::verifyEmail-Invalid verification code[0m
+2026-10-12T13:30:20.578Z [ERROR]: [31mEmail verification failed::12-Oct-2026, 14:30:17-AuthController::verifyEmail[0m
+2026-10-12T13:32:07.582Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::verifyEmail-Email verified successfully[0m
+2026-10-12T14:11:37.509Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::login-undefined[0m
+2026-10-12T14:11:38.116Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:12:27.904Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:12:31.887Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:16:56.631Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::logout-Logout successful[0m
+2026-10-12T14:21:12.826Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::login-undefined[0m
+2026-10-12T14:21:13.053Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:21:13.496Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:21:27.070Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:21:27.457Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:25:25.238Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:25:25.656Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:28.427Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:29.575Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:30.925Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:31.759Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:32.366Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:32.917Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:33.460Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:34.341Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:35.606Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:40.393Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:41.165Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:26:44.544Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:28:26.063Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:28:27.502Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:29:08.699Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:29:08.852Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:29:09.907Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:29:13.007Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:29:13.192Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:29:13.299Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:29:15.025Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:29:15.344Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:29:17.532Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:29:17.837Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:30:10.230Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:30:13.998Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:30:14.136Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:30:14.316Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:30:18.608Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:08.915Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:42.218Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:53.195Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:53.343Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:31:53.470Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:31:55.093Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:55.240Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:31:55.356Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:31:56.196Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:56.340Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:31:56.486Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:31:57.325Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:57.598Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:31:58.248Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:31:58.398Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:31:58.534Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:32:00.148Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:32:00.407Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:32:01.224Z [INFO]: [32m12-Oct-2026, 14:32:03-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:32:01.384Z [INFO]: [32m12-Oct-2026, 14:32:03-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:32:01.530Z [INFO]: [32m12-Oct-2026, 14:32:03-undefined-Blogs fetched successfully[0m
+2026-10-12T14:37:34.616Z [INFO]: [32m12-Oct-2026, 15:37:09-AuthController::logout-Logout successful[0m
+2026-10-12T14:38:20.623Z [INFO]: [32m12-Oct-2026, 15:37:09-AuthController::signup-User created successfully[0m
+2026-10-12T14:38:26.772Z [INFO]: [32m12-Oct-2026, 15:37:09-AuthController::verifyEmail-Email verified successfully[0m
+2026-10-12T14:38:46.913Z [WARN]: [33m12-Oct-2026, 15:37:09-AuthController::login-User not found[0m
+2026-10-12T14:38:46.920Z [ERROR]: [31mLogin failed::12-Oct-2026, 15:37:09-AuthController::login[0m
+2026-10-12T14:38:56.086Z [INFO]: [32m12-Oct-2026, 15:37:09-AuthController::login-undefined[0m
+2026-10-12T14:38:56.796Z [INFO]: [32m12-Oct-2026, 15:37:09-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:38:57.193Z [INFO]: [32m12-Oct-2026, 15:37:09-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:39:07.306Z [INFO]: [32m12-Oct-2026, 15:37:09-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:39:07.749Z [INFO]: [32m12-Oct-2026, 15:37:09-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:41:28.918Z [WARN]: [33m12-Oct-2026, 15:41:23-AuthMiddleware::auth-Unauthorized[0m
+2026-10-12T14:41:28.920Z [ERROR]: [31m12-Oct-2026, 15:41:23-AuthMiddleware::auth-undefined[0m
+2026-10-12T14:42:09.900Z [INFO]: [32m12-Oct-2026, 15:41:23-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:42:10.503Z [INFO]: [32m12-Oct-2026, 15:41:23-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:43:56.685Z [INFO]: [32m12-Oct-2026, 15:41:23-BlogController::likeDislikeBlog-Blog liked successfully[0m
+2026-10-12T14:43:56.839Z [INFO]: [32m12-Oct-2026, 15:41:23-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:43:57.109Z [INFO]: [32m12-Oct-2026, 15:41:23-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:44:00.559Z [WARN]: [33m12-Oct-2026, 15:43:58-AuthMiddleware::auth-Unauthorized[0m
+2026-10-12T14:44:00.561Z [ERROR]: [31m12-Oct-2026, 15:43:58-AuthMiddleware::auth-undefined[0m
+2026-10-12T14:44:03.979Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:44:04.142Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:44:04.290Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:44:16.790Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:44:16.917Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:44:33.980Z [INFO]: [32mReview created successfully::12-Oct-2026, 15:43:58-ReviewController::createReview[0m
+2026-10-12T14:44:34.190Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:44:34.349Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:45:23.219Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:45:23.378Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:45:23.507Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:45:25.965Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:45:26.115Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:45:26.253Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:45:37.530Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:45:37.671Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:45:37.809Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:47:36.771Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:47:36.925Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:47:37.057Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:47:37.468Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:47:37.621Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:47:37.750Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:47:39.252Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:47:39.400Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:47:39.547Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:03.310Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:03.576Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:37.067Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:37.418Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:38.870Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:39.060Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:48:39.158Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:42.726Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:42.862Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:48:43.023Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:45.343Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:45.629Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:47.240Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:47.543Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:48:50.316Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:48:50.475Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:49:03.355Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:49:03.487Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:49:04.712Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:49:04.986Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:49:05.879Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:49:06.007Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:49:55.323Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:49:55.610Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:49:56.661Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:49:56.817Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:49:56.981Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:49:57.851Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:49:58.005Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:49:58.153Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:50:01.999Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:50:02.174Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:50:02.329Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:50:05.725Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:50:05.938Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:50:10.346Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:50:10.491Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:50:21.877Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:51:20.037Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:51:20.174Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:51:29.880Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:51:34.733Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:51:37.391Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:51:37.552Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:52:41.389Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:53:15.124Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:53:15.432Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:53:17.092Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:53:17.343Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:53:17.420Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:53:18.658Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:53:18.873Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:53:18.955Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:53:25.062Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:53:25.211Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:54:23.503Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::logout-Logout successful[0m
+2026-10-12T14:54:46.105Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::login-undefined[0m
+2026-10-12T14:54:46.475Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:54:46.859Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:54:55.896Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:54:56.336Z [INFO]: [32m12-Oct-2026, 15:43:58-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-12T14:55:46.132Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:55:46.437Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:55:50.735Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:55:51.087Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:55:52.985Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:55:53.305Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:55:58.585Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::updateUser-User found successfully[0m
+2026-10-12T14:55:58.748Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::updateUser-User updated successfully[0m
+2026-10-12T14:55:58.990Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:55:59.279Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:56:21.399Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:56:24.253Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:56:24.539Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
+2026-10-12T14:56:26.901Z [INFO]: [32m12-Oct-2026, 15:43:58-AuthController::getMyProfile-User found successfully[0m
+2026-10-12T14:56:27.193Z [INFO]: [32m12-Oct-2026, 15:43:58-undefined-Blogs fetched successfully[0m
