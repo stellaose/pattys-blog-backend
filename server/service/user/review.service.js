@@ -1,4 +1,5 @@
 import { Review } from "../../models/review.model.js";
+import { AuthService } from "./auth.service.js";
 
 const ReviewService = {
   getReviewByBlogId: async blogId => {
@@ -16,6 +17,17 @@ const ReviewService = {
 
   getAllReviews: async () => {
     return await Review.find();
+  },
+
+  attachAuthorDetails: async reviews => {
+    const authorsById = await AuthService.getAuthorDetailsByUserIds(
+      reviews.map(review => review.author)
+    );
+
+    return reviews.map(review => ({
+      ...review.toObject(),
+      authorDetails: authorsById.get(review.author) ?? null,
+    }));
   },
 };
 

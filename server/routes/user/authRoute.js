@@ -11,7 +11,6 @@ import {
   verifyForgetPassword,
   resetPassword,
   changePassword,
-  updateProfile,
 } from "../../utils/utils.validation.js";
 
 const router = Router();
@@ -64,16 +63,6 @@ router.put(
   processJoiValidation(changePassword, "payload"),
   AuthMiddleware.auth,
   AuthController.changePassword
-);
-
-// $ user
-router.get("/my-profile", AuthMiddleware.auth, AuthController.getMyProfile);
-
-router.patch(
-  "/update-me",
-  processJoiValidation(updateProfile, "payload"),
-  AuthMiddleware.auth,
-  AuthController.updateUser
 );
 
 router.post("/logout", AuthMiddleware.auth, AuthController.logout);

@@ -112,7 +112,7 @@ module.exports = {
     }),
   }),
   likeDislikeBlog: Joi.object().keys({
-    likeStatus: Joi.string().valid("like", "dislike").required(),
+    likeStatus: Joi.string().valid("like", "dislike", "none").required(),
   }),
   createBlogReview: Joi.object().keys({
     review: Joi.string().required(),

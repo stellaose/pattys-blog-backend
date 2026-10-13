@@ -1,4 +1,5 @@
 import { Blog } from "../../models/blog.model.js";
+import { AuthService } from "./auth.service.js";
 
 const BlogsService = {
   getAllBlogs: async () => {
@@ -22,6 +23,30 @@ const BlogsService = {
 
   getOneBlog: async blogId => {
     return await Blog.findOne({ blogId });
+  },
+
+  attachAuthorDetails: async blogs => {
+    const plainBlogs = blogs.map(blog => blog.toObject());
+    const authorsById = await AuthService.getAuthorDetailsByUserIds(
+      plainBlogs.flatMap(blog => [
+        blog.author,
+        ...(blog.review ?? []).map(review => review.author),
+      ])
+    );
+
+    return plainBlogs.map(blog => ({
+      ...blog,
+      authorDetails: authorsById.get(blog.author) ?? null,
+      review: (blog.review ?? []).map(review => ({
+        ...review,
+        authorDetails: authorsById.get(review.author) ?? null,
+      })),
+    }));
+  },
+
+  attachAuthorDetailsToOne: async blog => {
+    const [blogWithAuthors] = await BlogsService.attachAuthorDetails([blog]);
+    return blogWithAuthors;
   },
 };
 
