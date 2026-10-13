@@ -87,11 +87,15 @@ const ReviewController = {
         `${messagesEnum.REVIEW_CREATED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_REVIEW}`
       );
 
+      const [reviewWithAuthor] = await ReviewService.attachAuthorDetails([
+        newReview,
+      ]);
+
       res.status(statusEnum.statusCode.HTTP_CREATED).json({
         code: statusEnum.statusCode.HTTP_CREATED,
         success: true,
         message: messagesEnum.REVIEW_CREATED_SUCCESSFULLY,
-        review: newReview,
+        review: reviewWithAuthor,
       });
     } catch (error) {
       if (session.inTransaction()) {
@@ -202,7 +206,7 @@ const ReviewController = {
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: messagesEnum.REVIEW_FETCHED_SUCCESSFULLY,
-        review: findReviews,
+        review: await ReviewService.attachAuthorDetails(findReviews),
       });
     } catch (error) {
       logger.error(

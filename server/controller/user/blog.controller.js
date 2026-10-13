@@ -40,7 +40,9 @@ export const BlogController = {
       const blogsCount = await BlogsService.countDocuments(filter);
 
       features.pagination(resultPerPage);
-      const blogs = await features.query;
+      const blogs = await BlogsService.attachAuthorDetails(
+        await features.query
+      );
 
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.GET_ALL_BLOGS}-${messagesEnum.BLOG_FETCHED_SUCCESSFULLY}`
@@ -107,7 +109,7 @@ export const BlogController = {
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: messagesEnum.BLOG_FETCHED_SUCCESSFULLY,
-        blog: allForAuth,
+        blog: await BlogsService.attachAuthorDetails(allForAuth),
         pagination: {
           count: blog.length,
           totalBlogs: blogsCount,
@@ -157,7 +159,7 @@ export const BlogController = {
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: messagesEnum.BLOG_FETCHED_SUCCESSFULLY,
-        blog,
+        blog: await BlogsService.attachAuthorDetailsToOne(blog),
       });
     } catch (error) {
       logger.error(
@@ -312,7 +314,7 @@ export const BlogController = {
         code: statusEnum.statusCode.HTTP_OK,
         success: true,
         message: messagesEnum.BLOG_UPDATED_SUCCESSFULLY,
-        blog,
+        blog: await BlogsService.attachAuthorDetailsToOne(blog),
       });
     } catch (error) {
       if (session.inTransaction()) {
@@ -387,7 +389,7 @@ export const BlogController = {
           code: statusEnum.statusCode.HTTP_OK,
           success: true,
           message: messagesEnum.BLOG_LIKED_SUCCESSFULLY,
-          blog,
+          blog: await BlogsService.attachAuthorDetailsToOne(blog),
         });
       }
       if (likeStatus === "dislike") {
@@ -432,7 +434,55 @@ export const BlogController = {
           code: statusEnum.statusCode.HTTP_OK,
           success: true,
           message: messagesEnum.BLOG_DISLIKED_SUCCESSFULLY,
-          blog,
+          blog: await BlogsService.attachAuthorDetailsToOne(blog),
+        });
+      }
+
+      if (likeStatus === "none") {
+        const blog = await Blog.findOneAndUpdate(
+          { blogId },
+          [
+            {
+              $set: {
+                likes: {
+                  $setDifference: [{ $ifNull: ["$likes", []] }, [req.userId]],
+                },
+                dislikes: {
+                  $setDifference: [
+                    { $ifNull: ["$dislikes", []] },
+                    [req.userId],
+                  ],
+                },
+              },
+            },
+            {
+              $set: {
+                likeNo: { $size: "$likes" },
+                dislikeNo: { $size: "$dislikes" },
+              },
+            },
+          ],
+          { new: true, updatePipeline: true }
+        );
+        if (!blog) {
+          logger.warn(
+            `${messagesEnum.BLOG_NOT_FOUND}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`
+          );
+          throw new ErrorResponse(
+            messagesEnum.BLOG_NOT_FOUND,
+            statusEnum.statusCode.HTTP_NOT_FOUND
+          );
+        } else {
+          logger.info(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_REACTION_REMOVED_SUCCESSFULLY}`
+          );
+        }
+
+        return res.status(statusEnum.statusCode.HTTP_OK).json({
+          code: statusEnum.statusCode.HTTP_OK,
+          success: true,
+          message: messagesEnum.BLOG_REACTION_REMOVED_SUCCESSFULLY,
+          blog: await BlogsService.attachAuthorDetailsToOne(blog),
         });
       }
     } catch (error) {

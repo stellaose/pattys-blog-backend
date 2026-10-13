@@ -50,6 +50,7 @@ export const messagesEnum = {
   USER_VERIFICATION_FAILED: "User verification failed",
   USER_FOUND: "User found successfully",
   USER_UPDATED_SUCCESSFULLY: "User updated successfully",
+  USER_DELETED_SUCCESSFULLY: "User deleted successfully",
 
   // ' Sign up
   SIGNUP_SUCCESSFUL:
@@ -82,6 +83,7 @@ export const messagesEnum = {
   BLOG_FLAGGED_SUCCESSFULLY: "Blog flagged successfully",
   BLOG_LIKED_SUCCESSFULLY: "Blog liked successfully",
   BLOG_DISLIKED_SUCCESSFULLY: "Blog disliked successfully",
+  BLOG_REACTION_REMOVED_SUCCESSFULLY: "Blog reaction removed successfully",
   BLOG_FETCHED_SUCCESSFULLY: "Blogs fetched successfully",
   BLOG_ID_REQUIRED: "Blog id is required",
   USER_BLOG_UPDATE: "User blog updated successfully",

@@ -8,12 +8,15 @@ export const labelEnum = {
   USER_RESET_PASSWORD: "AuthController::resetPassword",
   USER_VERIFY_FORGOT_PASSWORD: "AuthController::verifyForgetPassword",
   USER_CHANGE_PASSWORD: "AuthController::changePassword",
-  USER_UPDATE_PROFILE: "AuthController::updateUser",
-  USER_GET_PROFILE: "AuthController::getMyProfile",
-  USER_DELETE_PROFILE: "AuthController::deleteUser",
   RESEND_OTP: "AuthController::resendOtp",
   USER_LOGIN: "AuthController::login",
   USER_LOGOUT: "AuthController::logout",
+
+  // < USER
+  USER_UPDATE_PROFILE: "UserController::updateUser",
+  USER_GET_PROFILE: "UserController::getMyProfile",
+  USER_DELETE_PROFILE: "UserController::deleteUser",
+  GET_USER_PROFILE: "UserController::getUserProfile",
 
   // ^ Auth Middleware
   AUTH_MIDDLEWARE: "AuthMiddleware::auth",
