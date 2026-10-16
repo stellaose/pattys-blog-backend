@@ -53,7 +53,7 @@ export const AuthController = {
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USERNAME_REQUIRED}`
         );
         throw new ErrorResponse(
-          messagesEnum.PHONE_NUMBER_REQUIRED,
+          messagesEnum.USERNAME_REQUIRED,
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
@@ -87,7 +87,7 @@ export const AuthController = {
           `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USERNAME_EXISTS}`
         );
         throw new ErrorResponse(
-          messagesEnum.EMAIL_EXISTS,
+          messagesEnum.USERNAME_EXISTS,
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
