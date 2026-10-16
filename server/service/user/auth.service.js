@@ -8,7 +8,7 @@ export const AuthService = {
   },
 
   getUserByUsername: async username => {
-    return await Auth.findOne({ username: username.toLowerCase() });
+    return await Auth.findOne({ user_name: username.toLowerCase() });
   },
 
   getUserByUserId: async userId => {
