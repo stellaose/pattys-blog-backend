@@ -1,10 +1,10 @@
 import { UserActivityLog } from "../../models/user/user-activity-log.model.js";
 import { AuthService } from "../../service/user/auth.service.js";
-import { operations } from "./user-operations.lib.js";
+import { userOperations } from "./user-operations.lib.js";
 import logger from "../../logger/logger.js";
 import { createId, getFullName } from "../../utils/helper.js";
 
-export { descriptions } from "./user-description.lib.js";
+export { userDescriptions } from "./user-description.lib.js";
 
 // & saves one activity log; a failed write is logged but never thrown, so
 // * tracking can never break the request that triggered it
@@ -45,7 +45,7 @@ export const userActivityTracking = async (
     return;
   }
 
-  const activity_type = operations[op_code];
+  const activity_type = userOperations[op_code];
   if (!activity_type) {
     logger.warn(`No activity operation found for code ${op_code}`);
     return;

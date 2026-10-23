@@ -11,7 +11,7 @@ import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
 import { getFullName } from "../../utils/helper.js";
 import {
   userActivityTracking,
-  descriptions,
+  userDescriptions,
 } from "../../lib/user/index.js";
 
 export const UserController = {
@@ -115,7 +115,7 @@ export const UserController = {
         userId,
         statusEnum.opCodes.EDIT_PROFILE,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.edit_profile,
+        userDescriptions.edit_profile,
         getFullName(updatedUser)
       );
 
@@ -143,7 +143,7 @@ export const UserController = {
         req.userId,
         statusEnum.opCodes.EDIT_PROFILE,
         statusEnum.activityStatus.FAILED,
-        descriptions.edit_profile_failed,
+        userDescriptions.edit_profile_failed,
         user && getFullName(user)
       );
       next(error);
@@ -224,7 +224,7 @@ export const UserController = {
         userId,
         statusEnum.opCodes.DELETE_ACCOUNT,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.delete_account,
+        userDescriptions.delete_account,
         getFullName(user)
       );
 
@@ -248,7 +248,7 @@ export const UserController = {
         req.userId,
         statusEnum.opCodes.DELETE_ACCOUNT,
         statusEnum.activityStatus.FAILED,
-        descriptions.delete_account_failed,
+        userDescriptions.delete_account_failed,
         user && getFullName(user)
       );
       next(error);
