@@ -39192,3 +39192,81 @@
 2026-10-23T14:04:12.795Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
 2026-10-23T14:04:12.802Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
 2026-10-23T14:04:12.926Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:10:15.108Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:15.128Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:15.383Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:15.384Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:15.585Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:15.586Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:16.125Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:16.126Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:16.341Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:16.342Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:16.553Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:16.554Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:17.208Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:17.209Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:17.797Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:17.798Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:18.026Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:18.027Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:18.240Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:18.241Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:18.447Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:18.448Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:10:18.653Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthMiddleware::auth-Unauthorized[0m
+2026-10-23T14:10:18.653Z [ERROR]: [31m23-Oct-2026, 15:05:53-AuthMiddleware::auth-undefined[0m
+2026-10-23T14:16:09.977Z [INFO]: [32m23-Oct-2026, 15:05:53-AuthController::logout-Logout successful[0m
+2026-10-23T14:16:35.739Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthController::login-User not found[0m
+2026-10-23T14:16:35.742Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:05:53-AuthController::login[0m
+2026-10-23T14:16:41.649Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthController::login-User not found[0m
+2026-10-23T14:16:41.650Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:05:53-AuthController::login[0m
+2026-10-23T14:17:30.360Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthController::login-User not found[0m
+2026-10-23T14:17:30.362Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:05:53-AuthController::login[0m
+2026-10-23T14:17:39.609Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthController::login-User not found[0m
+2026-10-23T14:17:39.610Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:05:53-AuthController::login[0m
+2026-10-23T14:17:43.436Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthController::login-User not found[0m
+2026-10-23T14:17:43.437Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:05:53-AuthController::login[0m
+2026-10-23T14:17:44.356Z [WARN]: [33m23-Oct-2026, 15:05:53-AuthController::login-User not found[0m
+2026-10-23T14:17:44.357Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:05:53-AuthController::login[0m
+2026-10-23T14:22:22.350Z [WARN]: [33m23-Oct-2026, 15:22:13-AuthController::login-User not found[0m
+2026-10-23T14:22:22.352Z [ERROR]: [31mLogin failed::23-Oct-2026, 15:22:13-AuthController::login[0m
+2026-10-23T14:27:04.323Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminAuthController::login-Enter the code to finish signing in[0m
+2026-10-23T14:27:04.469Z [ERROR]: [31mE11000 duplicate key error collection: test.adminactivitylogs index: resourceId_1 dup key: { resourceId: null }[0m
+2026-10-23T14:27:04.470Z [INFO]: [32madminActivityTracking: activity for ADMLGR not tracked[0m
+2026-10-23T14:27:10.738Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminAuthController::verifyLogin-Login successful[0m
+2026-10-23T14:27:10.867Z [ERROR]: [31mE11000 duplicate key error collection: test.adminactivitylogs index: resourceId_1 dup key: { resourceId: null }[0m
+2026-10-23T14:27:10.867Z [INFO]: [32madminActivityTracking: activity for VRYLGOP not tracked[0m
+2026-10-23T14:27:12.242Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:27:12.512Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:27:12.517Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:27:12.647Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:27:12.766Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:27:13.330Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:27:13.445Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:27:37.643Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:27:39.843Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:27:58.920Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:28:02.818Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T14:28:06.787Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:28:13.180Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T14:28:18.918Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:28:21.553Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:28:25.068Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminController::getMyProfile-Profile fetched successfully[0m
+2026-10-23T14:42:16.179Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:42:17.290Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:42:18.963Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:42:20.666Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:42:21.160Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:42:21.185Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:42:21.188Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:42:21.282Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:42:21.308Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:42:21.668Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:42:22.872Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:42:33.702Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:42:38.101Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:42:39.278Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:43:11.733Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:43:25.001Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:43:26.677Z [INFO]: [32m23-Oct-2026, 15:22:13-AdminController::getAllAdmins-Admins fetched successfully[0m
