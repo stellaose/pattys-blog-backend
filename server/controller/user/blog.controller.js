@@ -9,25 +9,25 @@ import mongoose from "mongoose";
 import { createId } from "../../utils/helper.js";
 import {
   userActivityTracking,
-  descriptions,
+  userDescriptions,
 } from "../../lib/user/index.js";
 
-// = like / dislike / none each log as their own activity
+
 const reactionTracking = {
   like: {
     op: statusEnum.opCodes.LIKE_BLOG,
-    description: descriptions.like_blog,
-    failedDescription: descriptions.like_blog_failed,
+    description: userDescriptions.like_blog,
+    failedDescription: userDescriptions.like_blog_failed,
   },
   dislike: {
     op: statusEnum.opCodes.DISLIKE_BLOG,
-    description: descriptions.dislike_blog,
-    failedDescription: descriptions.dislike_blog_failed,
+    description: userDescriptions.dislike_blog,
+    failedDescription: userDescriptions.dislike_blog_failed,
   },
   none: {
     op: statusEnum.opCodes.REMOVE_BLOG_REACTION,
-    description: descriptions.remove_blog_reaction,
-    failedDescription: descriptions.remove_blog_reaction_failed,
+    description: userDescriptions.remove_blog_reaction,
+    failedDescription: userDescriptions.remove_blog_reaction_failed,
   },
 };
 
@@ -250,7 +250,7 @@ export const BlogController = {
         req.userId,
         statusEnum.opCodes.CREATE_BLOG,
         statusEnum.activityStatus.SUCCESS,
-        name => descriptions.create_blog(name, blog.title)
+        name => userDescriptions.create_blog(name, blog.title)
       );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}-${messagesEnum.BLOG_CREATED_SUCCESSFULLY}`
@@ -274,7 +274,7 @@ export const BlogController = {
         req.userId,
         statusEnum.opCodes.CREATE_BLOG,
         statusEnum.activityStatus.FAILED,
-        name => descriptions.create_blog_failed(name, req.body?.title)
+        name => userDescriptions.create_blog_failed(name, req.body?.title)
       );
       next(error);
     } finally {
@@ -345,7 +345,7 @@ export const BlogController = {
         req.userId,
         statusEnum.opCodes.EDIT_BLOG,
         statusEnum.activityStatus.SUCCESS,
-        name => descriptions.edit_blog(name, blogId)
+        name => userDescriptions.edit_blog(name, blogId)
       );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}-${messagesEnum.BLOG_UPDATED_SUCCESSFULLY}`
@@ -369,7 +369,7 @@ export const BlogController = {
         req.userId,
         statusEnum.opCodes.EDIT_BLOG,
         statusEnum.activityStatus.FAILED,
-        name => descriptions.edit_blog_failed(name, req.params.blogId)
+        name => userDescriptions.edit_blog_failed(name, req.params.blogId)
       );
       next(error);
     } finally {
@@ -619,7 +619,7 @@ export const BlogController = {
         req.userId,
         statusEnum.opCodes.DELETE_BLOG,
         statusEnum.activityStatus.SUCCESS,
-        name => descriptions.delete_blog(name, blogId)
+        name => userDescriptions.delete_blog(name, blogId)
       );
       logger.info(
         `${messagesEnum.BLOG_DELETED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`
@@ -642,7 +642,7 @@ export const BlogController = {
         req.userId,
         statusEnum.opCodes.DELETE_BLOG,
         statusEnum.activityStatus.FAILED,
-        name => descriptions.delete_blog_failed(name, req.params.blogId)
+        name => userDescriptions.delete_blog_failed(name, req.params.blogId)
       );
       next(error);
     } finally {

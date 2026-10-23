@@ -8,7 +8,7 @@ import ReviewService from "../../service/user/review.service.js";
 import { createId } from "../../utils/helper.js";
 import {
   userActivityTracking,
-  descriptions,
+  userDescriptions,
 } from "../../lib/user/index.js";
 
 const toBlogReviewEntry = (doc, userId) => ({
@@ -91,7 +91,7 @@ const ReviewController = {
         userId,
         statusEnum.opCodes.CREATE_REVIEW,
         statusEnum.activityStatus.SUCCESS,
-        name => descriptions.create_review(name, blogId)
+        name => userDescriptions.create_review(name, blogId)
       );
       logger.info(
         `${messagesEnum.REVIEW_CREATED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_REVIEW}`
@@ -118,7 +118,7 @@ const ReviewController = {
         req.userId,
         statusEnum.opCodes.CREATE_REVIEW,
         statusEnum.activityStatus.FAILED,
-        name => descriptions.create_review_failed(name, req.params.blogId)
+        name => userDescriptions.create_review_failed(name, req.params.blogId)
       );
       next(error);
     } finally {
@@ -175,7 +175,7 @@ const ReviewController = {
         req.userId,
         statusEnum.opCodes.DELETE_REVIEW,
         statusEnum.activityStatus.SUCCESS,
-        name => descriptions.delete_review(name, reviewId)
+        name => userDescriptions.delete_review(name, reviewId)
       );
       logger.info(
         `${messagesEnum.REVIEW_DELETED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_REVIEW}`
@@ -197,7 +197,7 @@ const ReviewController = {
         req.userId,
         statusEnum.opCodes.DELETE_REVIEW,
         statusEnum.activityStatus.FAILED,
-        name => descriptions.delete_review_failed(name, req.params.reviewId)
+        name => userDescriptions.delete_review_failed(name, req.params.reviewId)
       );
       next(error);
     } finally {

@@ -1,4 +1,4 @@
-export const descriptions = {
+export const userDescriptions = {
   // + Authentication Operations
   signup: userName => `${userName} created an account`,
   signup_failed: userName => `${userName} failed to create an account`,

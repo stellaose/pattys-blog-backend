@@ -8,7 +8,10 @@ import tokenService from "../../utils/token.js";
 import logger from "../../logger/logger.js";
 import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
 import { createId, getFullName } from "../../utils/helper.js";
-import { userActivityTracking, descriptions } from "../../lib/user/index.js";
+import {
+  userActivityTracking,
+  userDescriptions,
+} from "../../lib/user/index.js";
 
 dotenv.config({ quiet: true });
 
@@ -128,7 +131,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.SIGNUP,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.signup,
+        userDescriptions.signup(user.user_name),
         getFullName(user)
       );
       logger.info(
@@ -149,7 +152,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.SIGNUP,
         statusEnum.activityStatus.FAILED,
-        descriptions.signup_failed,
+        userDescriptions.signup_failed,
         user && getFullName(user)
       );
       next(error);
@@ -237,7 +240,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.VERIFY_EMAIL,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.verify_email,
+        userDescriptions.verify_email,
         getFullName(user)
       );
       logger.info(
@@ -259,7 +262,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.VERIFY_EMAIL,
         statusEnum.activityStatus.FAILED,
-        descriptions.verify_email_failed,
+        userDescriptions.verify_email_failed,
         user && getFullName(user)
       );
       next(error);
@@ -357,7 +360,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.RESEND_OTP,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.resend_otp,
+        userDescriptions.resend_otp,
         getFullName(user)
       );
       logger.info(
@@ -378,7 +381,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.RESEND_OTP,
         statusEnum.activityStatus.FAILED,
-        descriptions.resend_otp_failed,
+        userDescriptions.resend_otp_failed,
         user && getFullName(user)
       );
       next(error);
@@ -455,7 +458,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.LOGIN,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.login,
+        userDescriptions.login,
         getFullName(user)
       );
       logger.info(
@@ -479,7 +482,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.LOGIN,
         statusEnum.activityStatus.FAILED,
-        descriptions.login_failed,
+        userDescriptions.login_failed,
         user && getFullName(user)
       );
       next(error);
@@ -526,7 +529,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.FORGOT_PASSWORD,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.forgot_password,
+        userDescriptions.forgot_password,
         getFullName(user)
       );
       logger.info(
@@ -555,7 +558,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.FORGOT_PASSWORD,
         statusEnum.activityStatus.FAILED,
-        descriptions.forgot_password_failed,
+        userDescriptions.forgot_password_failed,
         user && getFullName(user)
       );
       next(error);
@@ -622,7 +625,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.VERIFY_FORGOT_PASSWORD,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.verify_forgot_password,
+        userDescriptions.verify_forgot_password,
         getFullName(user)
       );
       logger.info(
@@ -650,7 +653,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.VERIFY_FORGOT_PASSWORD,
         statusEnum.activityStatus.FAILED,
-        descriptions.verify_forgot_password_failed,
+        userDescriptions.verify_forgot_password_failed,
         user && getFullName(user)
       );
       next(error);
@@ -759,7 +762,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.RESET_PASSWORD,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.reset_password,
+        userDescriptions.reset_password,
         getFullName(user)
       );
       logger.info(
@@ -781,7 +784,7 @@ export const AuthController = {
         user?.userId,
         statusEnum.opCodes.RESET_PASSWORD,
         statusEnum.activityStatus.FAILED,
-        descriptions.reset_password_failed,
+        userDescriptions.reset_password_failed,
         user && getFullName(user)
       );
       next(error);
@@ -859,7 +862,7 @@ export const AuthController = {
         user.userId,
         statusEnum.opCodes.CHANGE_PASSWORD,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.change_password,
+        userDescriptions.change_password,
         getFullName(user)
       );
       logger.info(
@@ -880,7 +883,7 @@ export const AuthController = {
         req.userId,
         statusEnum.opCodes.CHANGE_PASSWORD,
         statusEnum.activityStatus.FAILED,
-        descriptions.change_password_failed,
+        userDescriptions.change_password_failed,
         user && getFullName(user)
       );
       next(error);
@@ -894,7 +897,7 @@ export const AuthController = {
         req.userId,
         statusEnum.opCodes.LOGOUT,
         statusEnum.activityStatus.SUCCESS,
-        descriptions.logout
+        userDescriptions.logout
       );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGOUT}-${messagesEnum.LOGOUT_SUCCESSFUL}`
@@ -913,7 +916,7 @@ export const AuthController = {
         req.userId,
         statusEnum.opCodes.LOGOUT,
         statusEnum.activityStatus.FAILED,
-        descriptions.logout_failed
+        userDescriptions.logout_failed
       );
       next(error);
     }

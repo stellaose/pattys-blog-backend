@@ -1,4 +1,4 @@
-export const operations = {
+export const userOperations = {
   // + Authentication Operations
   1: "USRSGNUP", // user signs up
   2: "USRVRYEML", // user verifies email
