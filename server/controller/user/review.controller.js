@@ -1,11 +1,11 @@
 import { messagesEnum, labelEnum, statusEnum } from "../../enums/index.js";
 import ErrorResponse from "../../utils/ErrorHandler.js";
 import logger from "../../logger/logger.js";
-import { Blog } from "../../models/blog.model.js";
+import { Blog } from "../../models/user/blog.model.js";
 import mongoose from "mongoose";
-import { Review } from "../../models/review.model.js";
-import { nanoid } from "nanoid";
+import { Review } from "../../models/user/review.model.js";
 import ReviewService from "../../service/user/review.service.js";
+import { createId } from "../../utils/helper.js";
 
 const toBlogReviewEntry = (doc, userId) => ({
   author: userId,
@@ -49,7 +49,7 @@ const ReviewController = {
           {
             author: userId,
             blogId,
-            reviewId: `review-${nanoid(24).replaceAll("_", "").replaceAll("-", "")}`,
+            reviewId: createId('review', 24),
             review,
           },
         ],

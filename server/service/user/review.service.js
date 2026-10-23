@@ -1,4 +1,4 @@
-import { Review } from "../../models/review.model.js";
+import { Review } from "../../models/user/review.model.js";
 import { AuthService } from "./auth.service.js";
 
 const ReviewService = {

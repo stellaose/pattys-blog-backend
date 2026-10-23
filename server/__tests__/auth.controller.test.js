@@ -1,12 +1,13 @@
 import bcrypt from "bcryptjs";
 import { AuthController } from "../controller/user/auth.controller.js";
-import { Auth } from "../models/auth.model.js";
+import { Auth } from "../models/user/auth.model.js";
 import { AuthService } from "../service/user/auth.service.js";
 import tokenService from "../utils/token.js";
 import { messagesEnum } from "../enums/index.js";
 
+
 // ! mock  auth schema
-jest.mock("../models/auth.model.js", () => ({
+jest.mock("../models/user/auth.model.js", () => ({
   Auth: { create: jest.fn() },
 }));
 

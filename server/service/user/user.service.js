@@ -1,4 +1,4 @@
-import { Auth } from "../../models/auth.model.js";
+import { Auth } from "../../models/user/auth.model.js";
 
 const UserService = {
   getPublicUserByUserId: async userId => {

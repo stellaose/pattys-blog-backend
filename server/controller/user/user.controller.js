@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import ErrorResponse from "../../utils/ErrorHandler.js";
-import { Auth } from "../../models/auth.model.js";
-import { Blog } from "../../models/blog.model.js";
-import { Review } from "../../models/review.model.js";
+import { Auth } from "../../models/user/auth.model.js";
+import { Blog } from "../../models/user/blog.model.js";
+import { Review } from "../../models/user/review.model.js";
 import { AuthService } from "../../service/user/auth.service.js";
 import BlogsService from "../../service/user/blog.service.js";
 import UserService from "../../service/user/user.service.js";

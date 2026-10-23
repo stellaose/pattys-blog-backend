@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const Joi = require("joi").extend(require("@joi/date"));
 
 module.exports = {
@@ -116,6 +115,12 @@ module.exports = {
   }),
   createBlogReview: Joi.object().keys({
     review: Joi.string().required(),
+  }),
+  createContactMessage: Joi.object().keys({
+    name: Joi.string().trim().max(100).required(),
+    email: Joi.string().trim().email().required(),
+    topic: Joi.string().trim().max(100).required(),
+    message: Joi.string().trim().max(5000).required(),
   }),
   reviewParams: Joi.object().keys({
     reviewId: Joi.string().required().messages({

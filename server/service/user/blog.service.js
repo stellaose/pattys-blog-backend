@@ -1,4 +1,4 @@
-import { Blog } from "../../models/blog.model.js";
+import { Blog } from "../../models/user/blog.model.js";
 import { AuthService } from "./auth.service.js";
 
 const BlogsService = {

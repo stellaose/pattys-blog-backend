@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import ErrorMiddleware from "./middleware/Error.js";
 import userRoutes from "./routes/user/index.js";
+import adminRoutes from "./routes/admin/index.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1", userRoutes);
+app.use("/api/v1/admin", adminRoutes);
 
 app.use(ErrorMiddleware);
 

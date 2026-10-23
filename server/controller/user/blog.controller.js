@@ -1,12 +1,12 @@
-import { Auth } from "../../models/auth.model.js";
-import { Blog } from "../../models/blog.model.js";
+import { Auth } from "../../models/user/auth.model.js";
+import { Blog } from "../../models/user/blog.model.js";
 import { messagesEnum, labelEnum, statusEnum } from "../../enums/index.js";
 import BlogsService from "../../service/user/blog.service.js";
 import ErrorResponse from "../../utils/ErrorHandler.js";
 import ApiFeatures from "../../utils/apiFeatures.js";
 import logger from "../../logger/logger.js";
-import { nanoid } from "nanoid";
 import mongoose from "mongoose";
+import { createId } from "../../utils/helper.js";
 
 const toAuthBlogEntry = doc => ({
   id: doc._id,
@@ -200,7 +200,7 @@ export const BlogController = {
         [
           {
             author: req.userId,
-            blogId: `blog-${nanoid(24).replaceAll("_", "").replaceAll("-", "")}`,
+            blogId: createId('blog', 24),
             title,
             description,
             category: category ? category?.toLowerCase() : "other",

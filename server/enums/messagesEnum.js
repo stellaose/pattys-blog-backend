@@ -98,4 +98,26 @@ export const messagesEnum = {
   REVIEW_ID_REQUIRED: "Review id is required",
   USER_REVIEW_UPDATE: "User review updated successfully",
   REVIEW_NOT_CREATED: "Review not created",
+
+  // # Contact
+  CONTACT_MESSAGE_SENT_SUCCESSFULLY:
+    "Thanks for reaching out, we will get back to you soon",
+  CONTACT_MESSAGES_FETCHED_SUCCESSFULLY:
+    "Contact messages fetched successfully",
+  CONTACT_EMAIL_NOT_SENT: "Contact message saved but the e-mail was not sent",
+  CONTACT_RECEIVER_NOT_SET: "CONTACT_RECEIVER_EMAIL is not set",
+};
+
+
+export const adminMessagesEnum = {
+  // # Resources
+  RESOURCE_NOT_FOUND: "Resource not found",
+  RESOURCE_EXISTS: "A resource with this name already exists",
+  RESOURCE_CREATED_SUCCESSFULLY: "Resource created successfully",
+  RESOURCE_RESTORED_SUCCESSFULLY:
+    "A deleted resource with this name was restored",
+  RESOURCE_FETCHED_SUCCESSFULLY: "Resource fetched successfully",
+  RESOURCES_FETCHED_SUCCESSFULLY: "Resources fetched successfully",
+  RESOURCE_UPDATED_SUCCESSFULLY: "Resource updated successfully",
+  RESOURCE_DELETED_SUCCESSFULLY: "Resource deleted successfully",
 };

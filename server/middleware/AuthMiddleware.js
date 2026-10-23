@@ -1,9 +1,9 @@
-/* eslint-disable no-undef */
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import ErrorResponse from "../utils/ErrorHandler.js";
 import { messagesEnum, labelEnum, statusEnum } from "../enums/index.js";
 import logger from "../logger/logger.js";
+import { AuthService } from "../service/user/auth.service.js";
 
 dotenv.config({ quiet: true });
 
@@ -80,6 +80,28 @@ const AuthMiddleWare = {
       );
       return next(error);
     }
+  },
+
+  requireRole: (...roles) => {
+    return async (req, res, next) => {
+      try {
+        const user = await AuthService.getUserByUserId(req.userId);
+
+        if (!user || !roles.includes(user.role)) {
+          logger.warn(
+            `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.REQUIRE_ROLE_MIDDLEWARE}-${messagesEnum.FORBIDDEN}`
+          );
+          throw new ErrorResponse(
+            messagesEnum.FORBIDDEN,
+            statusEnum.statusCode.HTTP_FORBIDDEN
+          );
+        }
+
+        next();
+      } catch (error) {
+        next(error);
+      }
+    };
   },
 
   allowedRoles: (...roles) => {

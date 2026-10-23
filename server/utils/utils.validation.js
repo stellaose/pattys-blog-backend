@@ -25,4 +25,5 @@ export const {
   likeDislikeBlog,
   createBlogReview,
   reviewParams,
+  createContactMessage,
 } = validation;

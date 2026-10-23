@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { escapeHtml } from "./escapeHtml.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const emailTemplatesDir = path.join(__dirname, "../templates/email"); 
@@ -28,15 +29,6 @@ const forgetPasswordStylesheet = fs.readFileSync(
 
 const forgetPasswordStyleBlock = `<style>\n${forgetPasswordStylesheet}\n</style>`;
 
-function escapeHtml(value) {
-  if (value == null) return "";
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
 
 export const signUpMail = (first_name, verificationCode) => ({
   subject: "Welcome to Pattys — verify your email",
@@ -55,5 +47,3 @@ export const forgetPasswordMail = (first_name, verificationCode) => ({
     .replaceAll("{{first_name}}", escapeHtml(first_name))
     .replaceAll("{{code}}", escapeHtml(verificationCode)),
 });
-
-
