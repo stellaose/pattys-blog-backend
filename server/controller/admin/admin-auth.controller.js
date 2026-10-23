@@ -39,7 +39,7 @@ export const AdminAuthController = {
       const { email, password } = req.body;
 
       admin = await AdminAuthService.getAdminByEmail(email);
-
+      console.log(admin);
       if (!admin) {
         logger.warn(
           `${labelEnum.CURRENT_TIME_STAMP}-${adminLabelEnum.ADMIN_LOGIN}-${adminMessagesEnum.INVALID_CREDENTIALS}`
@@ -51,6 +51,7 @@ export const AdminAuthController = {
       }
 
       const isMatch = await bcrypt.compare(password, admin.password);
+      console.log(isMatch)
 
       if (!isMatch) {
         logger.warn(
