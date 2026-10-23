@@ -38735,3 +38735,460 @@
 2026-10-23T10:48:29.577Z [INFO]: [32muserActivityTracking: activity for USRLKBLG tracked[0m
 2026-10-23T10:48:29.600Z [INFO]: [32m23-Oct-2026, 11:43:23-UserController::getMyProfile-User found successfully[0m
 2026-10-23T10:48:29.879Z [INFO]: [32m23-Oct-2026, 11:43:23-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-23T11:11:17.895Z [INFO]: [32mUser blogs updated::23-Oct-2026, 12:08:44-BlogController::createBlog::User blog updated successfully[0m
+2026-10-23T11:11:18.026Z [INFO]: [32m23-Oct-2026, 12:08:44-BlogController::createBlog-Blog created successfully[0m
+2026-10-23T11:11:18.196Z [INFO]: [32m23-Oct-2026, 12:08:44-UserController::getMyProfile-User found successfully[0m
+2026-10-23T11:11:18.285Z [INFO]: [32muserActivityTracking: activity for USRCRBLG tracked[0m
+2026-10-23T11:11:18.481Z [INFO]: [32m23-Oct-2026, 12:08:44-undefined-Blogs fetched successfully[0m
+2026-10-23T11:11:25.258Z [INFO]: [32m23-Oct-2026, 12:08:44-UserController::getMyProfile-User found successfully[0m
+2026-10-23T11:11:25.513Z [INFO]: [32m23-Oct-2026, 12:08:44-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-23T11:11:32.137Z [INFO]: [32m23-Oct-2026, 12:08:44-BlogController::likeDislikeBlog-Blog liked successfully[0m
+2026-10-23T11:11:32.398Z [INFO]: [32muserActivityTracking: activity for USRLKBLG tracked[0m
+2026-10-23T11:11:32.407Z [INFO]: [32m23-Oct-2026, 12:08:44-UserController::getMyProfile-User found successfully[0m
+2026-10-23T11:11:32.671Z [INFO]: [32m23-Oct-2026, 12:08:44-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-23T11:12:04.273Z [INFO]: [32mReview created successfully::23-Oct-2026, 12:08:44-ReviewController::createReview[0m
+2026-10-23T11:12:04.526Z [INFO]: [32muserActivityTracking: activity for USRCRRVW tracked[0m
+2026-10-23T11:12:04.562Z [INFO]: [32m23-Oct-2026, 12:08:44-UserController::getMyProfile-User found successfully[0m
+2026-10-23T11:12:04.836Z [INFO]: [32m23-Oct-2026, 12:08:44-BlogController::getAllBlogs-Blogs fetched successfully[0m
+2026-10-23T12:35:22.229Z [WARN]: [33m23-Oct-2026, 13:08:36-AdminAuthController::login-Invalid email or password[0m
+2026-10-23T12:35:22.238Z [ERROR]: [31mAdmin login failed::23-Oct-2026, 13:08:36-AdminAuthController::login[0m
+2026-10-23T12:54:11.461Z [INFO]: [32m23-Oct-2026, 13:54:04-AdminAuthController::login-Enter the code to finish signing in[0m
+2026-10-23T12:54:11.594Z [INFO]: [32madminActivityTracking: activity for ADMLGR tracked[0m
+2026-10-23T12:54:22.043Z [INFO]: [32m23-Oct-2026, 13:54:04-AdminAuthController::verifyLogin-Login successful[0m
+2026-10-23T12:54:22.167Z [ERROR]: [31mE11000 duplicate key error collection: test.adminactivitylogs index: resourceId_1 dup key: { resourceId: null }[0m
+2026-10-23T12:54:22.168Z [INFO]: [32madminActivityTracking: activity for VRYLGOP not tracked[0m
+2026-10-23T12:55:16.474Z [INFO]: [32m23-Oct-2026, 13:54:04-AdminAuthController::login-Enter the code to finish signing in[0m
+2026-10-23T12:55:16.603Z [ERROR]: [31mE11000 duplicate key error collection: test.adminactivitylogs index: resourceId_1 dup key: { resourceId: null }[0m
+2026-10-23T12:55:16.604Z [INFO]: [32madminActivityTracking: activity for ADMLGR not tracked[0m
+2026-10-23T12:55:28.934Z [INFO]: [32m23-Oct-2026, 13:54:04-AdminAuthController::verifyLogin-Login successful[0m
+2026-10-23T12:55:29.059Z [ERROR]: [31mE11000 duplicate key error collection: test.adminactivitylogs index: resourceId_1 dup key: { resourceId: null }[0m
+2026-10-23T12:55:29.059Z [INFO]: [32madminActivityTracking: activity for VRYLGOP not tracked[0m
+2026-10-23T13:00:08.503Z [ERROR]: [31mGet dashboard summary failed::23-Oct-2026, 14:00:07-AdminDashboardController::getSummary[0m
+2026-10-23T13:00:08.524Z [ERROR]: [31m23-Oct-2026, 14:00:07-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:09:24.794Z [INFO]: [32m23-Oct-2026, 14:09:11-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:09:25.014Z [INFO]: [32m23-Oct-2026, 14:09:11-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:09:56.264Z [INFO]: [32m23-Oct-2026, 14:09:35-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:09:56.700Z [INFO]: [32m23-Oct-2026, 14:09:35-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:09:59.724Z [INFO]: [32m23-Oct-2026, 14:09:35-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:10:00.237Z [INFO]: [32m23-Oct-2026, 14:09:35-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:10:00.686Z [INFO]: [32m23-Oct-2026, 14:09:35-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:10:00.968Z [INFO]: [32m23-Oct-2026, 14:09:35-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:12:41.564Z [INFO]: [32m23-Oct-2026, 14:12:34-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:12:41.923Z [INFO]: [32m23-Oct-2026, 14:12:34-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:13:50.206Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:13:50.929Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:13:53.092Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:13:53.604Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:13:55.577Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:13:56.724Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:14:44.688Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:14:45.629Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:09.742Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:15:10.495Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:22.244Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:15:23.331Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:23.596Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:15:24.441Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:25.690Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:25.845Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:15:26.807Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:28.227Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:15:31.844Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:15:32.706Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:17:02.191Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:17:03.386Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:18:17.525Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:18:17.528Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:18:18.163Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:18:18.171Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:22:57.755Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:22:58.688Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:22:59.852Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:23:01.663Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:23:03.898Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:23:05.371Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:23:05.399Z [INFO]: [32m23-Oct-2026, 14:12:53-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:23:35.346Z [ERROR]: [31mGet dashboard trends failed::23-Oct-2026, 14:12:53-AdminDashboardController::getTrends[0m
+2026-10-23T13:23:35.358Z [ERROR]: [31mGet dashboard summary failed::23-Oct-2026, 14:12:53-AdminDashboardController::getSummary[0m
+2026-10-23T13:23:36.921Z [ERROR]: [31mGet dashboard summary failed::23-Oct-2026, 14:12:53-AdminDashboardController::getSummary[0m
+2026-10-23T13:24:10.242Z [ERROR]: [31mGet dashboard summary failed::23-Oct-2026, 14:12:53-AdminDashboardController::getSummary[0m
+2026-10-23T13:24:12.334Z [ERROR]: [31mGet dashboard trends failed::23-Oct-2026, 14:12:53-AdminDashboardController::getTrends[0m
+2026-10-23T13:25:01.137Z [WARN]: [33m23-Oct-2026, 14:24:53-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:25:01.139Z [ERROR]: [31m23-Oct-2026, 14:24:53-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:25:01.173Z [WARN]: [33m23-Oct-2026, 14:24:53-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:25:01.173Z [ERROR]: [31m23-Oct-2026, 14:24:53-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:25:01.216Z [WARN]: [33m23-Oct-2026, 14:24:53-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:25:01.217Z [ERROR]: [31m23-Oct-2026, 14:24:53-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:25:03.657Z [INFO]: [32m23-Oct-2026, 14:24:53-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:25:05.030Z [INFO]: [32m23-Oct-2026, 14:24:53-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:26:28.533Z [INFO]: [32m23-Oct-2026, 14:26:21-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:27:32.166Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:27:32.414Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:27:32.506Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:27:44.336Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:27:44.476Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:27:44.817Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:28:00.404Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:28:01.225Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:28:05.349Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:28:08.107Z [INFO]: [32m23-Oct-2026, 14:27:02-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:28:18.835Z [ERROR]: [31m23-Oct-2026, 14:28:17-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:28:23.089Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:28:25.734Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:28:27.616Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:29:02.518Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:29:02.539Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:29:52.176Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminBlogController::getBlog-Blog fetched successfully[0m
+2026-10-23T13:29:55.623Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:29:55.685Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:29:55.711Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:29:55.746Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:29:56.333Z [INFO]: [32m23-Oct-2026, 14:28:19-AdminDashboardController::getSummary-Dashboard summary fetched successfully[0m
+2026-10-23T13:30:37.008Z [WARN]: [33m23-Oct-2026, 14:30:26-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:30:37.009Z [ERROR]: [31m23-Oct-2026, 14:30:26-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:30:37.039Z [WARN]: [33m23-Oct-2026, 14:30:26-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:30:37.040Z [ERROR]: [31m23-Oct-2026, 14:30:26-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:30:37.087Z [WARN]: [33m23-Oct-2026, 14:30:26-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:30:37.087Z [ERROR]: [31m23-Oct-2026, 14:30:26-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:30:53.141Z [INFO]: [32m23-Oct-2026, 14:30:26-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:30:53.148Z [INFO]: [32m23-Oct-2026, 14:30:26-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:30:53.166Z [INFO]: [32m23-Oct-2026, 14:30:26-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:30:53.737Z [INFO]: [32m23-Oct-2026, 14:30:26-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:30:53.740Z [INFO]: [32m23-Oct-2026, 14:30:26-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:31:42.884Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:31:42.891Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:31:42.914Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:31:43.592Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:31:43.641Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:32:31.880Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:32:32.159Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:32:32.178Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:32:32.185Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:32:32.365Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:32:32.376Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:32:32.420Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:32:32.420Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:32:32.583Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:32:32.881Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:32:33.189Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:32:33.210Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:32:33.261Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:32:33.405Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:32:33.991Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:32:52.254Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:32:52.256Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:33:21.163Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:33:21.179Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:33:51.109Z [ERROR]: [31mGet dashboard trends failed::23-Oct-2026, 14:30:57-AdminDashboardController::getTrends[0m
+2026-10-23T13:33:51.129Z [ERROR]: [31mGet top reviews failed::23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews[0m
+2026-10-23T13:33:51.138Z [ERROR]: [31mGet user activity failed::23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity[0m
+2026-10-23T13:33:51.159Z [ERROR]: [31mGet top blogs failed::23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs[0m
+2026-10-23T13:33:51.200Z [ERROR]: [31mGet admin activity failed::23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity[0m
+2026-10-23T13:33:55.896Z [ERROR]: [31mAdmin login failed::23-Oct-2026, 14:30:57-AdminAuthController::login[0m
+2026-10-23T13:34:08.660Z [ERROR]: [31mAdmin login failed::23-Oct-2026, 14:30:57-AdminAuthController::login[0m
+2026-10-23T13:34:15.795Z [ERROR]: [31mGet user activity failed::23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity[0m
+2026-10-23T13:34:28.379Z [ERROR]: [31mGet user activity failed::23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity[0m
+2026-10-23T13:34:29.365Z [ERROR]: [31mGet user activity failed::23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity[0m
+2026-10-23T13:34:29.368Z [ERROR]: [31mGet dashboard totals failed::23-Oct-2026, 14:30:57-AdminDashboardController::getTotals[0m
+2026-10-23T13:34:29.389Z [ERROR]: [31mGet dashboard breakdown failed::23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown[0m
+2026-10-23T13:34:29.395Z [ERROR]: [31mGet top blogs failed::23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs[0m
+2026-10-23T13:34:29.402Z [ERROR]: [31mGet admin activity failed::23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity[0m
+2026-10-23T13:34:30.360Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.360Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:30.363Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.363Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:30.369Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.369Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:30.369Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.369Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:30.371Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.371Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:30.380Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.380Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:30.387Z [WARN]: [33m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:34:30.387Z [ERROR]: [31m23-Oct-2026, 14:30:57-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:34:37.344Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:34:37.723Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:34:42.617Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:34:54.692Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:34:56.611Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:34:58.385Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:35:33.441Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:35:33.822Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:35:33.850Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:35:33.852Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:35:33.946Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:35:33.969Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:35:34.270Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:38:38.099Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:38:38.369Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:38:38.372Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:38:38.374Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:38:38.498Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:38:39.168Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:38:39.274Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:39:32.219Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:39:32.370Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:39:32.386Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:39:32.472Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:39:32.481Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:39:32.582Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:39:33.031Z [INFO]: [32m23-Oct-2026, 14:30:57-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:41:07.520Z [WARN]: [33m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:41:07.522Z [ERROR]: [31m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:07.555Z [WARN]: [33m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:41:07.556Z [ERROR]: [31m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:07.580Z [WARN]: [33m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:41:07.580Z [ERROR]: [31m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:07.631Z [WARN]: [33m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-Unauthorized[0m
+2026-10-23T13:41:07.631Z [ERROR]: [31m23-Oct-2026, 14:41:04-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:50.127Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminBlogController::getBlog-Blog fetched successfully[0m
+2026-10-23T13:41:57.136Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminBlogController::getBlog-Blog fetched successfully[0m
+2026-10-23T13:41:57.152Z [WARN]: [33m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:41:57.153Z [ERROR]: [31m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:57.162Z [WARN]: [33m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:41:57.162Z [ERROR]: [31m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:57.170Z [WARN]: [33m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:41:57.170Z [ERROR]: [31m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:57.175Z [WARN]: [33m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:41:57.175Z [ERROR]: [31m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:57.179Z [WARN]: [33m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:41:57.180Z [ERROR]: [31m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:57.183Z [WARN]: [33m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-Invalid token[0m
+2026-10-23T13:41:57.183Z [ERROR]: [31m23-Oct-2026, 14:41:30-AuthMiddleware::authAdmin-undefined[0m
+2026-10-23T13:41:59.152Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:41:59.741Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:41:59.860Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:41:59.863Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:41:59.888Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:41:59.972Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:42:00.307Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:42:04.374Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:42:04.634Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:42:04.752Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:42:04.767Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:42:04.776Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:42:04.777Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:42:05.239Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:42:52.920Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:42:52.923Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:42:53.184Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:42:53.191Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:42:53.204Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:42:53.941Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:42:53.958Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:43:41.445Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:43:52.726Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:43:56.171Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:44:40.718Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:44:43.794Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:44:46.472Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:44:55.833Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:44:57.810Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:00.612Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:04.745Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:06.798Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:08.840Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:16.062Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:17.826Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:40.591Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:41.861Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:44.452Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:45:49.320Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T13:45:52.874Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:45:58.771Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T13:46:03.261Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T13:46:06.242Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:46:09.345Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getMyProfile-Profile fetched successfully[0m
+2026-10-23T13:46:16.175Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:46:17.404Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T13:46:19.136Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:46:19.149Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:46:19.284Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:46:19.300Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:46:19.390Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:46:19.429Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:46:20.472Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:46:24.400Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:46:28.274Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T13:46:32.261Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T13:47:51.907Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T13:47:53.271Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:47:53.989Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:47:53.999Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:47:54.431Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:47:54.433Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:47:54.550Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:47:54.563Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:47:55.729Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:47:58.888Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:49:36.154Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:50:23.280Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:52:20.442Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:53:49.328Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:56:38.949Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:56:39.826Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:57:17.826Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T13:58:06.501Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:58:06.539Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:58:06.831Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:58:06.839Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:58:06.842Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:58:06.973Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:58:37.784Z [ERROR]: [31mGet dashboard trends failed::23-Oct-2026, 14:41:30-AdminDashboardController::getTrends[0m
+2026-10-23T13:58:48.073Z [ERROR]: [31mGet dashboard totals failed::23-Oct-2026, 14:41:30-AdminDashboardController::getTotals[0m
+2026-10-23T13:58:48.095Z [ERROR]: [31mGet dashboard breakdown failed::23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown[0m
+2026-10-23T13:58:48.108Z [ERROR]: [31mGet admin activity failed::23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity[0m
+2026-10-23T13:58:48.108Z [ERROR]: [31mGet top blogs failed::23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs[0m
+2026-10-23T13:58:48.113Z [ERROR]: [31mGet top reviews failed::23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews[0m
+2026-10-23T13:58:48.114Z [ERROR]: [31mGet dashboard trends failed::23-Oct-2026, 14:41:30-AdminDashboardController::getTrends[0m
+2026-10-23T13:59:18.112Z [ERROR]: [31mGet user activity failed::23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity[0m
+2026-10-23T13:59:18.132Z [ERROR]: [31mAdminContentController::getBlogs failed::23-Oct-2026, 14:41:30[0m
+2026-10-23T13:59:18.138Z [ERROR]: [31mAdminContentController::getBloggers failed::23-Oct-2026, 14:41:30[0m
+2026-10-23T13:59:24.556Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:59:24.856Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:59:25.337Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:59:25.339Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:59:25.438Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:59:25.461Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T13:59:25.465Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:59:25.604Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:59:25.893Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:59:47.560Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T13:59:48.130Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T13:59:48.134Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T13:59:48.137Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T13:59:48.250Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T13:59:48.252Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T13:59:48.514Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T13:59:49.401Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T13:59:56.588Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminBlogController::getBlog-Blog fetched successfully[0m
+2026-10-23T13:59:58.827Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:00:00.031Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:00:03.201Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:00:06.589Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T14:00:09.925Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T14:00:15.058Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:00:15.328Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:00:15.346Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:00:15.347Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:00:15.467Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:00:15.911Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:00:16.046Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:00:24.720Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:00:29.193Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getMyProfile-Profile fetched successfully[0m
+2026-10-23T14:00:33.006Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:00:34.385Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:00:35.405Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:02:01.322Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:02:02.571Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:02:05.156Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:02:09.305Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:02:11.701Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:03:26.010Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:03:26.822Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:03:28.065Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:03:28.108Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:03:28.248Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:03:28.355Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:03:28.359Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:03:28.489Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:03:29.360Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:03:42.765Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:03:44.944Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:03:48.505Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:03:51.864Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:03:52.979Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:03:52.990Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:03:53.128Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:03:53.158Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:03:53.283Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:03:54.489Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:03:54.492Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:03:54.631Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:03:54.634Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:03:55.108Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:03:56.036Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:03:56.621Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:03:57.634Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:03:58.257Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:03:59.015Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:03:59.761Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getMyProfile-Profile fetched successfully[0m
+2026-10-23T14:04:00.424Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:00.963Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:00.968Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:01.093Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:01.094Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:04:01.096Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:01.240Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:01.696Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T14:04:01.765Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:02.422Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:04:02.972Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:04:03.453Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:04:03.456Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:03.459Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:03.623Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:03.624Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:03.705Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:03.724Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:04:03.793Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:03.796Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:04.260Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:04:04.296Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:04.465Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBloggers-Bloggers fetched successfully[0m
+2026-10-23T14:04:04.726Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:04:04.766Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:04.775Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:04.917Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:04.919Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:04:04.922Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:05.050Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:05.145Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:04:05.402Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:05.615Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getMyProfile-Profile fetched successfully[0m
+2026-10-23T14:04:05.693Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:06.324Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:06.334Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminRoleController::getAllRoles-Roles fetched successfully[0m
+2026-10-23T14:04:06.925Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:04:07.068Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getContacts-Contact messages fetched successfully[0m
+2026-10-23T14:04:07.471Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminController::getAllAdmins-Admins fetched successfully[0m
+2026-10-23T14:04:07.720Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:04:07.894Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:08.044Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:08.046Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:08.063Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:08.181Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:08.181Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:08.304Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:04:08.571Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:08.586Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:08.589Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminBlogController::getBlog-Blog fetched successfully[0m
+2026-10-23T14:04:08.715Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:04:08.716Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:08.731Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:08.830Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:08.990Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:09.172Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:09.512Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:09.530Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:09.541Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:09.638Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:09.657Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:09.667Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:09.778Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m
+2026-10-23T14:04:09.910Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminBlogController::getBlog-Blog fetched successfully[0m
+2026-10-23T14:04:09.925Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:09.927Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:09.943Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:10.054Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:10.060Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:10.174Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:10.785Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminContentController::getBlogs-Blogs fetched successfully[0m
+2026-10-23T14:04:12.647Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTotals-Dashboard totals fetched successfully[0m
+2026-10-23T14:04:12.648Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getBreakdown-Dashboard breakdown fetched successfully[0m
+2026-10-23T14:04:12.686Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTrends-Dashboard trends fetched successfully[0m
+2026-10-23T14:04:12.777Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopBlogs-Most liked blogs fetched successfully[0m
+2026-10-23T14:04:12.795Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getUserActivity-User activity fetched successfully[0m
+2026-10-23T14:04:12.802Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminDashboardController::getTopReviews-Most liked reviews fetched successfully[0m
+2026-10-23T14:04:12.926Z [INFO]: [32m23-Oct-2026, 14:41:30-AdminActivityController::getAdminActivity-Admin activity fetched successfully[0m

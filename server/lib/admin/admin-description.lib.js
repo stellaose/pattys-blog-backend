@@ -1,4 +1,4 @@
-export const descriptions = {
+export const adminDescriptions = {
   // + Authentication Operations
   login_request: adminName => `${adminName} initiated a login request`,
   login_request_failed: adminName =>
@@ -65,10 +65,14 @@ export const descriptions = {
     `${adminName} deleted administrator ${recipient}`,
   delete_admin_failed: (adminName, recipient) =>
     `${adminName} failed to delete administrator ${recipient}`,
-  update_admin_status: (adminName, recipient) =>
-    `${adminName} updated admin ${recipient}'s status`,
-  update_admin_status_failed: (adminName, recipient) =>
-    `${adminName} failed to update admin ${recipient} status`,
+  update_admin_status: (adminName, recipient, status) =>
+    `${adminName} updated admin ${recipient}'s status${status ? ` to ${status}` : ""}`,
+  update_admin_status_failed: (adminName, recipient, status) =>
+    `${adminName} failed to update admin ${recipient} status${status ? ` to ${status}` : ""}`,
+  edit_admin: (adminName, recipient) =>
+    `${adminName} updated administrator ${recipient}`,
+  edit_admin_failed: (adminName, recipient) =>
+    `${adminName} failed to update administrator ${recipient}`,
 
   // & Profile Operations
   completes_profile: adminName =>
@@ -90,18 +94,28 @@ export const descriptions = {
   delete_blog: (adminName, blogId) => `${adminName} deleted blog ${blogId}`,
   delete_blog_failed: (adminName, blogId) =>
     `${adminName} failed to delete blog ${blogId}`,
-  
+
   // > Blogger Operations
-  create_blogger: (adminName, bloggerUsername) => `${adminName} creates blogger with username ${bloggerUsername}`,
-  create_blogger_failed: (adminName, bloggerUsername) => `${adminName} failed to create blogger with username ${bloggerUsername}`,
-  edit_blogger: (adminName, bloggerUsername) => `${adminName} edited blogger with username ${bloggerUsername}`,
-  edit_blogger_failed: (adminName, bloggerUsername) => `${adminName} failed to edit blogger with username ${bloggerUsername}`,
-  activate_blogger: (adminName, bloggerUsername) => `${adminName} activated blogger with username ${bloggerUsername}`,
-  activate_blogger_failed: (adminName, bloggerUsername) => `${adminName} failed to activate blogger with username ${bloggerUsername}`,
-  deactivate_blogger: (adminName, bloggerUsername) => `${adminName} deactivated blogger with username ${bloggerUsername}`,
-  deactivate_blogger_failed: (adminName, bloggerUsername) => `${adminName} failed to deactivate blogger with username ${bloggerUsername}`,
-  delete_blogger: (adminName, bloggerUsername) => `${adminName} deleted blogger with username ${bloggerUsername}`,
-  delete_blogger_failed: (adminName, bloggerUsername) => `${adminName} failed to edit blogger with username ${bloggerUsername}`,
+  create_blogger: (adminName, bloggerUsername) =>
+    `${adminName} creates blogger with username ${bloggerUsername}`,
+  create_blogger_failed: (adminName, bloggerUsername) =>
+    `${adminName} failed to create blogger with username ${bloggerUsername}`,
+  edit_blogger: (adminName, bloggerUsername) =>
+    `${adminName} edited blogger with username ${bloggerUsername}`,
+  edit_blogger_failed: (adminName, bloggerUsername) =>
+    `${adminName} failed to edit blogger with username ${bloggerUsername}`,
+  activate_blogger: (adminName, bloggerUsername) =>
+    `${adminName} activated blogger with username ${bloggerUsername}`,
+  activate_blogger_failed: (adminName, bloggerUsername) =>
+    `${adminName} failed to activate blogger with username ${bloggerUsername}`,
+  deactivate_blogger: (adminName, bloggerUsername) =>
+    `${adminName} deactivated blogger with username ${bloggerUsername}`,
+  deactivate_blogger_failed: (adminName, bloggerUsername) =>
+    `${adminName} failed to deactivate blogger with username ${bloggerUsername}`,
+  delete_blogger: (adminName, bloggerUsername) =>
+    `${adminName} deleted blogger with username ${bloggerUsername}`,
+  delete_blogger_failed: (adminName, bloggerUsername) =>
+    `${adminName} failed to edit blogger with username ${bloggerUsername}`,
 
   // # Permission Operations
   edit_admin_permissions: (adminName, recipient) =>
@@ -112,6 +126,10 @@ export const descriptions = {
     `${adminName} successfully created role ${roleName} with permissions`,
   create_role_permission_failed: (adminName, roleName) =>
     `${adminName} failed to create role ${roleName} with permissions`,
+  set_role_permissions: (adminName, roleName, resources) =>
+    `${adminName} updated permissions for role ${roleName} on ${resources}`,
+  set_role_permissions_failed: (adminName, roleName, resources) =>
+    `${adminName} failed to update permissions for role ${roleName} on ${resources}`,
 
   // = Logout Operations
   logout: adminName => `${adminName} logged out`,

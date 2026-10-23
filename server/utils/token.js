@@ -44,6 +44,28 @@ const tokenService = {
       "1h"
     ),
 
+  // + admin tokens carry adminId, which AuthMiddleware.authAdmin reads
+  generateAdminJwtToken: admin =>
+    signToken(
+      { _id: admin._id, adminId: admin.adminId, email: admin.email },
+      process.env.JWT_SECRET,
+      process.env.JWT_EXPIRES_IN
+    ),
+
+  generateAdminRefreshJwtToken: admin =>
+    signToken(
+      { _id: admin._id, adminId: admin.adminId, email: admin.email },
+      process.env.REFRESH_JWT_SECRET
+    ),
+
+  // ! signed with EMAIL_SECRET so it can never pass authAdmin as a login token
+  generateAdminResetPasswordToken: admin =>
+    signToken(
+      { adminId: admin.adminId, purpose: "admin-reset-password" },
+      process.env.EMAIL_SECRET,
+      "15m"
+    ),
+
   verifyToken: (token, secret) => {
     try {
       const decoded = jwt.verify(token, secret);

@@ -108,8 +108,41 @@ export const messagesEnum = {
   CONTACT_RECEIVER_NOT_SET: "CONTACT_RECEIVER_EMAIL is not set",
 };
 
-
 export const adminMessagesEnum = {
+  // + Login & passwords
+  INVALID_CREDENTIALS: "Invalid email or password",
+  ACCOUNT_NOT_ACTIVE: status =>
+    `Your account is ${status}; contact a super admin`,
+  LOGIN_OTP_SENT: "Enter the code to finish signing in",
+  LOGIN_SUCCESSFUL: "Login successful",
+  PASSWORD_ALREADY_CREATED: "You have already created your password",
+  PASSWORD_CREATED_SUCCESSFULLY: "Password created successfully",
+  RESET_OTP_SENT: "Enter the code to reset your password",
+  INVALID_RESET_TOKEN: "Password reset link is invalid or has expired",
+
+  // + Auth
+  ADMIN_EMAIL_EXISTS: "An admin with this email already exists",
+  ADMIN_ALREADY_DELETED:
+    "An admin with this email was deleted; restore them instead of inviting again",
+  ADMIN_INVITED_SUCCESSFULLY: "Admin invited successfully",
+  ROLE_INACTIVE: "This role is inactive and cannot be assigned",
+
+  // * Admins
+  ADMIN_NOT_FOUND: "Admin not found",
+  PROFILE_ALREADY_COMPLETED: "Profile has already been completed",
+  PROFILE_COMPLETED_SUCCESSFULLY: "Profile completed successfully",
+  PROFILE_FETCHED_SUCCESSFULLY: "Profile fetched successfully",
+  ADMINS_FETCHED_SUCCESSFULLY: "Admins fetched successfully",
+  ADMIN_FETCHED_SUCCESSFULLY: "Admin fetched successfully",
+  ADMIN_UPDATED_SUCCESSFULLY: "Admin updated successfully",
+  SUPER_ADMIN_ROLE_NOT_ALLOWED:
+    "Only a super admin can assign the super admin role",
+  ADMIN_STATUS_UNCHANGED: status => `Admin is already ${status}`,
+  ADMIN_STATUS_UPDATED_SUCCESSFULLY: "Admin status updated successfully",
+  CANNOT_UPDATE_OWN_STATUS: "You cannot update your own status",
+  CANNOT_DELETE_SELF: "You cannot delete your own account",
+  ADMIN_DELETED_SUCCESSFULLY: "Admin deleted successfully",
+
   // # Resources
   RESOURCE_NOT_FOUND: "Resource not found",
   RESOURCE_EXISTS: "A resource with this name already exists",
@@ -120,4 +153,41 @@ export const adminMessagesEnum = {
   RESOURCES_FETCHED_SUCCESSFULLY: "Resources fetched successfully",
   RESOURCE_UPDATED_SUCCESSFULLY: "Resource updated successfully",
   RESOURCE_DELETED_SUCCESSFULLY: "Resource deleted successfully",
+  RESOURCES_NOT_FOUND: ids => `Resource(s) not found: ${ids.join(", ")}`,
+  RESOURCE_REPEATED: id => `Resource ${id} is listed more than once`,
+
+  // ? Roles
+  ROLE_NOT_FOUND: "Role not found",
+  ROLE_EXISTS: "A role with this name already exists",
+  ROLE_IN_USE: "This role is still assigned to one or more admins",
+  ROLE_STATUS_UNCHANGED: status => `Role is already ${status}`,
+  ROLE_CREATED_SUCCESSFULLY: "Role created successfully",
+  ROLES_FETCHED_SUCCESSFULLY: "Roles fetched successfully",
+  ROLE_FETCHED_SUCCESSFULLY: "Role fetched successfully",
+  ROLE_UPDATED_SUCCESSFULLY: "Role updated successfully",
+  ROLE_STATUS_UPDATED_SUCCESSFULLY: "Role status updated successfully",
+  ROLE_DELETED_SUCCESSFULLY: "Role deleted successfully",
+  ROLE_PERMISSIONS_UPDATED_SUCCESSFULLY:
+    "Role permissions updated successfully",
+
+  // % Dashboard
+  DASHBOARD_SUMMARY_FETCHED_SUCCESSFULLY:
+    "Dashboard summary fetched successfully",
+  DASHBOARD_TRENDS_FETCHED_SUCCESSFULLY:
+    "Dashboard trends fetched successfully",
+  DASHBOARD_BREAKDOWN_FETCHED_SUCCESSFULLY:
+    "Dashboard breakdown fetched successfully",
+  DASHBOARD_TOP_BLOGS_FETCHED_SUCCESSFULLY:
+    "Most liked blogs fetched successfully",
+  DASHBOARD_TOP_REVIEWS_FETCHED_SUCCESSFULLY:
+    "Most liked reviews fetched successfully",
+  DASHBOARD_TOTALS_FETCHED_SUCCESSFULLY:
+    "Dashboard totals fetched successfully",
+  ADMIN_BLOG_FETCHED_SUCCESSFULLY: "Blog fetched successfully",
+  USER_ACTIVITY_FETCHED_SUCCESSFULLY: "User activity fetched successfully",
+  ADMIN_ACTIVITY_FETCHED_SUCCESSFULLY: "Admin activity fetched successfully",
+  ADMIN_BLOGS_FETCHED_SUCCESSFULLY: "Blogs fetched successfully",
+  ADMIN_BLOGGERS_FETCHED_SUCCESSFULLY: "Bloggers fetched successfully",
+  ADMIN_COMMENTS_FETCHED_SUCCESSFULLY: "Comments fetched successfully",
+  ADMIN_CONTACTS_FETCHED_SUCCESSFULLY: "Contact messages fetched successfully",
 };

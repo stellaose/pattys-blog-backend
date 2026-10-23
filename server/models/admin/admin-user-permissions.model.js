@@ -77,7 +77,7 @@ AdminUserPermissionSchema.virtual("admin", {
 
 // > belongsTo AdminRole
 AdminUserPermissionSchema.virtual("role", {
-  ref: "AdminRole",
+  ref: "AdminRoles",
   localField: "roleId",
   foreignField: "roleId",
   justOne: true,

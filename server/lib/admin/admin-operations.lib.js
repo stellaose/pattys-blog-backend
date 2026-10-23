@@ -1,4 +1,4 @@
-export const operations = {
+export const adminOperations = {
   // + Authentication Operations
   1: "ADMLGR", // admin login request
   2: "ADMLGA", // admin login approved
@@ -40,6 +40,10 @@ export const operations = {
   
   //  _ Admin Permissions
   27: "EDTADMPM", // edit admin permissions,
+  28: "ADMSTRLPM", // admin sets a role's permissions on resources
+
+  // = Logout
+  29: "ADMLGOUT", // admin logs out
 
   
 };

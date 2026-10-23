@@ -4,10 +4,12 @@ import mongoose from "mongoose";
 import databaseConnect from "../database/index.js";
 import { seedAdminResources } from "./admin-resources.seed.js";
 import { seedAdminRoles } from "./admin-role.seed.js";
+import { seedSuperAdmin } from "./super-admin.seed.js";
 
 // ! add new seeders here, in the order they must run
 const seeders = [
   ["admin roles", seedAdminRoles],
+  ["super admin", seedSuperAdmin],
   ["admin resources", seedAdminResources],
 ];
 
