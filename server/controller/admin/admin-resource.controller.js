@@ -15,23 +15,6 @@ import { adminActivityTracking } from "../../lib/admin/index.js";
 
 dotenv.config({ quiet: true });
 
-const findResourceOrThrow = async (resourceId, label) => {
-  const resource =
-    await AdminResourceService.getResourceByResourceId(resourceId);
-
-  if (!resource) {
-    logger.warn(
-      `${labelEnum.CURRENT_TIME_STAMP}-${label}-${adminMessagesEnum.RESOURCE_NOT_FOUND}`
-    );
-    throw new ErrorResponse(
-      adminMessagesEnum.RESOURCE_NOT_FOUND,
-      statusEnum.statusCode.HTTP_NOT_FOUND
-    );
-  }
-
-  return resource;
-};
-
 export const AdminResourceController = {
   createResource: async (req, res, next) => {
     try {
@@ -185,10 +168,18 @@ export const AdminResourceController = {
       const { resourceId } = req.params;
       const { name, description } = req.body;
 
-      const resource = await findResourceOrThrow(
-        resourceId,
-        adminLabelEnum.EDIT_RESOURCE
-      );
+      const resource =
+        await AdminResourceService.getResourceByResourceId(resourceId);
+
+      if (!resource) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${adminLabelEnum.EDIT_RESOURCE}-${adminMessagesEnum.RESOURCE_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          adminMessagesEnum.RESOURCE_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       if (name !== undefined) {
         const nameOwner =
@@ -236,10 +227,18 @@ export const AdminResourceController = {
     try {
       const { resourceId } = req.params;
 
-      const resource = await findResourceOrThrow(
-        resourceId,
-        adminLabelEnum.DELETE_RESOURCE
-      );
+      const resource =
+        await AdminResourceService.getResourceByResourceId(resourceId);
+
+      if (!resource) {
+        logger.warn(
+          `${labelEnum.CURRENT_TIME_STAMP}-${adminLabelEnum.DELETE_RESOURCE}-${adminMessagesEnum.RESOURCE_NOT_FOUND}`
+        );
+        throw new ErrorResponse(
+          adminMessagesEnum.RESOURCE_NOT_FOUND,
+          statusEnum.statusCode.HTTP_NOT_FOUND
+        );
+      }
 
       await resource.softDelete();
 

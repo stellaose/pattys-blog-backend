@@ -51,12 +51,62 @@ export const labelEnum = {
   REQUIRE_ROLE_MIDDLEWARE: "AuthMiddleware::requireRole",
 };
 
-
 export const adminLabelEnum = {
+  // + AUTH
+  ADMIN_LOGIN: "AdminAuthController::login",
+  ADMIN_VERIFY_LOGIN: "AdminAuthController::verifyLogin",
+  ADMIN_CREATE_PASSWORD: "AdminAuthController::createPassword",
+  ADMIN_FORGOT_PASSWORD: "AdminAuthController::forgotPassword",
+  ADMIN_VERIFY_FORGOT_PASSWORD: "AdminAuthController::verifyForgotPassword",
+  ADMIN_RESET_PASSWORD: "AdminAuthController::resetPassword",
+  ADMIN_CHANGE_PASSWORD: "AdminAuthController::changePassword",
+  ADMIN_LOGOUT: "AdminAuthController::logout",
+
+  // + ADMINS
+  INVITE_ADMIN: "AdminController::inviteAdmin",
+  COMPLETE_PROFILE: "AdminController::completeProfile",
+  GET_MY_PROFILE: "AdminController::getMyProfile",
+  GET_ALL_ADMINS: "AdminController::getAllAdmins",
+  GET_ONE_ADMIN: "AdminController::getOneAdmin",
+  EDIT_ADMIN: "AdminController::editAdmin",
+  UPDATE_ADMIN_STATUS: "AdminController::updateAdminStatus",
+  DELETE_ADMIN: "AdminController::deleteAdmin",
+
   // # RESOURCES
   CREATE_RESOURCE: "AdminResourceController::createResource",
   GET_ALL_RESOURCES: "AdminResourceController::getAllResources",
   GET_ONE_RESOURCE: "AdminResourceController::getOneResource",
   EDIT_RESOURCE: "AdminResourceController::editResource",
   DELETE_RESOURCE: "AdminResourceController::deleteResource",
+
+  // ? ROLES
+  CREATE_ROLE: "AdminRoleController::createRole",
+  GET_ALL_ROLES: "AdminRoleController::getAllRoles",
+  GET_ONE_ROLE: "AdminRoleController::getOneRole",
+  EDIT_ROLE: "AdminRoleController::editRole",
+  UPDATE_ROLE_STATUS: "AdminRoleController::updateRoleStatus",
+  DELETE_ROLE: "AdminRoleController::deleteRole",
+  SET_ROLE_PERMISSIONS: "AdminRoleController::setRolePermissions",
+  GET_ADMINS_BY_ROLE: "AdminRoleController::getAdminsByRole",
+
+  // % DASHBOARD
+  GET_DASHBOARD_SUMMARY: "AdminDashboardController::getSummary",
+  GET_DASHBOARD_TRENDS: "AdminDashboardController::getTrends",
+  GET_DASHBOARD_BREAKDOWN: "AdminDashboardController::getBreakdown",
+  GET_DASHBOARD_TOP_BLOGS: "AdminDashboardController::getTopBlogs",
+  GET_DASHBOARD_TOP_REVIEWS: "AdminDashboardController::getTopReviews",
+  GET_DASHBOARD_TOTALS: "AdminDashboardController::getTotals",
+
+  // % BLOGS
+  ADMIN_GET_BLOG: "AdminBlogController::getBlog",
+
+  // % ACTIVITY
+  GET_USER_ACTIVITY: "AdminActivityController::getUserActivity",
+  GET_ADMIN_ACTIVITY: "AdminActivityController::getAdminActivity",
+
+  // % CONTENT LISTS
+  ADMIN_GET_BLOGS: "AdminContentController::getBlogs",
+  ADMIN_GET_BLOGGERS: "AdminContentController::getBloggers",
+  ADMIN_GET_COMMENTS: "AdminContentController::getComments",
+  ADMIN_GET_CONTACTS: "AdminContentController::getContacts",
 };

@@ -60,7 +60,7 @@ AdminRolePermissionSchema.index({ roleId: 1, resourceId: 1 }, { unique: true });
 
 // > belongsTo AdminRole
 AdminRolePermissionSchema.virtual("role", {
-  ref: "AdminRole",
+  ref: "AdminRoles",
   localField: "roleId",
   foreignField: "roleId",
   justOne: true,

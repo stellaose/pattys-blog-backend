@@ -12,25 +12,6 @@ import {
   userDescriptions,
 } from "../../lib/user/index.js";
 
-
-const reactionTracking = {
-  like: {
-    op: statusEnum.opCodes.LIKE_BLOG,
-    description: userDescriptions.like_blog,
-    failedDescription: userDescriptions.like_blog_failed,
-  },
-  dislike: {
-    op: statusEnum.opCodes.DISLIKE_BLOG,
-    description: userDescriptions.dislike_blog,
-    failedDescription: userDescriptions.dislike_blog_failed,
-  },
-  none: {
-    op: statusEnum.opCodes.REMOVE_BLOG_REACTION,
-    description: userDescriptions.remove_blog_reaction,
-    failedDescription: userDescriptions.remove_blog_reaction_failed,
-  },
-};
-
 const toAuthBlogEntry = doc => ({
   id: doc._id,
   title: doc.title,
@@ -430,9 +411,9 @@ export const BlogController = {
         } else {
           userActivityTracking(
             req.userId,
-            reactionTracking[likeStatus].op,
+            statusEnum.opCodes.LIKE_BLOG,
             "success",
-            name => reactionTracking[likeStatus].description(name, blogId)
+            name => userDescriptions.like_blog(name, blogId)
           );
           logger.info(
             `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_LIKED_SUCCESSFULLY}`
@@ -480,9 +461,9 @@ export const BlogController = {
         } else {
           userActivityTracking(
             req.userId,
-            reactionTracking[likeStatus].op,
+            statusEnum.opCodes.DISLIKE_BLOG,
             "success",
-            name => reactionTracking[likeStatus].description(name, blogId)
+            name => userDescriptions.dislike_blog(name, blogId)
           );
           logger.info(
             `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_DISLIKED_SUCCESSFULLY}`
@@ -534,9 +515,9 @@ export const BlogController = {
         } else {
           userActivityTracking(
             req.userId,
-            reactionTracking[likeStatus].op,
+            statusEnum.opCodes.REMOVE_BLOG_REACTION,
             "success",
-            name => reactionTracking[likeStatus].description(name, blogId)
+            name => userDescriptions.remove_blog_reaction(name, blogId)
           );
           logger.info(
             `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_REACTION_REMOVED_SUCCESSFULLY}`
@@ -555,13 +536,29 @@ export const BlogController = {
         `Like/Dislike post failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`,
         error.message
       );
-      const reaction = reactionTracking[req.body?.likeStatus];
-      if (reaction) {
+      // = like / dislike / none each log as their own activity
+      const { likeStatus } = req.body ?? {};
+      const blogId = req.params.blogId;
+      if (likeStatus === "like") {
         userActivityTracking(
           req.userId,
-          reaction.op,
+          statusEnum.opCodes.LIKE_BLOG,
           "failed",
-          name => reaction.failedDescription(name, req.params.blogId)
+          name => userDescriptions.like_blog_failed(name, blogId)
+        );
+      } else if (likeStatus === "dislike") {
+        userActivityTracking(
+          req.userId,
+          statusEnum.opCodes.DISLIKE_BLOG,
+          "failed",
+          name => userDescriptions.dislike_blog_failed(name, blogId)
+        );
+      } else if (likeStatus === "none") {
+        userActivityTracking(
+          req.userId,
+          statusEnum.opCodes.REMOVE_BLOG_REACTION,
+          "failed",
+          name => userDescriptions.remove_blog_reaction_failed(name, blogId)
         );
       }
       next(error);

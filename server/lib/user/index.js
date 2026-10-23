@@ -6,8 +6,8 @@ import { createId, getFullName } from "../../utils/helper.js";
 
 export { userDescriptions } from "./user-description.lib.js";
 
-// & saves one activity log; a failed write is logged but never thrown, so
-// * tracking can never break the request that triggered it
+// & saves one activity log; a failed write is logged but never thrown
+
 const monitor = async (log, type) => {
   try {
     await UserActivityLog.create(log);
@@ -31,9 +31,7 @@ const resolveUserName = async userId => {
   }
 };
 
-// ? records what a user did, e.g.
-// - userActivityTracking(userId, 12, "success", name => descriptions.create_blog(name, title))
-// > pass userName when the handler already has the user, to skip the lookup
+// ? records what a user did
 export const userActivityTracking = async (
   userId,
   op_code,
@@ -51,7 +49,11 @@ export const userActivityTracking = async (
     return;
   }
 
-  const name = userName ?? (await resolveUserName(userId));
+  // > a ready-made string needs no name, so skip the lookup
+  const name =
+    typeof describe === "function"
+      ? (userName ?? (await resolveUserName(userId)))
+      : undefined;
 
   return monitor(
     {
@@ -59,7 +61,7 @@ export const userActivityTracking = async (
       userId,
       activity_type,
       activity_status,
-      description: describe(name),
+      description: typeof describe === "function" ? describe(name) : describe,
     },
     "userActivityTracking"
   );

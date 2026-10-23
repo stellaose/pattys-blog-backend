@@ -23,6 +23,14 @@ const AdminAuthSchema = new Schema(
       trim: true,
       required: true,
     },
+    middle_name: {
+      type: String,
+      trim: true,
+    },
+    phone_number: {
+      type: String,
+      trim: true,
+    },
     email: {
       type: String,
       trim: true,
@@ -53,6 +61,10 @@ const AdminAuthSchema = new Schema(
     status: {
       type: String,
       required: true,
+    },
+    // > adminId of the admin who sent the invite
+    invitedBy: {
+      type: String,
     },
     isEmailVerified: {
       type: Boolean,
@@ -108,7 +120,7 @@ const AdminAuthSchema = new Schema(
 
 // > belongsTo AdminRole
 AdminAuthSchema.virtual("adminRole", {
-  ref: "AdminRole",
+  ref: "AdminRoles",
   localField: "roleId",
   foreignField: "roleId",
   justOne: true,

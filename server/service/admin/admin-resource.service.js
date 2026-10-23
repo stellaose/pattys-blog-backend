@@ -2,10 +2,10 @@ import { AdminResource } from "../../models/admin/admin-resources.model.js";
 import "../../models/admin/admin-permissions.model.js";
 
 const AdminResourceService = {
-  getAllResources: async () => {
-    return await AdminResource.find({
-      isDeleted: false,
-    });
+  // > returns the query unawaited so ApiFeatures can chain search/sort/paging onto it;
+  // the soft-delete plugin already leaves deleted resources out
+  getAllResources: () => {
+    return AdminResource.find();
   },
 
   getAllResourcesIncludingDeleted: async () => {

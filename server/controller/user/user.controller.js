@@ -56,18 +56,17 @@ export const UserController = {
         last_name,
         user_name,
         email,
-        password,
         phone_number,
         gender,
         bio,
       } = req.body;
 
+      // ! no password here: change-password hashes it with bcrypt after checking the current one
       const updatedDetails = {
         first_name,
         last_name,
         user_name,
         email,
-        password,
         phone_number,
         gender,
         bio,
