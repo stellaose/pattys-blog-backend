@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 import { AuthService } from "../service/user/auth.service.js";
-import { Auth } from "../models/auth.model.js";
+import { Auth } from "../models/user/auth.model.js";
 
 // ! mock auth schema so no database is needed
-jest.mock("../models/auth.model.js", () => ({
+jest.mock("../models/user/auth.model.js", () => ({
   Auth: { findOne: jest.fn() },
 }));
 

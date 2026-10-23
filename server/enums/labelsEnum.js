@@ -44,4 +44,19 @@ export const labelEnum = {
   EDIT_REVIEW: "ReviewController::editReview",
   DELETE_REVIEW: "ReviewController::deleteReview",
   GET_REVIEWS_BY_BLOG_ID: "ReviewController::getReviewsByBlogId",
+
+  // # CONTACT
+  CREATE_CONTACT_MESSAGE: "ContactController::createContactMessage",
+  GET_ALL_CONTACT_MESSAGES: "ContactController::getAllContactMessages",
+  REQUIRE_ROLE_MIDDLEWARE: "AuthMiddleware::requireRole",
+};
+
+
+export const adminLabelEnum = {
+  // # RESOURCES
+  CREATE_RESOURCE: "AdminResourceController::createResource",
+  GET_ALL_RESOURCES: "AdminResourceController::getAllResources",
+  GET_ONE_RESOURCE: "AdminResourceController::getOneResource",
+  EDIT_RESOURCE: "AdminResourceController::editResource",
+  DELETE_RESOURCE: "AdminResourceController::deleteResource",
 };

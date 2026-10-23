@@ -1,4 +1,4 @@
-import { Auth } from "../../models/auth.model.js";
+import { Auth } from "../../models/user/auth.model.js";
 
 export const AuthService = {
   getUserByEmail: async email => {

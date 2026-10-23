@@ -29,7 +29,7 @@ function getOAuth2Client() {
   return client;
 }
 
-export async function sendEmail({ to, subject, html, text }) {
+export async function sendEmail({ to, subject, html, text, replyTo }) {
   const oAuth2Client = getOAuth2Client();
   const accessTokenResponse = await oAuth2Client.getAccessToken();
   const accessToken =
@@ -60,5 +60,6 @@ export async function sendEmail({ to, subject, html, text }) {
     subject,
     text,
     html,
+    replyTo,
   });
 }

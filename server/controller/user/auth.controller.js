@@ -2,16 +2,16 @@ import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
 import ErrorResponse from "../../utils/ErrorHandler.js";
 import validateEmail from "../../utils/Validation.js";
-import { Auth } from "../../models/auth.model.js";
+import { Auth } from "../../models/user/auth.model.js";
 import { AuthService } from "../../service/user/auth.service.js";
-import { nanoid } from "nanoid";
 import tokenService from "../../utils/token.js";
 import logger from "../../logger/logger.js";
 import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
+import { createId } from "../../utils/helper.js";
 
 dotenv.config({ quiet: true });
 
-// Email sending is disabled so others can test: every OTP is this fixed code.
+// + Email sending is disabled so others can test: every OTP is this fixed code.
 const TEST_OTP = 123456;
 
 export const AuthController = {
@@ -96,7 +96,7 @@ export const AuthController = {
       const hashedPassword = bcrypt.hashSync(password, salt);
 
       const user = await Auth.create({
-        userId: `user-${nanoid(24).replaceAll("_", "").replaceAll("-", "")}`,
+        userId: createId("user", 24),
         first_name,
         last_name,
         user_name,

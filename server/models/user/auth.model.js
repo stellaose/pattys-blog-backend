@@ -6,9 +6,6 @@ const { isEmail } = validator;
 
 const AuthBlogEntrySchema = new Schema(
   {
-    // These fields are embedded inside Auth.blogs and are optional.
-    // Removing `ref: "Blog"` avoids Mongoose attempting to cast/populate refs
-    // for undefined/malformed entries during `user.save()`.
     id: {
       type: String,
       required: false,
@@ -72,7 +69,7 @@ const AuthSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin", "superAdmin"],
+      enum: ["user"],
       default: "user",
     },
     isEmailVerified: {

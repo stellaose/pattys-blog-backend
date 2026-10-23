@@ -16,8 +16,6 @@ export const statusEnum = {
     HTTP_SERVICE_UNAVAILABLE: 503,
   },
   eUserType: {
-    Admin: "admin",
-    SuperAdmin: "superAdmin",
     User: "user",
   },
 };

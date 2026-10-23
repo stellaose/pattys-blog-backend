@@ -20,7 +20,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "code:check": "npm run lint && npm run format:check",
-    "code:fix": "npm run lint:fix && npm run format"
+    "code:fix": "npm run lint:fix && npm run format",
+    "migrate:create": "migrate-mongo create",
+    "migrate:up": "migrate-mongo up",
+    "migrate:down": "migrate-mongo down",
+    "migrate:status": "migrate-mongo status",
+    "seed": "node server/seeders/index.js"
   },
   "dependencies": {
     "@joi/date": "^2.1.1",
