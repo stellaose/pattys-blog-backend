@@ -20,8 +20,10 @@ export const operations = {
   14: "USRDELBLG", // user deletes blog
   15: "USRLKBLG", // user likes blog
   16: "USRDLKBLG", // user dislikes blog
+  17: "USRRMRCTBLG", // user removes like/dislike from blog
 
   // ? Review Operations
-  17: "USRCRRVW", // user creates review
-  18: "USRDELRVW", // user deletes review
+  18: "USRCRRVW", // user creates review
+  19: "USRDELRVW", // user deletes review
 };
+

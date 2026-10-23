@@ -7,7 +7,8 @@ import { AuthService } from "../../service/user/auth.service.js";
 import tokenService from "../../utils/token.js";
 import logger from "../../logger/logger.js";
 import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
-import { createId } from "../../utils/helper.js";
+import { createId, getFullName } from "../../utils/helper.js";
+import { userActivityTracking, descriptions } from "../../lib/user/index.js";
 
 dotenv.config({ quiet: true });
 
@@ -16,6 +17,7 @@ const TEST_OTP = 123456;
 
 export const AuthController = {
   signup: async (req, res, next) => {
+    let user;
     try {
       const {
         first_name,
@@ -95,7 +97,7 @@ export const AuthController = {
       const salt = bcrypt.genSaltSync(10);
       const hashedPassword = bcrypt.hashSync(password, salt);
 
-      const user = await Auth.create({
+      user = await Auth.create({
         userId: createId("user", 24),
         first_name,
         last_name,
@@ -122,6 +124,13 @@ export const AuthController = {
       delete userObj.emailVerificationToken;
       delete userObj.emailVerificationTokenExpires;
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.SIGNUP,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.signup,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}-${messagesEnum.USER_CREATED}`
       );
@@ -136,11 +145,19 @@ export const AuthController = {
         `Signup failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_SIGNUP}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.SIGNUP,
+        statusEnum.activityStatus.FAILED,
+        descriptions.signup_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   verifyEmail: async (req, res, next) => {
+    let user;
     try {
       const { email, code } = req.body;
 
@@ -161,7 +178,7 @@ export const AuthController = {
         );
       }
 
-      const user = await AuthService.getUserByEmail(email);
+      user = await AuthService.getUserByEmail(email);
 
       if (!user) {
         logger.warn(
@@ -216,6 +233,13 @@ export const AuthController = {
       delete userObj.passwordToken;
       delete userObj.passwordTokenExpires;
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.VERIFY_EMAIL,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.verify_email,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}-${messagesEnum.EMAIL_VERIFIED_SUCCESSFULLY}`
       );
@@ -231,11 +255,19 @@ export const AuthController = {
         `Email verification failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFICATION}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.VERIFY_EMAIL,
+        statusEnum.activityStatus.FAILED,
+        descriptions.verify_email_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   resendOtp: async (req, res, next) => {
+    let user;
     try {
       const { userId } = req.params;
       const { isSignupPasswordOtp, isForgotPasswordOtp } = req.body;
@@ -260,7 +292,7 @@ export const AuthController = {
         );
       }
 
-      const user = await AuthService.getUserByUserId(userId);
+      user = await AuthService.getUserByUserId(userId);
 
       if (!user) {
         logger.warn(
@@ -321,6 +353,13 @@ export const AuthController = {
         phone_number: user?.phone_number,
       };
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.RESEND_OTP,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.resend_otp,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
       );
@@ -335,11 +374,19 @@ export const AuthController = {
         `Resend otp failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.RESEND_OTP}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.RESEND_OTP,
+        statusEnum.activityStatus.FAILED,
+        descriptions.resend_otp_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   login: async (req, res, next) => {
+    let user;
     try {
       const { email, password } = req.body;
 
@@ -362,7 +409,7 @@ export const AuthController = {
         );
       }
 
-      const user = await AuthService.getUserByEmail(email);
+      user = await AuthService.getUserByEmail(email);
 
       if (!user) {
         logger.warn(
@@ -404,6 +451,13 @@ export const AuthController = {
       delete userObj.passwordToken;
       delete userObj.passwordTokenExpires;
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.LOGIN,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.login,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}-${messagesEnum.LOGIN_SUCCESSFUL}`
       );
@@ -421,11 +475,19 @@ export const AuthController = {
         `Login failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGIN}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.LOGIN,
+        statusEnum.activityStatus.FAILED,
+        descriptions.login_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   forgetPassword: async (req, res, next) => {
+    let user;
     try {
       const { email } = req.body;
 
@@ -436,7 +498,7 @@ export const AuthController = {
         throw new ErrorResponse(messagesEnum.EMAIL_REQUIRED, 400);
       }
 
-      const user = await AuthService.getUserByEmail(email);
+      user = await AuthService.getUserByEmail(email);
 
       if (!user) {
         throw new ErrorResponse(
@@ -460,6 +522,13 @@ export const AuthController = {
 
       await user.save();
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.FORGOT_PASSWORD,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.forgot_password,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}-${messagesEnum.EMAIL_SENT_SUCCESSFULLY}`
       );
@@ -482,11 +551,19 @@ export const AuthController = {
         `Forget password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_FORGET_PASSWORD}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.FORGOT_PASSWORD,
+        statusEnum.activityStatus.FAILED,
+        descriptions.forgot_password_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   verifyForgetPassword: async (req, res, next) => {
+    let user;
     try {
       const { userId, code } = req.body;
 
@@ -509,7 +586,7 @@ export const AuthController = {
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
-      const user = await AuthService.getUserByUserId(userId);
+      user = await AuthService.getUserByUserId(userId);
 
       if (!user) {
         logger.warn(
@@ -541,6 +618,13 @@ export const AuthController = {
         );
       }
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.VERIFY_FORGOT_PASSWORD,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.verify_forgot_password,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}-${messagesEnum.VERIFICATION_SUCCESSFUL}`
       );
@@ -562,11 +646,19 @@ export const AuthController = {
         `Verify forget password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_VERIFY_FORGOT_PASSWORD}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.VERIFY_FORGOT_PASSWORD,
+        statusEnum.activityStatus.FAILED,
+        descriptions.verify_forgot_password_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   resetPassword: async (req, res, next) => {
+    let user;
     try {
       const { userId, password } = req.body;
 
@@ -590,7 +682,7 @@ export const AuthController = {
         );
       }
 
-      const user = await AuthService.getUserByUserId(userId);
+      user = await AuthService.getUserByUserId(userId);
 
       if (!user) {
         logger.warn(
@@ -663,6 +755,13 @@ export const AuthController = {
         email: user?.email,
       };
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.RESET_PASSWORD,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.reset_password,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}-${messagesEnum.PASSWORD_RESET_SUCCESSFUL}`
       );
@@ -678,11 +777,19 @@ export const AuthController = {
         `Reset password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_RESET_PASSWORD}`,
         error.message
       );
+      userActivityTracking(
+        user?.userId,
+        statusEnum.opCodes.RESET_PASSWORD,
+        statusEnum.activityStatus.FAILED,
+        descriptions.reset_password_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   changePassword: async (req, res, next) => {
+    let user;
     try {
       const { password, newPassword } = req.body;
       const { userId } = req.params;
@@ -706,7 +813,7 @@ export const AuthController = {
           statusEnum.statusCode.HTTP_BAD_REQUEST
         );
       }
-      const user = await AuthService.getUserByUserId(req.userId);
+      user = await AuthService.getUserByUserId(req.userId);
 
       if (!user) {
         logger.warn(
@@ -748,6 +855,13 @@ export const AuthController = {
 
       await user.save();
 
+      userActivityTracking(
+        user.userId,
+        statusEnum.opCodes.CHANGE_PASSWORD,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.change_password,
+        getFullName(user)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}-${messagesEnum.PASSWORD_CHANGE_SUCCESSFUL}`
       );
@@ -762,6 +876,13 @@ export const AuthController = {
         `Change password failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_CHANGE_PASSWORD}`,
         error.message
       );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.CHANGE_PASSWORD,
+        statusEnum.activityStatus.FAILED,
+        descriptions.change_password_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
@@ -769,6 +890,12 @@ export const AuthController = {
   logout: async (req, res, next) => {
     try {
       res.clearCookie("token");
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.LOGOUT,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.logout
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGOUT}-${messagesEnum.LOGOUT_SUCCESSFUL}`
       );
@@ -781,6 +908,12 @@ export const AuthController = {
       logger.error(
         `Logout failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_LOGOUT}`,
         error.message
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.LOGOUT,
+        statusEnum.activityStatus.FAILED,
+        descriptions.logout_failed
       );
       next(error);
     }

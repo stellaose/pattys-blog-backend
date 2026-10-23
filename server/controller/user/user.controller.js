@@ -8,6 +8,11 @@ import BlogsService from "../../service/user/blog.service.js";
 import UserService from "../../service/user/user.service.js";
 import logger from "../../logger/logger.js";
 import { labelEnum, messagesEnum, statusEnum } from "../../enums/index.js";
+import { getFullName } from "../../utils/helper.js";
+import {
+  userActivityTracking,
+  descriptions,
+} from "../../lib/user/index.js";
 
 export const UserController = {
   getMyProfile: async (req, res, next) => {
@@ -44,6 +49,7 @@ export const UserController = {
   },
 
   updateUser: async (req, res, next) => {
+    let user;
     try {
       const {
         first_name,
@@ -70,7 +76,7 @@ export const UserController = {
 
       const userId = req.userId;
 
-      const user = await AuthService.getUserByUserId(userId);
+      user = await AuthService.getUserByUserId(userId);
 
       if (!user) {
         logger.warn(
@@ -105,6 +111,14 @@ export const UserController = {
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}-${messagesEnum.USER_UPDATED_SUCCESSFULLY}`
       );
 
+      userActivityTracking(
+        userId,
+        statusEnum.opCodes.EDIT_PROFILE,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.edit_profile,
+        getFullName(updatedUser)
+      );
+
       const userObj = updatedUser.toObject();
       delete userObj.password;
       delete userObj.passwordToken;
@@ -125,12 +139,20 @@ export const UserController = {
         `Update user failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_UPDATE_PROFILE}`,
         error.message
       );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.EDIT_PROFILE,
+        statusEnum.activityStatus.FAILED,
+        descriptions.edit_profile_failed,
+        user && getFullName(user)
+      );
       next(error);
     }
   },
 
   deleteUser: async (req, res, next) => {
     const session = await mongoose.startSession();
+    let user;
     try {
       const userId = req.userId;
       if (!userId) {
@@ -144,7 +166,7 @@ export const UserController = {
       }
 
       session.startTransaction();
-      const user = await Auth.findOneAndDelete({ userId }, { session });
+      user = await Auth.findOneAndDelete({ userId }, { session });
 
       if (!user) {
         logger.warn(
@@ -198,6 +220,13 @@ export const UserController = {
       );
 
       await session.commitTransaction();
+      userActivityTracking(
+        userId,
+        statusEnum.opCodes.DELETE_ACCOUNT,
+        statusEnum.activityStatus.SUCCESS,
+        descriptions.delete_account,
+        getFullName(user)
+      );
 
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}-${messagesEnum.USER_DELETED_SUCCESSFULLY}`
@@ -214,6 +243,13 @@ export const UserController = {
       logger.error(
         `Delete user failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.USER_DELETE_PROFILE}`,
         error.message
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.DELETE_ACCOUNT,
+        statusEnum.activityStatus.FAILED,
+        descriptions.delete_account_failed,
+        user && getFullName(user)
       );
       next(error);
     } finally {

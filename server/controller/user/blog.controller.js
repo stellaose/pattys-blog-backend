@@ -7,6 +7,29 @@ import ApiFeatures from "../../utils/apiFeatures.js";
 import logger from "../../logger/logger.js";
 import mongoose from "mongoose";
 import { createId } from "../../utils/helper.js";
+import {
+  userActivityTracking,
+  descriptions,
+} from "../../lib/user/index.js";
+
+// = like / dislike / none each log as their own activity
+const reactionTracking = {
+  like: {
+    op: statusEnum.opCodes.LIKE_BLOG,
+    description: descriptions.like_blog,
+    failedDescription: descriptions.like_blog_failed,
+  },
+  dislike: {
+    op: statusEnum.opCodes.DISLIKE_BLOG,
+    description: descriptions.dislike_blog,
+    failedDescription: descriptions.dislike_blog_failed,
+  },
+  none: {
+    op: statusEnum.opCodes.REMOVE_BLOG_REACTION,
+    description: descriptions.remove_blog_reaction,
+    failedDescription: descriptions.remove_blog_reaction_failed,
+  },
+};
 
 const toAuthBlogEntry = doc => ({
   id: doc._id,
@@ -200,7 +223,7 @@ export const BlogController = {
         [
           {
             author: req.userId,
-            blogId: createId('blog', 24),
+            blogId: createId("blog", 24),
             title,
             description,
             category: category ? category?.toLowerCase() : "other",
@@ -223,6 +246,12 @@ export const BlogController = {
 
       await session.commitTransaction();
 
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.CREATE_BLOG,
+        statusEnum.activityStatus.SUCCESS,
+        name => descriptions.create_blog(name, blog.title)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}-${messagesEnum.BLOG_CREATED_SUCCESSFULLY}`
       );
@@ -240,6 +269,12 @@ export const BlogController = {
       logger.error(
         `Create blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_BLOG}`,
         error.message
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.CREATE_BLOG,
+        statusEnum.activityStatus.FAILED,
+        name => descriptions.create_blog_failed(name, req.body?.title)
       );
       next(error);
     } finally {
@@ -306,6 +341,12 @@ export const BlogController = {
 
       await session.commitTransaction();
 
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.EDIT_BLOG,
+        statusEnum.activityStatus.SUCCESS,
+        name => descriptions.edit_blog(name, blogId)
+      );
       logger.info(
         `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}-${messagesEnum.BLOG_UPDATED_SUCCESSFULLY}`
       );
@@ -323,6 +364,12 @@ export const BlogController = {
       logger.error(
         `Edit blog failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.EDIT_BLOG}`,
         error.message
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.EDIT_BLOG,
+        statusEnum.activityStatus.FAILED,
+        name => descriptions.edit_blog_failed(name, req.params.blogId)
       );
       next(error);
     } finally {
@@ -381,6 +428,12 @@ export const BlogController = {
             statusEnum.statusCode.HTTP_NOT_FOUND
           );
         } else {
+          userActivityTracking(
+            req.userId,
+            reactionTracking[likeStatus].op,
+            "success",
+            name => reactionTracking[likeStatus].description(name, blogId)
+          );
           logger.info(
             `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_LIKED_SUCCESSFULLY}`
           );
@@ -425,6 +478,12 @@ export const BlogController = {
             statusEnum.statusCode.HTTP_NOT_FOUND
           );
         } else {
+          userActivityTracking(
+            req.userId,
+            reactionTracking[likeStatus].op,
+            "success",
+            name => reactionTracking[likeStatus].description(name, blogId)
+          );
           logger.info(
             `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_DISLIKED_SUCCESSFULLY}`
           );
@@ -473,6 +532,12 @@ export const BlogController = {
             statusEnum.statusCode.HTTP_NOT_FOUND
           );
         } else {
+          userActivityTracking(
+            req.userId,
+            reactionTracking[likeStatus].op,
+            "success",
+            name => reactionTracking[likeStatus].description(name, blogId)
+          );
           logger.info(
             `${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}-${messagesEnum.BLOG_REACTION_REMOVED_SUCCESSFULLY}`
           );
@@ -490,6 +555,15 @@ export const BlogController = {
         `Like/Dislike post failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.LIKE_DISLIKE_BLOG}`,
         error.message
       );
+      const reaction = reactionTracking[req.body?.likeStatus];
+      if (reaction) {
+        userActivityTracking(
+          req.userId,
+          reaction.op,
+          "failed",
+          name => reaction.failedDescription(name, req.params.blogId)
+        );
+      }
       next(error);
     }
   },
@@ -541,6 +615,12 @@ export const BlogController = {
       }
 
       await session.commitTransaction();
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.DELETE_BLOG,
+        statusEnum.activityStatus.SUCCESS,
+        name => descriptions.delete_blog(name, blogId)
+      );
       logger.info(
         `${messagesEnum.BLOG_DELETED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`
       );
@@ -557,6 +637,12 @@ export const BlogController = {
       logger.error(
         `Delete post failed::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_BLOG}`,
         error.message
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.DELETE_BLOG,
+        statusEnum.activityStatus.FAILED,
+        name => descriptions.delete_blog_failed(name, req.params.blogId)
       );
       next(error);
     } finally {
