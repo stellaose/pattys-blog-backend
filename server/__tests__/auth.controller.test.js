@@ -4,6 +4,7 @@ import { Auth } from "../models/user/auth.model.js";
 import { AuthService } from "../service/user/auth.service.js";
 import tokenService from "../utils/token.js";
 import { messagesEnum } from "../enums/index.js";
+import { UserActivityLog } from "../models/user/user-activity-log.model.js";
 
 
 // ! mock  auth schema
@@ -43,6 +44,11 @@ jest.mock("bcryptjs", () => ({
     hashSync: jest.fn(password => `hashed:${password}`),
     compare: jest.fn(),
   },
+}));
+
+// # mock activity log model so tracking never touches the database
+jest.mock("../models/user/user-activity-log.model.js", () => ({
+  UserActivityLog: { create: jest.fn().mockResolvedValue({}) },
 }));
 
 // =  nanoid ships ESM only, which jest's CJS transform cannot load
@@ -464,6 +470,53 @@ describe("AuthController.login", () => {
 
     expectError(next, 401, messagesEnum.INVALID_PASSWORD);
     expect(tokenService.generateJwtToken).not.toHaveBeenCalled();
+  });
+
+  // = a successful login is written to the user's activity log
+  test("tracks a successful login", async () => {
+    AuthService.getUserByEmail.mockResolvedValue(makeUser());
+    bcrypt.compare.mockResolvedValue(true);
+
+    await call(AuthController.login, {
+      body: { email: "ada@example.com", password: "secret123" },
+    });
+
+    expect(UserActivityLog.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        userId: "user-abc123",
+        activity_type: "USRLGN",
+        activity_status: "success",
+      })
+    );
+  });
+
+  // = a wrong password for a known user is logged as a failed login
+  test("tracks a failed login for a known user", async () => {
+    AuthService.getUserByEmail.mockResolvedValue(makeUser());
+    bcrypt.compare.mockResolvedValue(false);
+
+    await call(AuthController.login, {
+      body: { email: "ada@example.com", password: "wrong" },
+    });
+
+    expect(UserActivityLog.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        userId: "user-abc123",
+        activity_type: "USRLGN",
+        activity_status: "failed",
+      })
+    );
+  });
+
+  // = there is no user to attach the log to, so nothing is tracked
+  test("does not track a login for an unknown email", async () => {
+    AuthService.getUserByEmail.mockResolvedValue(null);
+
+    await call(AuthController.login, {
+      body: { email: "ada@example.com", password: "secret123" },
+    });
+
+    expect(UserActivityLog.create).not.toHaveBeenCalled();
   });
 });
 

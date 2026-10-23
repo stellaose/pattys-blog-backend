@@ -6,6 +6,10 @@ import mongoose from "mongoose";
 import { Review } from "../../models/user/review.model.js";
 import ReviewService from "../../service/user/review.service.js";
 import { createId } from "../../utils/helper.js";
+import {
+  userActivityTracking,
+  descriptions,
+} from "../../lib/user/index.js";
 
 const toBlogReviewEntry = (doc, userId) => ({
   author: userId,
@@ -49,7 +53,7 @@ const ReviewController = {
           {
             author: userId,
             blogId,
-            reviewId: createId('review', 24),
+            reviewId: createId("review", 24),
             review,
           },
         ],
@@ -83,6 +87,12 @@ const ReviewController = {
         await session.commitTransaction();
       }
 
+      userActivityTracking(
+        userId,
+        statusEnum.opCodes.CREATE_REVIEW,
+        statusEnum.activityStatus.SUCCESS,
+        name => descriptions.create_review(name, blogId)
+      );
       logger.info(
         `${messagesEnum.REVIEW_CREATED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_REVIEW}`
       );
@@ -103,6 +113,12 @@ const ReviewController = {
       }
       logger.error(
         `${error.message}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.CREATE_REVIEW}`
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.CREATE_REVIEW,
+        statusEnum.activityStatus.FAILED,
+        name => descriptions.create_review_failed(name, req.params.blogId)
       );
       next(error);
     } finally {
@@ -155,6 +171,12 @@ const ReviewController = {
         await session.commitTransaction();
       }
 
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.DELETE_REVIEW,
+        statusEnum.activityStatus.SUCCESS,
+        name => descriptions.delete_review(name, reviewId)
+      );
       logger.info(
         `${messagesEnum.REVIEW_DELETED_SUCCESSFULLY}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_REVIEW}`
       );
@@ -170,6 +192,12 @@ const ReviewController = {
       }
       logger.error(
         `${error.message}::${labelEnum.CURRENT_TIME_STAMP}-${labelEnum.DELETE_REVIEW}`
+      );
+      userActivityTracking(
+        req.userId,
+        statusEnum.opCodes.DELETE_REVIEW,
+        statusEnum.activityStatus.FAILED,
+        name => descriptions.delete_review_failed(name, req.params.reviewId)
       );
       next(error);
     } finally {

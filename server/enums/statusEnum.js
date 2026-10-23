@@ -18,4 +18,29 @@ export const statusEnum = {
   eUserType: {
     User: "user",
   },
+  opCodes: {
+  SIGNUP: 1,
+  VERIFY_EMAIL: 2,
+  RESEND_OTP: 3,
+  LOGIN: 4,
+  FORGOT_PASSWORD: 5,
+  VERIFY_FORGOT_PASSWORD: 6,
+  RESET_PASSWORD: 7,
+  CHANGE_PASSWORD: 8,
+  LOGOUT: 9,
+  EDIT_PROFILE: 10,
+  DELETE_ACCOUNT: 11,
+  CREATE_BLOG: 12,
+  EDIT_BLOG: 13,
+  DELETE_BLOG: 14,
+  LIKE_BLOG: 15,
+  DISLIKE_BLOG: 16,
+  REMOVE_BLOG_REACTION: 17,
+  CREATE_REVIEW: 18,
+  DELETE_REVIEW: 19,
+  },
+  activityStatus: {
+  SUCCESS: "success",
+  FAILED: "failed",
+}
 };

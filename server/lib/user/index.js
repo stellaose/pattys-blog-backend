@@ -1,7 +1,10 @@
 import { UserActivityLog } from "../../models/user/user-activity-log.model.js";
+import { AuthService } from "../../service/user/auth.service.js";
 import { operations } from "./user-operations.lib.js";
 import logger from "../../logger/logger.js";
-import { createId } from "../../utils/helper.js";
+import { createId, getFullName } from "../../utils/helper.js";
+
+export { descriptions } from "./user-description.lib.js";
 
 // & saves one activity log; a failed write is logged but never thrown, so
 // * tracking can never break the request that triggered it
@@ -17,33 +20,46 @@ const monitor = async (log, type) => {
   }
 };
 
+// ~ looks the user up by id for their name; falls back to the id if they can't be found
+const resolveUserName = async userId => {
+  try {
+    const user = await AuthService.getUserByUserId(userId);
+    return user ? getFullName(user) : userId;
+  } catch (error) {
+    logger.error(error.message);
+    return userId;
+  }
+};
+
 // ? records what a user did, e.g.
-// - userActivityTracking(userId, 12, "success", descriptions.create_blog(name, blogId), blogId)
-export const userActivityTracking = (
+// - userActivityTracking(userId, 12, "success", name => descriptions.create_blog(name, title))
+// > pass userName when the handler already has the user, to skip the lookup
+export const userActivityTracking = async (
   userId,
   op_code,
   activity_status,
-  description,
-  resourceId
+  describe,
+  userName
 ) => {
   if (!userId) {
-    return Promise.resolve();
+    return;
   }
 
   const activity_type = operations[op_code];
   if (!activity_type) {
     logger.warn(`No activity operation found for code ${op_code}`);
-    return Promise.resolve();
+    return;
   }
+
+  const name = userName ?? (await resolveUserName(userId));
 
   return monitor(
     {
       logId: createId("log", 24),
       userId,
-      resourceId,
       activity_type,
       activity_status,
-      description,
+      description: describe(name),
     },
     "userActivityTracking"
   );

@@ -9,16 +9,14 @@ export const descriptions = {
   login: userName =>
     `${userName} successfully authenticated and accessed the platform`,
   login_failed: userName => `${userName} login authentication failed`,
-  forgot_password: userName =>
-    `${userName} initiated a password reset request`,
+  forgot_password: userName => `${userName} initiated a password reset request`,
   forgot_password_failed: userName =>
     `${userName} failed to initiate a password reset request`,
   verify_forgot_password: userName =>
     `${userName} successfully verified password reset OTP`,
   verify_forgot_password_failed: userName =>
     `${userName} failed to verify password reset OTP`,
-  reset_password: userName =>
-    `${userName} reset account password successfully`,
+  reset_password: userName => `${userName} reset account password successfully`,
   reset_password_failed: userName =>
     `${userName} account password reset failed`,
   change_password: userName =>
@@ -37,9 +35,9 @@ export const descriptions = {
     `${userName} failed to delete their account`,
 
   // ` Blog Operations
-  create_blog: (userName, blogId) => `${userName} created blog ${blogId}`,
-  create_blog_failed: (userName, blogId) =>
-    `${userName} failed to create blog ${blogId}`,
+  create_blog: (userName, title) => `${userName} created blog "${title}"`,
+  create_blog_failed: (userName, title) =>
+    `${userName} failed to create blog "${title}"`,
   edit_blog: (userName, blogId) => `${userName} edited blog ${blogId}`,
   edit_blog_failed: (userName, blogId) =>
     `${userName} failed to edit blog ${blogId}`,
@@ -52,10 +50,13 @@ export const descriptions = {
   dislike_blog: (userName, blogId) => `${userName} disliked blog ${blogId}`,
   dislike_blog_failed: (userName, blogId) =>
     `${userName} failed to dislike blog ${blogId}`,
+  remove_blog_reaction: (userName, blogId) =>
+    `${userName} removed their reaction from blog ${blogId}`,
+  remove_blog_reaction_failed: (userName, blogId) =>
+    `${userName} failed to remove their reaction from blog ${blogId}`,
 
   // ? Review Operations
-  create_review: (userName, blogId) =>
-    `${userName} reviewed blog ${blogId}`,
+  create_review: (userName, blogId) => `${userName} reviewed blog ${blogId}`,
   create_review_failed: (userName, blogId) =>
     `${userName} failed to review blog ${blogId}`,
   delete_review: (userName, reviewId) =>
